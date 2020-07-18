@@ -1,0 +1,26 @@
+Input{
+    width: 100%;
+    border-radius: 4px;
+    height: 2rem;
+}
+.Input__Element{
+    padding: 5px;
+    margin: 12px auto;
+    outline: none;
+}
+.HideErrorMessage{
+    display: none;
+}
+.ShowErrorMessage{
+    color: red;
+}
+
+@media(min-width:800px){
+    .Input{
+        width: 95%;
+    }
+    .Input__Element{
+        padding: 7px 10px;
+        margin: 20px auto;
+    }
+}

@@ -1,0 +1,16 @@
+.NavItem{
+    margin-left: 67px;
+}
+.NavItem a{
+    font-family: 'Poppins';
+    font-size: 18px;
+    line-height: 27px;
+    color: #393535;
+    text-decoration: none;
+    border-bottom: 0px;
+}
+.active{
+    border-bottom: 2px solid #003A1A !important;
+    color: #003A1A;
+    transition: border 1s, color 2s;
+}

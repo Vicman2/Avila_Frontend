@@ -1,0 +1,32 @@
+.NavItems{
+    display: none;
+}
+
+.cartNav{
+    display: flex;
+    margin-left: 67px;
+    align-items: center;
+}
+.cartNav a{
+    font-family: 'Poppins';
+    font-size: 18px;
+    line-height: 27px;
+    color: #393535;
+    text-decoration: none;
+}
+.cart_img_contain{
+    margin-left: 3px;
+    width: 16px;
+    height: 18px;
+}
+.cart_img_contain img{
+    width: 100%;
+    height: 100%;
+}
+
+
+@media(min-width:900px){
+    .NavItems{
+        display: flex;
+    }
+}

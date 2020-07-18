@@ -1,0 +1,27 @@
+.Navbar{
+    background: #F4FFF0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+.logo_div{
+    height: 45px;
+    width: 78px;
+}
+.logo_div img{
+    width: 100%;
+    height: 100%;
+}
+
+@media(min-width:900px){
+    .Navbar{
+        background-color: #FFFFFF;
+        margin: 23px auto;
+    }
+    .logo_div{
+        height: 53px;
+        width: 93px;
+    }
+}

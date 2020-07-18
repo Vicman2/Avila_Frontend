@@ -1,0 +1,25 @@
+.Button button{
+    background-color:#84BE38;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF;
+    border: none;
+    height: 40px;
+    padding: 7px 11px;
+    outline: none;
+    border: 1px solid #5E8E1E;
+}
+.btn_big button{
+    padding: 7px 33px;
+}
+.Button button:hover{
+    cursor: pointer;
+    background: #5E8E1E;
+    transition: background 1.5s;
+}
+.Button button:focus{
+    background: #003A1A;
+    transition: background 1.5s;
+}

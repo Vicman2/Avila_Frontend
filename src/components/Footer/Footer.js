@@ -2,6 +2,12 @@ import React, {Component} from 'react'
 import Input from '../UI/Inputs/Input/Input'
 import './Footer.css'
 import Button from '../UI/Button/Button'
+import logo from './Assets/AVILA-logo.png'
+import instagram from './Assets/instagram.png'
+import facebook from './Assets/facebook.png'
+import twitter from './Assets/twitter.png'
+import NavItem from '../Navbar/NavItems/NavItem/NavItem'
+import { NavLink } from 'react-router-dom'
 
 
 
@@ -58,6 +64,46 @@ class Footer extends Component{
                         </div>
                         <Button name="Subscribe" clicked={(e)=>this.submitEmail(e)} big/>
                     </form>
+                </div>
+                <div className="Footer_White contain">
+                    <div className="Footer_white_row1">
+                        <div className="The_About">
+                            <div className="logo_div">
+                                <img src={logo} alt="Logo" />
+                            </div>
+                            <p className="Footer_About">Avila Naturalle is multi-channel natural body care
+                                and household brand, which combines a dynamic
+                                distribution network with a retail strategy as well
+                                as e-commerce. Avila Naturalle is a subsidiary of 
+                                Top Confectionery Limited Nigeria which has a 
+                                major focus on encouraging the usage of natural 
+                                products and essentials oils</p>
+
+                        </div>
+                        <div className="Footer_Contact">
+                            <p className="Footer_Contact_Us">Contact us</p>
+                            <p className="Footer_Num"> <ion-icon name="call-outline"></ion-icon> +234 900 0000 900 000</p>
+                            <p className="Footer_Email"><ion-icon name="mail-outline"></ion-icon>  info@avilanaturalle.com</p>
+                        </div>
+                        <div className="Footer_Socials">
+                            <p className="Footer_Contact_Us">Connect with us on social media</p>
+                            <p className="Footer_Handles">
+                                <img src={instagram} alt="instagram" />
+                                <img src={facebook} alt="facebook" />
+                                <img src={twitter} alt="twitter" />
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div className="Footer_Ending">
+                        <p>Designed By Offordile Chimaobi Victor</p>
+                        <p>© 2020  Avila Naturalle</p>
+                        <div className="Footer_Navs">
+                            <NavLink to="/terms">Terms</NavLink> 
+                            <NavLink to="/privacy">Privacy Policy</NavLink> 
+                            <NavLink to="/careers">Careers</NavLink> 
+                        </div>
+                    </div>
                 </div>
             </div>
         )

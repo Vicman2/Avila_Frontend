@@ -13,6 +13,9 @@ Input{
 }
 .ShowErrorMessage{
     color: red;
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 5px;
 }
 
 @media(min-width:800px){
@@ -22,5 +25,9 @@ Input{
     .Input__Element{
         padding: 7px 10px;
         margin: 20px auto;
+    }
+    .ShowErrorMessage{
+        margin-top: -15px;
+        margin-bottom: 10px;
     }
 }

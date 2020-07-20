@@ -10,11 +10,13 @@ import {Provider} from 'react-redux'
 
 import productsReducer  from './store/reducers/productReducer'
 import userReducer from './store/reducers/userReducer'
+import UIReducer from './store/reducers/UIReducer'
 
 
 const rootReducers = combineReducers({
     products: productsReducer, 
-    users: userReducer
+    users: userReducer, 
+    ui:  UIReducer
 })
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const store = createStore(

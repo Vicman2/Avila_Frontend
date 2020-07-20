@@ -1,0 +1,20 @@
+.Backdrop{
+    width: 100vw; 
+    height: 100vh;
+    position: fixed;
+    background: rgba(0,0,0,0.8);
+    top:0;
+    left: 0;
+    bottom: 0;
+    z-index: 201;
+}
+.Hide{
+    display: none;
+}
+.ShowMe{
+    display: block;
+    width: 100vw;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 201;
+}

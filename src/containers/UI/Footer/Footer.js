@@ -1,51 +1,87 @@
 import React, {Component} from 'react'
-import Input from '../UI/Inputs/Input/Input'
-import './Footer.css'
-import Button from '../UI/Button/Button'
-import logo from './Assets/AVILA-logo.png'
-import instagram from './Assets/instagram.png'
-import facebook from './Assets/facebook.png'
-import twitter from './Assets/twitter.png'
-import NavItem from '../Navbar/NavItems/NavItem/NavItem'
-import { NavLink } from 'react-router-dom'
+import Input from '../../../components/UI/Inputs/Input/Input';
+import './Footer.css';
+import Button from '../../../components/UI/Button/Button';
+import logo from './Assets/AVILA-logo.png';
+import instagram from './Assets/instagram.png';
+import facebook from './Assets/facebook.png';
+import twitter from './Assets/twitter.png';
+import { NavLink } from 'react-router-dom';
+import Axios from '../../../axios';
+import Loader from '../../../components/UI/Loader/Loader';
+import * as uiActions from '../../../store/actions/UIActions'
+import {flowRight as compose} from 'lodash'
+import { connect } from 'react-redux';
 
+
+const emailInput = {
+    elemType: "input",
+    config: {
+        type: 'text', 
+        placeholder: "Email"
+    },
+    value:"",
+    validation: function(){
+        let valid = false;
+        const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        if(emailRegex.test(this.value)){
+            valid = true
+        }
+        return valid
+    },
+    isValid: false,
+    errorMessage: "Please input a valid email address",
+    touched: false
+}
 
 
 class Footer extends Component{
     state = {
-        isFormValid: false,
-        emailInput: {
-            elemType: "input",
-            config: {
-                type: 'text', 
-                placeholder: "Email"
-            },
-            value:"",
-            validation: function(){
-                let valid = false;
-                const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                if(emailRegex.test(this.value)){
-                    valid = true
-                }
-                return valid
-            },
-            isValid: false,
-            errorMessage: "Please input a valid email address",
-            touched: false
-        }
+        loading:false,
+        isFormValid: true,
+        isSubmitted: false,
+        emailInput: emailInput
     }
     emailValidationHandler =(event)=> {
         const UpdatedFormElement = {...this.state.emailInput}
         UpdatedFormElement.value = event.target.value;
         UpdatedFormElement.touched = true;
-        let isValid = UpdatedFormElement.validation();
-        UpdatedFormElement.isValid = isValid
-        this.setState({emailInput: UpdatedFormElement, isFormValid: isValid});
+        this.setState({emailInput: UpdatedFormElement});
     }
-    submitEmail = (e)=>{
+     submitEmail = async (e)=>{
         e.preventDefault();
+        let isValid = this.state.emailInput.validation()
+        const emailInput1 = {...this.state.emailInput, touched:true}
+        await this.setState({isFormValid: isValid, isSubmitted: true, emailInput: emailInput1});
+        if(this.state.isFormValid && this.state.isSubmitted){
+            this.setState({loading:true})
+            let data ={email: this.state.emailInput.value}
+            Axios.post('/users/subscribe', data)
+            .then(data => {
+                this.setState({emailInput, loading:false})
+                this.props.notify({
+                    status: 'success', 
+                    content: "You have successfully subscribed to our news chanel"
+                })
+            }).catch(err => {
+                this.setState({emailInput, loading:false})
+                if(err.response && err.response.data){
+                    this.props.notify({
+                        status: 'error', 
+                        content: err.response.data.message
+                    })
+                }
+            })
+        }
+
     }
     render(){
+       let toShow = <Button name="Subscribe" clicked={(e)=>this.submitEmail(e)} big/>
+       if(this.state.loading){
+           toShow = <div className="Footer_Loader">
+               <Loader />
+            </div>
+       }
         return(
             <div className="Footer">
                 <div className="Footer_green contain">
@@ -57,12 +93,12 @@ class Footer extends Component{
                             elemType={this.state.emailInput.elemType} 
                             config={this.state.emailInput.config}
                             errorMessage={this.state.emailInput.errorMessage}
-                            valid={this.state.emailInput.isValid}
+                            valid={this.state.isFormValid}
                             touched={this.state.emailInput.touched}
                             value={this.state.emailInput.value}
                             changed={(event)=>this.emailValidationHandler(event)}/>
                         </div>
-                        <Button name="Subscribe" clicked={(e)=>this.submitEmail(e)} big/>
+                        {toShow}
                     </form>
                 </div>
                 <div className="Footer_White contain">
@@ -110,4 +146,12 @@ class Footer extends Component{
     }
 }
 
-export default Footer
+const actionMappedToProps = dispatch => {
+    return{
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload))
+    }
+}
+
+export default compose(
+    connect(null, actionMappedToProps)
+) (Footer)

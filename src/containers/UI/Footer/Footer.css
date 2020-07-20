@@ -1,4 +1,9 @@
-
+.Footer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
 
 .Footer_green{
     background: #003A1A;
@@ -102,6 +107,11 @@
 .Footer_Ending p{
     margin-top: 19px;
 }
+.Footer_Loader{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
 
 @media(min-width:900px){
     .Footer_green{
@@ -146,5 +156,8 @@
     .Footer_Navs{
         justify-content: space-between;
         min-width: 245px;
+    }
+    .Footer_Loader{
+        width: 15%;
     }
 }

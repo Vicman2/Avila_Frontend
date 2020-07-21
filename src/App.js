@@ -6,6 +6,11 @@ import Notification from './containers/UI/Notification/Notification';
 import {flowRight as compose} from 'lodash'
 import { connect } from 'react-redux';
 import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
+import { Switch, Route } from 'react-router-dom';
+import Home from './containers/Home/Home'
+import Products from './containers/Products/Products';
+import Account from './containers/Account/Account';
+import Cart from './containers/Cart/Cart';
 
 
 
@@ -24,7 +29,6 @@ class App extends Component{
         <Navbar
         clickedHamburger={this.clickedHamburger}
         />
-        <Footer />
         <Notification
           show={this.props.showNotification}
           data={this.props.notificationData}
@@ -33,6 +37,13 @@ class App extends Component{
           show={this.state.hamburger}
           clicked={this.clickedHamburger}
         />
+        <Switch>
+          <Route path="/products" component={Products} />
+          <Route path="/account" component={Account} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/" exact component={Home} />
+        </Switch>
+        <Footer />
       </div>
     )
   }

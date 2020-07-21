@@ -3,6 +3,7 @@
     bottom: 0;
     right: 0;
     left: 0;
+    text-align: center;
 }
 
 .Footer_green{
@@ -139,6 +140,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
+        border-bottom: 0.4px solid #84BE38;
     }
     .The_About{
         max-width: 320px;
@@ -152,10 +154,12 @@
     .Footer_Ending{
         flex-direction: row;
         justify-content: space-around;
+        margin-top: 35px;
     }
     .Footer_Navs{
         justify-content: space-between;
         min-width: 245px;
+        margin-top: 0;
     }
     .Footer_Loader{
         width: 15%;

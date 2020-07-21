@@ -7,9 +7,9 @@ import cartImg from './Assets/cart.png'
 const NavItems = (props) => {
     return(
         <div className="NavItems">
-            <NavItem location="/home" name="Home" exact />
-            <NavItem location="/products" name="Products" exact />
-            <NavItem location="/account" name="My Account" exact />
+            <NavItem location="/" name="Home" exact />
+            <NavItem location="/products" name="Products"  />
+            <NavItem location="/account" name="My Account"  />
             <div className="cartNav">
                 <div>
                     <NavLink activeClassName="active" to="/cart" exact>Cart</NavLink>

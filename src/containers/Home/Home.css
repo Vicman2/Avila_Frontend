@@ -1,0 +1,70 @@
+
+.react-multiple-carousel__arrow{
+    z-index: 201 !important;
+}
+.CarouselImage{
+    width:300px ;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+}
+
+.Home_Landing_Carousel{
+    margin-top: 30px;
+    width:300px;
+    height: 209px;
+}
+.react-multiple-carousel__arrow--right{
+    margin-right: -20px;
+}
+.react-multiple-carousel__arrow--left{
+    margin-left: -20px;
+    z-index: 1000;
+}
+.Home_Sec1{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Home_Avila{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 181.5%;
+    color: #121111;
+    margin-bottom: 0;
+}
+.Home_WeProvide{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 181.5%;
+    color: #121111;
+    margin-top: 16px;
+}
+
+
+
+@media(min-width:800px){
+    .CarouselImage{
+        width: 369px;
+        height: 363px;
+    } 
+    .Home_Landing_Carousel{
+        margin-top: 0;
+        width: 410px;
+        height: 363px;
+    }
+    .Home_Landing{
+        max-width: 400px;
+    }
+    .Home_Sec1{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

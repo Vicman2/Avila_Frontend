@@ -16,7 +16,7 @@ const Navbar = (props)=> {
             <div>
                 <NavItems />
             </div>
-            <Harmburger />
+            <Harmburger clicked={props.clickedHamburger} />
         </header>
     )
 }

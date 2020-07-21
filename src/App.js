@@ -21,14 +21,16 @@ class App extends Component{
   render(){
     return (
       <div className="App">
-        <Navbar/>
+        <Navbar
+        clickedHamburger={this.clickedHamburger}
+        />
         <Footer />
         <Notification
           show={this.props.showNotification}
           data={this.props.notificationData}
         />
         <HamburgerMenu 
-          show={this.state.harmburger}
+          show={this.state.hamburger}
           clicked={this.clickedHamburger}
         />
       </div>

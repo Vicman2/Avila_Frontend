@@ -1,0 +1,66 @@
+.HarmburgerMenu{
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #84BE38;
+    z-index: 210;
+}
+.RotateBurger{
+    margin-right: 0px;
+    width: 50px;
+    height: 40px;
+    padding-top: 25px;
+    padding-bottom: -100px;
+    padding-left: 10px;
+    padding-right: 0;
+}
+.RotateBurger:hover{
+    border-radius: 50%;
+    cursor: pointer;
+}
+.RotateBurger span{
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+}
+.RotateSection{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Show_Harmburger{
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 500ms, transform 700ms;
+}
+.Hide_Harmburger{
+    opacity: 0;
+    transform: translateX(-900px);
+    transition: opacity 500ms ,transform 700ms;
+}
+.Crossing1{
+    transform: rotateZ(45deg);
+    transition: transform 1.6s;
+}
+.Crossing2{
+    margin-top: -3px;
+    transform: rotateZ(-45deg);
+    transition: transform 1.6s;
+}
+
+.Ham_NavLink a{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #F9FFF8;
+    text-decoration: none;
+}
+.Ham_NavLink{
+    margin-bottom: 25px;
+}

@@ -12,6 +12,15 @@
 .contain{
   padding: 1px 28px;
 }
+.The_Headers{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #003A1A;
+  margin: 0;
+}
 
 
 @media(min-width:900px){
@@ -20,6 +29,9 @@
   }
   .App{
     padding-bottom: 100vh;
+  }
+  .The_Headers{
+    font-size: 24px;
   }
 }
 

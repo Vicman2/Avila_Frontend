@@ -71,6 +71,36 @@
 
     color: #121111;
 }
+.Home_Pop_Header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header_span{
+    display: inline-block;
+    width: 10%;
+    background-color: #84BE38;
+    height: 2px;
+}
+
+@media(min-width: 400px){
+    .header_span{
+        width: 20%;
+    }
+}
+.Home_Covered{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 98%;
+    letter-spacing: 0.07em;
+    text-transform: lowercase;
+    text-align: center;
+    color: #003A1A;
+    width: 100%;
+    margin-top: 5px;
+}
 
 
 
@@ -108,5 +138,8 @@
     }
     .Home_About_sec p{
         max-width: 361px;
+    }
+    .header_span{
+        width: 30%;
     }
 }

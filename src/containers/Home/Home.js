@@ -87,10 +87,11 @@ class Home extends Component{
 
                 <div className="Home_Sec3 contain">
                     <div className="Home_Pop_Header">
-                        <span className="header-span"></span>
+                        <span className="header_span"></span>
                             <p className="The_Headers">POPULAR AVILA PRODUCTS</p>
-                        <span className="header-span"></span>
+                        <span className="header_span"></span>
                     </div>
+                    <p className="Home_Covered">we’ve got you covered</p>
                 </div>
             </div>
         )

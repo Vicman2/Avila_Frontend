@@ -92,6 +92,21 @@ class Home extends Component{
                         <span className="header_span"></span>
                     </div>
                     <p className="Home_Covered">we’ve got you covered</p>
+
+                    <div className="Home_pop_products">
+                        <div className="Popular_Products">
+                            <img className="contain_img" src={prod1} alt=""/>
+                        </div>
+                        <div className="Popular_Products">
+                            <img className="contain_img" src={prod2}  alt=""/>
+                        </div>
+                        <div className="Popular_Products">
+                            <img className="contain_img" src={prod3}  alt=""/>
+                        </div>
+                        <div className="Popular_Products">
+                            <img className="contain_img" src={prod4}  alt=""/>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

@@ -83,11 +83,6 @@
     height: 2px;
 }
 
-@media(min-width: 400px){
-    .header_span{
-        width: 20%;
-    }
-}
 .Home_Covered{
     font-family: 'Poppins';
     font-style: normal;
@@ -101,7 +96,25 @@
     width: 100%;
     margin-top: 5px;
 }
+.Home_pop_products{
+    display: grid;
+    justify-items: center;
+    grid-template-columns:1fr;
+}
+.Popular_Products{
+    margin-top: 23px;
+    width: 212px;
+    height: 243px;
+}
 
+@media(min-width: 400px){
+    .header_span{
+        width: 20%;
+    }
+    .Home_pop_products{
+        grid-template-columns:1fr 1fr;
+    }
+}
 
 
 @media(min-width:800px){
@@ -142,4 +155,14 @@
     .header_span{
         width: 30%;
     }
+    .Home_pop_products{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .Popular_Products{
+        margin-top: 63px;
+        width: 212px;
+        height: 243px;
+    }
+
 }

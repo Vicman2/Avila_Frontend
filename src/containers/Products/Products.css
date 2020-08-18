@@ -26,3 +26,37 @@
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.Product_newPage{
+    padding: 3px 5px;
+    font-family: 'Poppins';
+    border: 1px solid  #003A1A;
+    color:  #003A1A;
+}
+.Product_newPage:hover{
+    cursor: pointer;
+}
+.Products_Pagination{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+.Prod_Active_Page{
+    background-color: #003A1A;
+    color: #FFFFFF;
+}
+.Pagin_Section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.Page_Numeration{
+    display: flex;
+}
+.Deactive_Nav{
+    color: #ccc;
+}
+.Deactive_Nav:hover{
+    cursor: not-allowed;
+}

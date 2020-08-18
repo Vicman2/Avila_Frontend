@@ -11,6 +11,8 @@ import Home from './containers/Home/Home'
 import Products from './containers/Products/Products';
 import Account from './containers/Account/Account';
 import Cart from './containers/Cart/Cart';
+import ProdPreview from './containers/ProdPreview/ProdPreview'
+
 
 
 
@@ -38,6 +40,7 @@ class App extends Component{
           clicked={this.clickedHamburger}
         />
         <Switch>
+          <Route path="/products/:id" component={ProdPreview} />
           <Route path="/products" component={Products} />
           <Route path="/account" component={Account} />
           <Route path="/cart" component={Cart} />

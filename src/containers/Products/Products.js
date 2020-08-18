@@ -11,7 +11,7 @@ import Product from '../../components/Product/Product'
 class Products extends Component{
     state = {
         pageNo: 1, 
-        noOfProducts: 15, 
+        noOfProducts: 16, 
         products: [], 
         totalProducts: null, 
         activePage:null
@@ -61,6 +61,9 @@ class Products extends Component{
         await this.setState({pageNo , activePage: pageNo})
         this.fetchProducts()
     }
+    clickedProduct = (id)=>{
+        this.props.history.push(`/products/${id}`)
+    }
 
     render(){
         let display = null
@@ -71,7 +74,8 @@ class Products extends Component{
         }else{
             display = this.state.products.map(prod => {
                 return(
-                    <Product 
+                    <Product
+                    clicked={()=>this.clickedProduct(prod._id)}
                     key={prod._id}
                     src={prod.prodImageSrc}
                     name={prod.name}

@@ -1,0 +1,99 @@
+.ProdPreview{
+    margin-top: 50px;
+}
+
+.ProdPreview_Landing{
+    display: flex;
+}
+.ProdPreview_Img{
+    width: 166px;
+    height: 155px;
+}
+.ProdPreview_Titles{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.ProdPreview_Name{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 22px;
+    color: #84BE38;
+    margin-top: 0;
+}
+.ProdPreview_Rating{
+    margin-top: 0;
+}
+.ProdPreview_Rating ion-icon{
+    margin-right: 5px;
+    color: #84BE38;
+}
+.ProdPreview_Highlight{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 11px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+}
+.ProdPreview_Price{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    color: #003A1A;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.ProdPreview_Category{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+}
+.ProdPreview_Desc_Title{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 181.5%;
+    color: #003A1A;
+    margin-top: 40px;
+}
+.ProdPreview_Description{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 181.5%;
+    text-align: justify;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+@media(min-width:900px){
+    .ProdPreview_Img{
+        width: 304px;
+        height: 293px;
+    }
+    .ProdPreview_Name{
+        font-size: 18px;
+    }
+    .ProdPreview_Highlight{
+        margin-top: 0;
+        font-size: 22px;
+    }
+    .ProdPreview_Category{
+        font-size: 18px;
+    }
+    .ProdPreview_Description{
+        font-size: 18px;
+    }
+}

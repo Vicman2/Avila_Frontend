@@ -2,11 +2,16 @@
     width: 210px;
     padding: 7px;
     border: 0.5px solid #84BE38;
-    margin-left: 10px;
     margin-top: 30px;
+    max-width: 215;
+    height: 309px;
+    transition: width 1s;
+}
+.Product:hover{
+    cursor: pointer;
 }
 .ProdImage_Cont{
-    width: 206px;
+    width: 100%;
     height: 193px;
     display: flex;
     justify-content: center;

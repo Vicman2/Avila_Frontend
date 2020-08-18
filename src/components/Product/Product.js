@@ -1,12 +1,13 @@
 import React from 'react'
 import './Product.css'
 import Button from '../UI/Button/Button'
+import { withRouter } from 'react-router-dom'
 
 
 
 const Product = (props) =>{
     return(
-        <div className="Product">
+        <div className="Product" onClick={props.clicked}>
             <div className="ProdImage_Cont">
                 <img className="contain_img" src={props.src}  alt={props.name}/>
             </div>
@@ -27,4 +28,4 @@ const Product = (props) =>{
 }
 
 
-export default Product
+export default  withRouter(Product) 

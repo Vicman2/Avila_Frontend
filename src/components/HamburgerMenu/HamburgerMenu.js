@@ -29,7 +29,7 @@ const HamburgerMenu = (props) => {
                 </div>
                 <div>
                     <div className="Ham_NavLink">
-                        <NavLink to="/home">Home</NavLink>    
+                        <NavLink to="/" exact>Home</NavLink>    
                     </div>
                     <div className="Ham_NavLink">
                         <NavLink to="/products">Products</NavLink>   

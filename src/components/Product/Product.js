@@ -1,0 +1,30 @@
+import React from 'react'
+import './Product.css'
+import Button from '../UI/Button/Button'
+
+
+
+const Product = (props) =>{
+    return(
+        <div className="Product">
+            <div className="ProdImage_Cont">
+                <img className="contain_img" src={props.src}  alt={props.name}/>
+            </div>
+            <div className="ProdContain_Detials">
+                <div className="NamePrice">
+                    <p className="Product_Name">{props.name} </p>
+                    <p className="Product_Price">#{props.price.toLocaleString()} </p>
+                </div>
+                <div className="Product_Favourite">
+                    <ion-icon name="heart-outline"></ion-icon>
+                </div>
+            </div>
+            <div className="Product_Buy_Btn">
+                <Button name="Buy Now" />
+            </div>
+        </div>
+    )
+}
+
+
+export default Product

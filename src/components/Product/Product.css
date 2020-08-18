@@ -1,0 +1,46 @@
+.Product{
+    width: 210px;
+    padding: 7px;
+    border: 0.5px solid #84BE38;
+    margin-left: 10px;
+    margin-top: 30px;
+}
+.ProdImage_Cont{
+    width: 206px;
+    height: 193px;
+    display: flex;
+    justify-content: center;
+}
+.ProdContain_Detials{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Product_Name{
+    max-width: 100%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 181.5%;
+    letter-spacing: -0.055em;
+    color: #84BE38;
+    text-transform: capitalize;
+}
+.Product_Price{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: #003A1A;
+
+}
+.Product_Favourite ion-icon{
+    color: #84BE38;
+    font-size: 28px;
+}
+.Product_Buy_Btn{
+    display: flex;
+    justify-content: center;
+    margin-bottom: -17px;
+}

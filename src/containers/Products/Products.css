@@ -1,0 +1,28 @@
+.Product_Loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Product_Title_Cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Products_Title{
+    text-align: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 98%;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #003A1A;
+    border-bottom: 2px solid #003A1A;
+}
+.Products_List{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

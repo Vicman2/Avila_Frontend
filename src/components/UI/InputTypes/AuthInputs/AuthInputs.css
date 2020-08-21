@@ -1,0 +1,33 @@
+Input{
+    width: 100%;
+    border-radius: 4px;
+    height: 2rem;
+}
+.AuthInputs__Element{
+    padding: 5px;
+    margin: 12px auto;
+    outline: none;
+}
+.HideErrorMessage{
+    display: none;
+}
+.ShowErrorMessage{
+    color: red;
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+@media(min-width:800px){
+    .Input{
+        width: 95%;
+    }
+    .AuthInputs__Element{
+        padding: 7px 10px;
+        margin: 20px auto;
+    }
+    .ShowErrorMessage{
+        margin-top: -15px;
+        margin-bottom: 10px;
+    }
+}

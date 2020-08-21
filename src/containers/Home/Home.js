@@ -7,6 +7,7 @@ import prod1 from './Assets/prod1.png'
 import prod2 from './Assets/prod2.png'
 import prod3 from './Assets/prod3.png'
 import prod4 from './Assets/prod4.png'
+import RelatedProducts from '../RelatedProducts/RelatedProducts';
 
 
 class Home extends Component{
@@ -93,20 +94,7 @@ class Home extends Component{
                     </div>
                     <p className="Home_Covered">we’ve got you covered</p>
 
-                    <div className="Home_pop_products">
-                        <div className="Popular_Products">
-                            <img className="contain_img" src={prod1} alt=""/>
-                        </div>
-                        <div className="Popular_Products">
-                            <img className="contain_img" src={prod2}  alt=""/>
-                        </div>
-                        <div className="Popular_Products">
-                            <img className="contain_img" src={prod3}  alt=""/>
-                        </div>
-                        <div className="Popular_Products">
-                            <img className="contain_img" src={prod4}  alt=""/>
-                        </div>
-                    </div>
+                    <RelatedProducts />
                 </div>
             </div>
         )

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Input from '../../../components/UI/Inputs/Input/Input';
+import Input from '../../../components/UI/InputTypes/Inputs/Input/Input';
 import './Footer.css';
 import Button from '../../../components/UI/Button/Button';
 import logo from './Assets/AVILA-logo.png';

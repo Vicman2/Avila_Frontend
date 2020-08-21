@@ -77,6 +77,10 @@
     text-align: justify;
     color: rgba(0, 0, 0, 0.5);
 }
+.ProdPreview_AddToCart{
+    display: flex;
+    justify-content: center;
+}
 
 @media(min-width:900px){
     .ProdPreview_Img{
@@ -95,5 +99,8 @@
     }
     .ProdPreview_Description{
         font-size: 18px;
+    }
+    .ProdPreview_AddToCart{
+        justify-content: flex-end;
     }
 }

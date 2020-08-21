@@ -1,8 +1,8 @@
 import React from 'react'
-import Aux from '../../../../HOC/Aux/Aux'
-import './Input.css'
+import Aux from '../../../../../HOC/Aux/Aux'
+import './AuthInputs.css'
 
-const input = (props) => {
+const AuthInputs = (props) => {
     let inputElement = null;
     let classes = null;
     if(!props.valid && props.touched){
@@ -15,7 +15,7 @@ const input = (props) => {
         inputElement =(
             <Aux>
                 <input 
-                className="Input__Element" 
+                className="AuthInputs__Element" 
                 onChange={props.changed} 
                 {...props.config}
                 value={props.value}/>
@@ -27,7 +27,7 @@ const input = (props) => {
         inputElement = (
             <Aux>
                 <textarea  
-                className="Input__Element"  
+                className="AuthInputs__Element"  
                 onChange={props.changed} 
                 value={props.value}
                 {...props.config}></textarea>
@@ -37,7 +37,7 @@ const input = (props) => {
         break;
         default: 
         inputElement = <input 
-        className="Input__Element" 
+        className="AuthInputs__Element" 
         onChange={props.changed} {...props.config}
         value={props.value} />
     }
@@ -49,4 +49,4 @@ const input = (props) => {
     )
 }
 
-export default input
+export default AuthInputs

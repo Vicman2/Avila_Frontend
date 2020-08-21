@@ -14,7 +14,8 @@ class Products extends Component{
         noOfProducts: 16, 
         products: [], 
         totalProducts: null, 
-        activePage:null
+        activePage:null, 
+        loading: true
     }
     componentDidMount(){
         window.scrollTo(0,0)
@@ -24,17 +25,19 @@ class Products extends Component{
         Axios.get(`/products/getProducts?pageNo=${this.state.pageNo}&noOfProducts=${this.state.noOfProducts}`)
         .then(res => {
             this.setState({
-                products: res.data.data.requestedProduct, 
-                totalProducts:res.data.data.totalProducts, 
-                activePage:this.state.pageNo
+                products: res.data.data.requestedProduct,
+                totalProducts:res.data.data.totalProducts,
+                activePage:this.state.pageNo,
+                loading:false
             })
             window.scrollTo(0,0)
         }).catch(err => {
-            console.log(err)
+            this.setState({loading:false})
             this.props.notify({
                 status: 'error', 
                 content: "There was an error fetching products. Please refresh"
             })
+            
         })
     }
     nexPage = async ()=>{
@@ -67,7 +70,7 @@ class Products extends Component{
 
     render(){
         let display = null
-        if(this.state.products.length === 0){
+        if(this.state.loading && this.state.products.length === 0){
             display =<div className="Product_Loader">
                 <Loader />
             </div>

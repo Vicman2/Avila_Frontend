@@ -102,7 +102,7 @@
     grid-template-columns:1fr;
 }
 .Popular_Products{
-    margin-top: 23px;
+    margin-top: 0px;
     width: 212px;
     height: 243px;
 }
@@ -160,7 +160,7 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
     .Popular_Products{
-        margin-top: 63px;
+        margin-top: 10px;
         width: 212px;
         height: 243px;
     }

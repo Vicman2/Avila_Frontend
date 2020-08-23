@@ -36,7 +36,7 @@ class Home extends Component{
                     <div className="Home_Landing">
                         <p className="Home_Avila">Shalom<br /> Avila Natural Distributor</p>
                         <p className="Home_WeProvide">we provide the best natural skincare and Food product</p>
-                        <Button name="Explore products" />
+                        <Button name="Explore products" clicked={() => this.props.history.push('/products')}/>
                     </div>
                     <div className="Home_Landing_Carousel">
                         <Carousel

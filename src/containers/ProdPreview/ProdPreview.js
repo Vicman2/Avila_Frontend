@@ -17,9 +17,18 @@ class ProdPreview extends Component{
     }
     componentDidMount(){
         let {id} = this.props.match.params
-        window.scrollTo(0,0)
+        this.fetchData(id)
+        
+    }
+    componentDidUpdate(prevProps){
+        if(this.props.match.params.id !== prevProps.match.params.id){
+            this.fetchData(this.props.match.params.id)
+        }
+    }
+    fetchData = (id) => {
         Axios.get(`/api/products/getProduct/${id}`)
         .then(res => {
+            window.scrollTo(0,0)
             this.setState({
                 product: res.data.data, 
                 loading: false
@@ -34,7 +43,7 @@ class ProdPreview extends Component{
         })
     }
     render(){
-        console.log(this.state.product)
+        console.log(this.props)
         let display=null
         if(this.state.loading){
             display =  <div className="Product_Loader">
@@ -73,7 +82,7 @@ class ProdPreview extends Component{
         return(
             <div className="ProdPreview contain">
                 {display}
-                <RelatedProducts />
+                <RelatedProducts showTitle />
             </div>
         )
     }

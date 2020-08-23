@@ -3,3 +3,21 @@
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.RelatedProducts_title{
+    font-family: 'Poppins';
+    font-style: normal;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: #003A1A;
+    margin-bottom: 10px;
+}
+.Popular_Products:hover{
+    cursor: pointer;
+}
+@media(min-width:900px){
+    .RelatedProducts_title{
+        text-align: left;
+    }
+}

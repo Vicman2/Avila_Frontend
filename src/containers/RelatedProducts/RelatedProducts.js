@@ -4,6 +4,8 @@ import {flowRight as compose} from 'lodash'
 import * as uiActions from '../../store/actions/UIActions'
 import './RelatedProducts.css'
 import Axios from '../../axios'
+import { withRouter } from 'react-router-dom'
+import Aux from '../../HOC/Aux/Aux'
 
 
 
@@ -25,21 +27,31 @@ class RelatedProducts extends Component{
             
         })
     }
+    preview = (id) => {
+        this.props.history.push(`/products/${id}`)
+    }
     render(){
         let toDisplay = null
+        let title = null;
+        if(this.props.showTitle) {
+            title = <p className="RelatedProducts_title">RelatedProducts</p>
+        }
         if(this.state.products){
             toDisplay = this.state.products.map(rProd => {
                 return(
-                    <div className="Popular_Products">
+                    <div className="Popular_Products" onClick={() => this.preview(rProd._id)}>
                         <img className="contain_img" src={rProd.prodImageSrc} alt=""/>
                     </div>
                 )
             })
         }
         return(
-            <div className="RelatedProducts">
-                {toDisplay}
-            </div>
+            <Aux>
+                {title}
+                <div className="RelatedProducts">
+                    {toDisplay}
+                </div>
+            </Aux>
         )
     }
 }
@@ -50,5 +62,6 @@ const actionMappedToProps = dispatch => {
     }
 }
 export default compose(
+    withRouter,
     connect(null, actionMappedToProps)
 ) (RelatedProducts)

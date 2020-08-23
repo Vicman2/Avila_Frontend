@@ -18,7 +18,7 @@ class ProdPreview extends Component{
     componentDidMount(){
         let {id} = this.props.match.params
         window.scrollTo(0,0)
-        Axios.get(`/products/getProduct/${id}`)
+        Axios.get(`/api/products/getProduct/${id}`)
         .then(res => {
             this.setState({
                 product: res.data.data, 

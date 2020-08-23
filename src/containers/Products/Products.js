@@ -24,6 +24,7 @@ class Products extends Component{
     fetchProducts= ()=>{
         Axios.get(`/products/getProducts?pageNo=${this.state.pageNo}&noOfProducts=${this.state.noOfProducts}`)
         .then(res => {
+            console.log(res)
             this.setState({
                 products: res.data.data.requestedProduct,
                 totalProducts:res.data.data.totalProducts,

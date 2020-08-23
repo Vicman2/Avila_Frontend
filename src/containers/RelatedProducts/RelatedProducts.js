@@ -12,7 +12,7 @@ class RelatedProducts extends Component{
         products :null
     }
     componentDidMount(){
-        Axios.get(`/products/getProducts?pageNo=1&noOfProducts=4`)
+        Axios.get(`/api/products/getProducts?pageNo=1&noOfProducts=4`)
         .then(res => {
             this.setState({
                 products: res.data.data.requestedProduct,

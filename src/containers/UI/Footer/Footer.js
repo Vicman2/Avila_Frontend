@@ -56,7 +56,7 @@ class Footer extends Component{
         if(this.state.isFormValid && this.state.isSubmitted){
             this.setState({loading:true})
             let data ={email: this.state.emailInput.value}
-            Axios.post('/users/subscribe', data)
+            Axios.post('/api/users/subscribe', data)
             .then(data => {
                 this.setState({emailInput, loading:false})
                 this.props.notify({

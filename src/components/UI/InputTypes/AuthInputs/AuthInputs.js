@@ -1,5 +1,5 @@
 import React from 'react'
-import Aux from '../../../../../HOC/Aux/Aux'
+import Aux from '../../../../HOC/Aux/Aux'
 import './AuthInputs.css'
 
 const AuthInputs = (props) => {
@@ -35,6 +35,23 @@ const AuthInputs = (props) => {
             </Aux>
         )
         break;
+        case('select'):
+        let options = props.options.map(option => {
+            return(
+                <option key={option.value} value={option.value}>{option.name} </option>
+            )
+        })
+            inputElement = (
+                <Aux>
+                    <select
+                    className="AuthInputs__Element INPUT_SELECT"
+                    onChange={props.changed}
+                    name={props.name}>
+                        {options}
+                    </select>
+                </Aux>
+            )
+        break;
         default: 
         inputElement = <input 
         className="AuthInputs__Element" 
@@ -42,9 +59,9 @@ const AuthInputs = (props) => {
         value={props.value} />
     }
     return (
-        <div className="Input">
-            <label> {props.label} </label>
+        <div className="Input_Auto">
             {inputElement}
+            <label className="AuthInputs__Element_label"> {props.label} </label>
         </div>
     )
 }

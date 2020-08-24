@@ -1,12 +1,31 @@
-Input{
+.Input_Auto{
     width: 100%;
-    border-radius: 4px;
-    height: 2rem;
+    border: none;
+    border-radius: 0 !important;
+    height: 5rem;
+    margin: 20px 0;
+    position: relative;
+}
+.AuthInputs__Element::placeholder{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #393535;
 }
 .AuthInputs__Element{
     padding: 5px;
     margin: 12px auto;
+    border: none;
+    border-bottom: 0.5px solid #393535;
     outline: none;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #393535;
 }
 .HideErrorMessage{
     display: none;
@@ -17,17 +36,42 @@ Input{
     margin-top: 0px;
     margin-bottom: 5px;
 }
-
+.INPUT_SELECT{
+    border: none;
+    border-bottom: 0.5px solid #393535;
+    background-color: inherit;
+    margin-bottom: 0 !important;
+}
+.INPUT_SELECT:hover{
+    cursor: pointer;
+}
+.AuthInputs__Element_label{
+    position: absolute;
+    top:27px;
+    left: 5px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #393535;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.Input_Auto input:focus ~ label, 
+.Input_Auto input:valid ~ label{
+    top:-12px;
+    color: #84BE38;
+}
 @media(min-width:800px){
-    .Input{
-        width: 95%;
+    .Input_Auto{
+        width: 100%;
     }
     .AuthInputs__Element{
-        padding: 7px 10px;
         margin: 20px auto;
     }
     .ShowErrorMessage{
-        margin-top: -15px;
+        margin-top: -10px;
         margin-bottom: 10px;
     }
 }

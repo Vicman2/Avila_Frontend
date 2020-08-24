@@ -1,0 +1,17 @@
+.SignIn_Inputs{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+}
+
+
+
+@media(min-width:900px){
+    .SignIn_Inputs{
+        flex-wrap: wrap;
+        flex-direction: row;
+     }
+    .SignIn_Inputs .Input_Auto{
+        width: 40%;
+    }
+}

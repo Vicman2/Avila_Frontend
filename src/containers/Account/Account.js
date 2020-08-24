@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import {flowRight as compose} from 'lodash'
 import * as uiActions from '../../store/actions/UIActions'
 import './Account.css'
-import Login from '../../components/Auth/Login/Login'
+import Login from '../Auth/Login/Login'
+import SignUp from '../Auth/Signup/Signup'
 
 
 

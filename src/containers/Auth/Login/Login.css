@@ -1,0 +1,40 @@
+.Auth_Title{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #84BE38;
+    text-align: center;
+}
+.Forgotten_Password{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #393535;
+    display: flex;
+    justify-content: flex-end;
+}
+.Auth_Btn_Wrapper{
+    display: flex;
+    justify-content: center;
+}
+.Auth_Alt{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #393535;
+    text-align: center;
+}
+
+
+
+@media(min-width:900px){
+    .Auth_Title{
+        font-size: 20px;
+    }
+}

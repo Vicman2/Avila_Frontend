@@ -32,6 +32,7 @@
 }
 .ShowErrorMessage{
     color: red;
+    font-weight: 300;
     font-size: 14px;
     margin-top: 0px;
     margin-bottom: 5px;
@@ -62,6 +63,10 @@
 .Input_Auto input:valid ~ label{
     top:-12px;
     color: #84BE38;
+}
+.AuthInputs__Element:focus, 
+.AuthInputs__Element:valid{
+    border-bottom: 2px solid #84BE38 !important;
 }
 @media(min-width:800px){
     .Input_Auto{

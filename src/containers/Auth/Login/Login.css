@@ -1,3 +1,6 @@
+.Login{
+    width: 90%;
+}
 .Auth_Title{
     font-family: 'Montserrat';
     font-style: normal;
@@ -15,6 +18,8 @@
     line-height: 17px;
     color: #393535;
     display: flex;
+    margin-top: -20px;
+    margin-bottom: 15px;
     justify-content: flex-end;
 }
 .Auth_Btn_Wrapper{
@@ -30,10 +35,19 @@
     color: #393535;
     text-align: center;
 }
+.Auth_Alt span{
+    color: #84BE38;
+}
+.Auth_Alt span:hover{
+    cursor: pointer;
+}
 
 
 
 @media(min-width:900px){
+    .Login{
+        width: 100%;
+    }
     .Auth_Title{
         font-size: 20px;
     }

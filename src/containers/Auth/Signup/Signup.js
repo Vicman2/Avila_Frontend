@@ -1,5 +1,11 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {flowRight as compose} from 'lodash'
+import  * as uiActions from '../../../store/actions/UIActions'
 import InputForm from '../../../components/UI/InputTypes/AuthInputs/AuthInputs'
+import Loader from '../../../components/UI/Loader/Loader'
+import {setInLocalStorage} from '../../../utility'
+import Axios from '../../../axios'
 import './Signup.css'
 import Button from '../../../components/UI/Button/Button';
 
@@ -138,6 +144,9 @@ class SignUp extends Component{
             sex: {...FORM_INPUTS.sex}
         }
     }
+    componentDidMount(){
+        window.scrollTo(0,0)
+    }
     formElementChangeHandler = async (event, elemName)=> {
         let formInputs = {...this.state.formInputs}
         let element = formInputs[elemName]
@@ -156,6 +165,38 @@ class SignUp extends Component{
             }
         }
         await this.setState({isFormValid: theFormIsValid})
+    }
+    
+
+    signUpHandler = async (event) => {
+        let data  = {}
+        event.preventDefault();
+        await this.setState({isSubmited: true});
+        if(this.state.isSubmited && this.state.isFormValid){
+            for(let key in this.state.formInputs){
+                const deKey= key;
+                data[deKey]= this.state.formInputs[deKey].value
+            }
+            await this.setState({loading: true})
+            Axios.post('/api/users/create',data )
+            .then(res => {
+                const {token} = res.data.data
+                setInLocalStorage("token", token, 3600000);
+                this.setState({formInputs: FORM_INPUTS, loading: false});
+                this.props.notify({
+                    status: 'success', 
+                    content: res.data.message
+                })
+            }).catch(err=> {
+                this.setState({loading: false})
+                if(err.response.data){
+                    this.props.notify({
+                        status: 'error', 
+                        content: err.response.data.message
+                    })
+                }
+            })
+        }
     }
     
     render(){
@@ -186,21 +227,31 @@ class SignUp extends Component{
                 />
             )
         })
-        
+        let loadingBtn = <Button big name="SIGN UP" clicked={this.signUpHandler} />
+        if(this.state.loading){
+            loadingBtn = <Loader />
+        }
         return(
-            <div className="Login">
+            <div className="SignIn">
                 <p className="Auth_Title">SIGN UP</p>
                 <div className="SignIn_Inputs">
                     {toDisplay}
                 </div>
                 <div className="Auth_Btn_Wrapper">
-                    <Button big name="SIGN UP" />
+                    {loadingBtn}
                 </div>
-                <p className="Auth_Alt">Already have an account ? signup</p>
+                <p className="Auth_Alt">Already have an account ? <span onClick={this.props.switchAuth}>Login</span></p>
             </div>
         )
     }
 }
 
+const actionMappedToProps = dispatch => {
+    return{
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload))
+    }
+}
 
-export default SignUp
+export default compose(
+    connect(null, actionMappedToProps)
+) (SignUp)

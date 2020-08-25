@@ -1,0 +1,45 @@
+
+
+
+
+.Profile_Key{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: #393535;
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.Profile_Value{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #393535;
+    margin-top: 5px;
+}
+.Account_Info_Title{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    color: #393535;
+    border-bottom: 0.3px solid #000000;
+    margin-bottom: 4px;
+}
+.Account_Edit{
+    text-align: right;
+    font-family: 'Poppins';
+    margin-top: 7px;
+    margin-bottom: 2px;
+    font-size: 18px;
+    line-height: 27px;
+    color: #84BE38;
+}
+.Account_Edit:hover{
+    cursor: pointer;
+}

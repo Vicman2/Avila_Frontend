@@ -1,0 +1,33 @@
+.AccountNav_Item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px 15px;
+    transition: 0.5s;
+}
+.AccountNav_Item:hover{
+    background-color:#003A1A;
+    cursor: pointer;
+}
+.AccountNav_Item>p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    color: #84BE38;
+    text-align: center;
+    width: 100%;
+}
+.AccountNav_Item>ion-icon{
+    font-size: 26px;
+    margin-right: 10px;
+    color: #84BE38;
+    cursor: pointer;
+}
+
+@media(min-width:900px){
+    .AccountNav{
+        width: 15%;
+    }
+}

@@ -1,0 +1,9 @@
+.Account_Auth{
+    display: flex;
+    justify-content: center;
+}
+.Account_validCont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

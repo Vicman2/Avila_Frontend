@@ -3,10 +3,16 @@
    flex-direction: column;
    justify-content: space-around;
 }
+.SignIn{
+    width: 90%;
+}
 
 
 
 @media(min-width:900px){
+    .SignIn{
+        width: 80%;
+    }
     .SignIn_Inputs{
         flex-wrap: wrap;
         flex-direction: row;

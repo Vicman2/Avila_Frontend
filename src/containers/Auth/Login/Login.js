@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import InputForm from '../../../components/UI/InputTypes/AuthInputs/AuthInputs'
+import {setInLocalStorage} from '../../../utility'
+import Axios from '../../../axios'
 import './Login.css'
 import Button from '../../../components/UI/Button/Button';
 
@@ -54,6 +56,9 @@ class Login extends Component{
             password: {...FORM_INPUTS.password}
         }
     }
+    componentDidMount(){
+        window.scrollTo(0,0)
+    }
     formElementChangeHandler = async (event, elemName)=> {
         let formInputs = {...this.state.formInputs}
         let element = formInputs[elemName]
@@ -72,6 +77,49 @@ class Login extends Component{
             }
         }
         await this.setState({isFormValid: theFormIsValid})
+    }
+    onLoginHandler = async(event) => {
+        let data  = {}
+        event.preventDefault();
+        await this.setState({isSubmited: true});
+        if(this.state.isSubmited && this.state.isFormValid){
+            for(let key in this.state.formInputs){
+                const deKey= key;
+                data[deKey]= this.state.formInputs[deKey].value
+            }
+            await this.setState({loading: true})
+            Axios.post('/api/')
+            .then(res => {
+                this.setState({loading: false})
+                const {token, user} = res.data.login
+                const cart = JSON.parse(localStorage.getItem('cart'))
+                if(cart && cart.cartIds.length > 0){
+                    this.props.mutate({
+                        variables: {
+                            books: cart.cartIds
+                        }
+                    }).then(res => {
+                        this.props.updateCart(res.data.logIn)
+                    })
+                    .catch(err=> {
+                       
+                    })
+                }
+                setInLocalStorage("token", token, 3600000);
+                localStorage.removeItem('cart')
+
+                this.props.login(token)
+                this.setState({formInputs: FORM_INPUTS});
+                this.props.cancel()
+                this.props.updateCartNo(user.cart.length)
+            }).catch(err=> {
+                this.setState({loading: false})
+                if(err.graphQLErrors){
+                    const errors = err.graphQLErrors.map(error => error.message);
+                    this.setState({errors});
+                }
+            })
+        }
     }
     
     render(){
@@ -109,7 +157,7 @@ class Login extends Component{
                 <div className="Auth_Btn_Wrapper">
                     <Button big name="LOGIN" />
                 </div>
-                <p className="Auth_Alt">Don't have an account? Sign up </p>
+                <p className="Auth_Alt">Don't have an account? <span onClick={this.props.switchAuth}>Sign up</span> </p>
             </div>
         )
     }

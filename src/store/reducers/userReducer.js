@@ -1,8 +1,7 @@
 import * as actionType from '../actions/userActions'
 
 const initialStore = {
-    isLoggedIn: false, 
-    userData: {},
+    isLoggedIn: false,
 }
 
 
@@ -12,13 +11,11 @@ const reducer = (state = initialStore, action) => {
             return{
                 ...state,
                 isLoggedIn : true, 
-                userData: action.payload
             }
         
         case actionType.LOGOUT:
             return{
-                ...state, 
-                userData:{}, 
+                ...state,  
                 isLoggedIn: false
             }
     }

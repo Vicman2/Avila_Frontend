@@ -6,14 +6,14 @@ import './Account.css'
 import Login from '../Auth/Login/Login'
 import SignUp from '../Auth/Signup/Signup'
 import AccountNav from '../../components/AccountNav/AccountNav'
-import Profile from '../../components/Profile/Profile'
+import Profile from '../Profile/Profile'
 
 
 
 
 class Account extends Component{
     state={
-        signedIn: false // Initailly set to false to know if the user already have an account
+        signedIn: false, // Initailly set to false to know if the user already have an account
     }
     swithAuthMethod = () => {
         this.setState((prevState) => {
@@ -25,7 +25,7 @@ class Account extends Component{
     }
     render(){
         let toDisplay = null
-        let login =  <div className="Account_Login">
+        let login =  <div className="Account_Auth">
             <Login switchAuth={this.swithAuthMethod} />
         </div>
         let Navs = <AccountNav />
@@ -44,9 +44,7 @@ class Account extends Component{
         }
         return(
             <div className="Account contain">
-              <div className="Account_validCont">
                 {toDisplay}
-            </div>
             </div>
         )
     }
@@ -54,7 +52,8 @@ class Account extends Component{
 
 const propsMappedToState= state => {
     return{
-        isLoggedIn: state.users.isLoggedIn
+        isLoggedIn: state.users.isLoggedIn, 
+        onAuthComp : state.ui.unAuthComponent
     }
 }
 

@@ -1,9 +1,15 @@
+.AccountNav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .AccountNav_Item{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 2px 15px;
+    padding: 2px 3px;
     transition: 0.5s;
+    margin: 0px 2px;
 }
 .AccountNav_Item:hover{
     background-color:#003A1A;
@@ -13,21 +19,36 @@
     font-family: 'Poppins';
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 10px;
     line-height: 27px;
     color: #84BE38;
     text-align: center;
     width: 100%;
+    margin: 2px;
 }
 .AccountNav_Item>ion-icon{
-    font-size: 26px;
-    margin-right: 10px;
+    font-size: 10px;
+    margin-right: 3px;
     color: #84BE38;
     cursor: pointer;
 }
 
 @media(min-width:900px){
     .AccountNav{
-        width: 15%;
+        width: 20%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2px 147px;
+    }
+    .AccountNav_Item{
+        padding: 2px 15px;
+        margin: 15px 2px;
+    }
+    .AccountNav_Item>p{
+        font-size: 18px;
+    }
+    .AccountNav_Item>ion-icon{
+        font-size: 24px;
+        margin-right: 3px;
     }
 }

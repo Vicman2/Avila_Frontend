@@ -5,7 +5,8 @@ const initialStore = {
     notificationData : {
         status: "", 
         content:""
-    }
+    }, 
+    unAuthComponent: null
 }
 
 
@@ -22,6 +23,11 @@ const reducer = (state = initialStore, action) => {
             return{
                 ...state, 
                 showNotification: false,
+            }
+        case actionType.SET_COMPONENT_ON_AUTH:
+            return{
+                ...state, 
+                unAuthComponent: action.comp,
             }
     }
     return state;

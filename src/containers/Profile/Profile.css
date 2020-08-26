@@ -43,3 +43,8 @@
 .Account_Edit:hover{
     cursor: pointer;
 }
+.Profile_Loader{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

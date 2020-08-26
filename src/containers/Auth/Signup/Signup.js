@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {flowRight as compose} from 'lodash'
 import  * as uiActions from '../../../store/actions/UIActions'
+import  * as userActions from '../../../store/actions/userActions'
 import InputForm from '../../../components/UI/InputTypes/AuthInputs/AuthInputs'
 import Loader from '../../../components/UI/Loader/Loader'
 import {setInLocalStorage} from '../../../utility'
@@ -109,7 +110,7 @@ const FORM_INPUTS = {
     sex: {
         elemType: 'select',
         value: "", 
-        isValid: true,
+        isValid: false,
         touched: false,
         name: 'sex',
         validation: function(){
@@ -124,7 +125,7 @@ const FORM_INPUTS = {
             {name: 'Female', value: 'female'},
             {name: "Male", value: 'male'}, 
         ], 
-        config:{}
+        errorMessage: "Select is a gender please"
     }
     
 }
@@ -172,6 +173,18 @@ class SignUp extends Component{
         let data  = {}
         event.preventDefault();
         await this.setState({isSubmited: true});
+        await this.setState((prevState) => {
+            return{
+                ...prevState, 
+                formInputs: {
+                    ...prevState.formInputs, 
+                    sex: {
+                        ...prevState.formInputs.sex, 
+                        touched: true
+                    }
+                }
+            }
+        })
         if(this.state.isSubmited && this.state.isFormValid){
             for(let key in this.state.formInputs){
                 const deKey= key;
@@ -187,6 +200,7 @@ class SignUp extends Component{
                     status: 'success', 
                     content: res.data.message
                 })
+                this.props.login()
             }).catch(err=> {
                 this.setState({loading: false})
                 if(err.response.data){
@@ -248,7 +262,8 @@ class SignUp extends Component{
 
 const actionMappedToProps = dispatch => {
     return{
-        notify: (payload)=>dispatch(uiActions.promptNotification(payload))
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
+        login: () => dispatch(userActions.login())
     }
 }
 

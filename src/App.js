@@ -12,6 +12,8 @@ import Products from './containers/Products/Products';
 import Account from './containers/Account/Account';
 import Cart from './containers/Cart/Cart';
 import ProdPreview from './containers/ProdPreview/ProdPreview'
+import { getInLocalStorage } from './utility';
+import * as userActions from './store/actions/userActions'
 
 
 
@@ -19,6 +21,12 @@ import ProdPreview from './containers/ProdPreview/ProdPreview'
 class App extends Component{
   state= {
     hamburger: false
+  }
+  componentDidMount(){
+    let token = getInLocalStorage('token')
+    if(token){
+      this.props.login()
+    }
   }
   clickedHamburger = ()=> {
     this.setState((prevState) => {
@@ -60,7 +68,13 @@ const stateMappedToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    login: ()=> dispatch(userActions.login())
+  }
+}
+
 
 export default compose(
-  connect(stateMappedToProps)
+  connect(stateMappedToProps, mapDispatchToProps)
 )(App);

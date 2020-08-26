@@ -49,6 +49,7 @@ const AuthInputs = (props) => {
                     name={props.name}>
                         {options}
                     </select>
+                    <div className={classes}>{props.errorMessage}</div>
                 </Aux>
             )
         break;

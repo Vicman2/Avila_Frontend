@@ -5,5 +5,15 @@
 .Account_validCont{
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+@media(min-width: 900px){
+    .Account_validCont{
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
 }

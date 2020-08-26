@@ -1,9 +1,14 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {flowRight as compose} from 'lodash'
+import  * as uiActions from '../../../store/actions/UIActions'
+import  * as userActions from '../../../store/actions/userActions'
 import InputForm from '../../../components/UI/InputTypes/AuthInputs/AuthInputs'
 import {setInLocalStorage} from '../../../utility'
 import Axios from '../../../axios'
 import './Login.css'
 import Button from '../../../components/UI/Button/Button';
+import Loader from '../../../components/UI/Loader/Loader'
 
 
 const FORM_INPUTS = {
@@ -88,35 +93,23 @@ class Login extends Component{
                 data[deKey]= this.state.formInputs[deKey].value
             }
             await this.setState({loading: true})
-            Axios.post('/api/')
+            Axios.post('/api/users/login', data)
             .then(res => {
-                this.setState({loading: false})
-                const {token, user} = res.data.login
-                const cart = JSON.parse(localStorage.getItem('cart'))
-                if(cart && cart.cartIds.length > 0){
-                    this.props.mutate({
-                        variables: {
-                            books: cart.cartIds
-                        }
-                    }).then(res => {
-                        this.props.updateCart(res.data.logIn)
-                    })
-                    .catch(err=> {
-                       
-                    })
-                }
+                let {token} = res.data.data
                 setInLocalStorage("token", token, 3600000);
-                localStorage.removeItem('cart')
-
-                this.props.login(token)
-                this.setState({formInputs: FORM_INPUTS});
-                this.props.cancel()
-                this.props.updateCartNo(user.cart.length)
+                this.setState({formInputs: FORM_INPUTS, loading: false});
+                this.props.notify({
+                    status: 'success', 
+                    content: res.data.message
+                })
+                this.props.login()
             }).catch(err=> {
                 this.setState({loading: false})
-                if(err.graphQLErrors){
-                    const errors = err.graphQLErrors.map(error => error.message);
-                    this.setState({errors});
+                if(err.response.data){
+                    this.props.notify({
+                        status: 'error', 
+                        content: err.response.data.message
+                    })
                 }
             })
         }
@@ -146,6 +139,11 @@ class Login extends Component{
                 />
             )
         })
+
+        let btnLoader = <Loader />
+        if(!this.state.loading){
+            btnLoader = <Button big name="LOGIN" clicked={this.onLoginHandler} />
+        }
         
         return(
             <div className="Login">
@@ -155,13 +153,20 @@ class Login extends Component{
                     <p>Forgotten password ?</p>
                 </div>
                 <div className="Auth_Btn_Wrapper">
-                    <Button big name="LOGIN" />
+                    {btnLoader}
                 </div>
                 <p className="Auth_Alt">Don't have an account? <span onClick={this.props.switchAuth}>Sign up</span> </p>
             </div>
         )
     }
 }
+const actionMappedToProps = dispatch => {
+    return{
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
+        login: () => dispatch(userActions.login())
+    }
+}
 
-
-export default Login
+export default compose(
+    connect(null, actionMappedToProps)
+) (Login)

@@ -3,7 +3,7 @@ import './AccountNav.css'
 
 const AccountNav = (props) => {
     return(
-        <div className="AccountNav contain">
+        <div className="AccountNav">
             <div className="AccountNav_Item">
                 <ion-icon name="person-outline"></ion-icon>
                 <p>My Account</p>

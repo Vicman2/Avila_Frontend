@@ -1,7 +1,7 @@
 .Notification{
     position: fixed;
     bottom: 70px;
-    display: flex;
+    display: none;
     justify-content: center;
     background-color: transparent;
     width: 100%;
@@ -44,6 +44,7 @@
     color: #004085;
 }
 .Show_Notification{
+    display: flex;
     animation: notifyUp 1s;
 }
 .Hide_Notification{

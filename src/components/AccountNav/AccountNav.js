@@ -5,10 +5,12 @@ import * as userActions from '../../store/actions/userActions'
 import './AccountNav.css'
 
 const AccountNav = (props) => {
+    
     const onLogOut = () => {
         localStorage.removeItem("token");
         props.logOut()
     }
+
     return(
         <div className="AccountNav">
             <div className="AccountNav_Item">

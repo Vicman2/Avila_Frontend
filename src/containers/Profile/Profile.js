@@ -21,6 +21,7 @@ class Profile extends Component{
                 "x-access-token": getInLocalStorage("token")
             }
         }).then (res => {
+            window.screenTop(0,0)
             this.setState({userDetails: res.data.data})
         })
     }

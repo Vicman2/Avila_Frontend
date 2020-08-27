@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 const Product = (props) =>{
     let favIcon = <ion-icon name="heart-outline" onClick={props.addFavourite}></ion-icon>
     if(props.favourites){
-        favIcon = <ion-icon name="heart"></ion-icon>
+        favIcon = <ion-icon name="heart" onClick={props.removeFavourite}></ion-icon>
     }
     return(
         <div className="Product">

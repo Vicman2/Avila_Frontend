@@ -1,0 +1,47 @@
+.OneNav{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px 3px;
+    transition: 0.5s;
+    margin: 0px 2px;
+}
+.OneNav:hover{
+    background-color:#003A1A;
+    cursor: pointer;
+}
+.activeScreen{
+    background-color:#003A1A;
+}
+.OneNav>p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 27px;
+    color: #84BE38;
+    text-align: center;
+    width: 100%;
+    margin: 2px;
+}
+.OneNav>ion-icon{
+    font-size: 10px;
+    margin-right: 3px;
+    color: #84BE38;
+    cursor: pointer;
+}
+
+
+@media(min-width:900px){
+    .OneNav{
+        padding: 2px 15px;
+        margin: 15px 2px;
+    }
+    .OneNav>p{
+        font-size: 18px;
+    }
+    .OneNav>ion-icon{
+        font-size: 24px;
+        margin-right: 3px;
+    }
+}

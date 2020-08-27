@@ -116,6 +116,32 @@ class Products extends Component{
             })
         }
     }
+    removeFromFavourites = (id) => {
+        const token = getInLocalStorage("token")
+            Axios.put(`/api/users/removeFavourite/${id}`, {},{
+                headers: {
+                    "x-access-token": token
+                }
+            })
+            .then(res => {
+                this.fetchProducts()
+                window.scrollTo(0,0)
+                this.props.notify({
+                    status: 'success',
+                    content: res.data.message
+                })
+            }).catch(err => {
+                this.setState({loading:false})
+                if(err.response.data){
+                    console.log(err.response.data)
+                    this.props.notify({
+                        status: 'error', 
+                        content: err.response.data.message
+                    })
+                }
+                
+            })
+    }
 
     render(){
         let display = null
@@ -134,6 +160,7 @@ class Products extends Component{
                     name={prod.name}
                     price={prod.price}
                     addFavourite= {()=>this.addToFavourties(prod._id)}
+                    removeFavourite = {() => this.removeFromFavourites(prod._id)}
                     favourites={addedToFavouite}
                     />
                 )

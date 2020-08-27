@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import './Profile.css'
-import Axios from '../../axios'
-import { getInLocalStorage } from '../../utility'
-import Loader from '../../components/UI/Loader/Loader'
-import Aux from '../../HOC/Aux/Aux'
+import Axios from '../../../axios'
+import { getInLocalStorage } from '../../../utility'
+import Loader from '../../../components/UI/Loader/Loader'
+import Aux from '../../../HOC/Aux/Aux'
 
 
 

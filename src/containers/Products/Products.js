@@ -31,17 +31,21 @@ class Products extends Component{
                 "x-access-token": getInLocalStorage("token")
             }
         })
-        axios.all([productRequest, userRequest])
+        let fetchArray = [productRequest]
+        if(this.props.isLoggedIn){
+            fetchArray.push(userRequest)
+        }
+        axios.all(fetchArray)
         .then(axios.spread((...responses) => {
+            window.scrollTo(0,0)
             const prodResponse = responses[0]
             const userResponse = responses[1]
-            console.log(prodResponse, userResponse)
             this.setState({
                 products: prodResponse.data.data.requestedProduct,
                 totalProducts:prodResponse.data.data.totalProducts,
                 activePage:this.state.pageNo,
                 loading:false, 
-                userFavourite: userResponse.data.data.favourites
+                userFavourite: userResponse ?  userResponse.data.data.favourites : []
             })
         } ))
         .catch(err => {
@@ -55,6 +59,7 @@ class Products extends Component{
         })
     }
     nexPage = async ()=>{
+        window.scrollTo(0,0)
         let  numberOfPages = this.state.totalProducts/this.state.noOfProducts
         numberOfPages = isInteger(numberOfPages) ? numberOfPages : parseInt(numberOfPages) + 1
         if(this.state.activePage < numberOfPages){
@@ -82,30 +87,34 @@ class Products extends Component{
         this.props.history.push(`/products/${id}`)
     }
     addToFavourties = (id)=>{
-        const token = getInLocalStorage("token")
-        Axios.put(`/api/users/addFavourite/${id}`, {},{
-            headers: {
-                "x-access-token": token
-            }
-        })
-        .then(res => {
-            this.fetchProducts()
-            window.scrollTo(0,0)
-            this.props.notify({
-                status: 'success',
-                content: res.data.message
+        if(!this.props.isLoggedIn){
+            this.props.history.push('/account')
+        }else{
+            const token = getInLocalStorage("token")
+            Axios.put(`/api/users/addFavourite/${id}`, {},{
+                headers: {
+                    "x-access-token": token
+                }
             })
-        }).catch(err => {
-            this.setState({loading:false})
-            if(err.response.data){
-                console.log(err.response.data)
+            .then(res => {
+                this.fetchProducts()
+                window.scrollTo(0,0)
                 this.props.notify({
-                    status: 'error', 
-                    content: err.response.data.message
+                    status: 'success',
+                    content: res.data.message
                 })
-            }
-            
-        })
+            }).catch(err => {
+                this.setState({loading:false})
+                if(err.response.data){
+                    console.log(err.response.data)
+                    this.props.notify({
+                        status: 'error', 
+                        content: err.response.data.message
+                    })
+                }
+                
+            })
+        }
     }
 
     render(){
@@ -162,7 +171,7 @@ class Products extends Component{
             }
             pagination =<div className="Pagin_Section">
                 <p onClick={this.prevPage} className={prevLink.join(" ")}>Prev</p>
-                <p className="Page_Numeration">{arrayPage} </p>
+                <div className="Page_Numeration">{arrayPage} </div>
                 <p onClick={this.nexPage} className={nextLink.join(" ")}>Next</p>
 
             </div>
@@ -184,7 +193,11 @@ class Products extends Component{
     }
 }
 
-
+const stateMappedToProps = state => {
+    return {
+        isLoggedIn : state.users.isLoggedIn
+    }
+}
 
 const actionMappedToProps = dispatch => {
     return{
@@ -192,5 +205,5 @@ const actionMappedToProps = dispatch => {
     }
 }
 export default compose(
-    connect(null, actionMappedToProps)
+    connect(stateMappedToProps, actionMappedToProps)
 ) (Products)

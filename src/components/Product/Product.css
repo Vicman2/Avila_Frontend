@@ -7,14 +7,15 @@
     height: 309px;
     transition: width 1s;
 }
-.Product:hover{
-    cursor: pointer;
-}
+
 .ProdImage_Cont{
     width: 100%;
     height: 193px;
     display: flex;
     justify-content: center;
+}
+.ProdImage_Cont:hover{
+    cursor: pointer;
 }
 .ProdContain_Detials{
     display: flex;
@@ -32,6 +33,9 @@
     color: #84BE38;
     text-transform: capitalize;
 }
+.Product_Name:hover{
+    cursor: pointer;
+}
 .Product_Price{
     font-family: 'Montserrat';
     font-style: normal;
@@ -43,6 +47,9 @@
 .Product_Favourite ion-icon{
     color: #84BE38;
     font-size: 28px;
+}
+.Product_Favourite ion-icon:hover{
+    cursor: pointer;
 }
 .Product_Buy_Btn{
     display: flex;

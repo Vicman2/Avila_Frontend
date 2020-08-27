@@ -3,9 +3,11 @@ import {flowRight as compose, isInteger} from 'lodash'
 import {connect} from 'react-redux'
 import * as uiActions from '../../store/actions/UIActions'
 import Axios from '../../axios'
+import axios from 'axios'
 import './Products.css'
 import Loader from '../../components/UI/Loader/Loader'
 import Product from '../../components/Product/Product'
+import { getInLocalStorage } from '../../utility'
 
 
 class Products extends Component{
@@ -15,23 +17,35 @@ class Products extends Component{
         products: [], 
         totalProducts: null, 
         activePage:null, 
-        loading: true
+        loading: true,
+        userFavourite : []
     }
     componentDidMount(){
         window.scrollTo(0,0)
         this.fetchProducts()
     }
     fetchProducts= ()=>{
-        Axios.get(`/api/products/getProducts?pageNo=${this.state.pageNo}&noOfProducts=${this.state.noOfProducts}`)
-        .then(res => {
+        const productRequest = axios.get(`https://avila-backend.herokuapp.com/api/products/getProducts?pageNo=${this.state.pageNo}&noOfProducts=${this.state.noOfProducts}`)
+        const userRequest = axios.get(`https://avila-backend.herokuapp.com/api/users/getUser`, {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
+        })
+        axios.all([productRequest, userRequest])
+        .then(axios.spread((...responses) => {
+            const prodResponse = responses[0]
+            const userResponse = responses[1]
+            console.log(prodResponse, userResponse)
             this.setState({
-                products: res.data.data.requestedProduct,
-                totalProducts:res.data.data.totalProducts,
+                products: prodResponse.data.data.requestedProduct,
+                totalProducts:prodResponse.data.data.totalProducts,
                 activePage:this.state.pageNo,
-                loading:false
+                loading:false, 
+                userFavourite: userResponse.data.data.favourites
             })
-            window.scrollTo(0,0)
-        }).catch(err => {
+        } ))
+        .catch(err => {
+            console.log(err)
             this.setState({loading:false})
             this.props.notify({
                 status: 'error', 
@@ -67,6 +81,32 @@ class Products extends Component{
     clickedProduct = (id)=>{
         this.props.history.push(`/products/${id}`)
     }
+    addToFavourties = (id)=>{
+        const token = getInLocalStorage("token")
+        Axios.put(`/api/users/addFavourite/${id}`, {},{
+            headers: {
+                "x-access-token": token
+            }
+        })
+        .then(res => {
+            this.fetchProducts()
+            window.scrollTo(0,0)
+            this.props.notify({
+                status: 'success',
+                content: res.data.message
+            })
+        }).catch(err => {
+            this.setState({loading:false})
+            if(err.response.data){
+                console.log(err.response.data)
+                this.props.notify({
+                    status: 'error', 
+                    content: err.response.data.message
+                })
+            }
+            
+        })
+    }
 
     render(){
         let display = null
@@ -76,6 +116,7 @@ class Products extends Component{
             </div>
         }else{
             display = this.state.products.map(prod => {
+                let addedToFavouite = this.state.userFavourite.find(fav => fav == prod._id)
                 return(
                     <Product
                     clicked={()=>this.clickedProduct(prod._id)}
@@ -83,6 +124,8 @@ class Products extends Component{
                     src={prod.prodImageSrc}
                     name={prod.name}
                     price={prod.price}
+                    addFavourite= {()=>this.addToFavourties(prod._id)}
+                    favourites={addedToFavouite}
                     />
                 )
             })

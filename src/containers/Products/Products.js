@@ -141,6 +141,31 @@ class Products extends Component{
             }
         })
     }
+    addToCart = (id) => {
+        if(!this.props.isLoggedIn){
+            this.props.history.push('/account')
+        }else{
+            Axios.post(`/api/cart/add/${id}`, {}, {
+                headers: {
+                    "x-access-token": getInLocalStorage("token")
+                }
+            }).then(res => {
+                this.props.notify({
+                    status: 'success',
+                    content: res.data.message
+                })
+                this.props.history.push('/cart')
+            }).catch(err => {
+                if(err.response.data){
+                    console.log(err.response.data)
+                    this.props.notify({
+                        status: 'error', 
+                        content: err.response.data.message
+                    })
+                }
+            })
+        }
+    }
 
     render(){
         let display = null
@@ -161,6 +186,7 @@ class Products extends Component{
                     addFavourite= {()=>this.addToFavourties(prod._id)}
                     removeFavourite = {() => this.removeFromFavourites(prod._id)}
                     favourites={addedToFavouite}
+                    addToCart ={() => this.addToCart(prod._id)}
                     />
                 )
             })

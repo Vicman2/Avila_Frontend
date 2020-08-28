@@ -39,7 +39,7 @@ class RelatedProducts extends Component{
         if(this.state.products){
             toDisplay = this.state.products.map(rProd => {
                 return(
-                    <div className="Popular_Products" onClick={() => this.preview(rProd._id)}>
+                    <div key={rProd._id} className="Popular_Products" onClick={() => this.preview(rProd._id)}>
                         <img className="contain_img" src={rProd.prodImageSrc} alt=""/>
                     </div>
                 )

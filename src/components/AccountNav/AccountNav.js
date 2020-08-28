@@ -23,6 +23,7 @@ const AccountNav = (props) => {
             {navs.map(nav => {
                 return(
                     <OneNav
+                    key={nav.name}
                     title={nav.title}
                     icon={nav.icon}
                     switchNav={() => props.switchNav(nav.name)}

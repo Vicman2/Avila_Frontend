@@ -1,16 +1,148 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {flowRight as compose} from 'lodash'
+import Axios from '../../axios'
+import * as uiActions from '../../store/actions/UIActions'
 import './Cart.css'
+import { getInLocalStorage } from '../../utility'
+import { withRouter } from 'react-router-dom'
+import Loader from '../../components/UI/Loader/Loader'
+import emptySVG from './Assets/emptyCart.svg'
+import CartItem from '../../components/CartItem/CartItem'
 
 
 class Cart extends Component{
+    state =  {
+        loading: true, 
+        cartItems: []
+    }
+    componentDidMount(){
+        this.getCart();
+    }
+    getCart = ()=>{
+        Axios.get('/api/cart/get', {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
+        }).then(({data}) => {
+            this.setState({
+                loading: false, 
+                cartItems: data.data
+            })
+        }).catch(err => {
+            this.setState({loading:false})
+            if(err.response && err.response.data){
+                this.props.notify({
+                    status: 'error', 
+                    content: err.response.data.message
+                })
+            }
+        })
+    }
+    increaseQuantity= (id) => {
+        Axios.put(`/api/cart/inc/${id}`, {}, {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
+        }).then(({data}) => {
+            this.getCart()
+        }).catch(err => {
+            this.setState({loading:false})
+            if(err.response && err.response.data){
+                this.props.notify({
+                    status: 'error', 
+                    content: err.response.data.message
+                })
+            }
+        })
+    }
+    decreaseQuantity = (id) => {
+        Axios.put(`/api/cart/dec/${id}`, {}, {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
+        }).then(({data}) => {
+            this.getCart()
+        }).catch(err => {
+            this.setState({loading:false})
+            if(err.response && err.response.data){
+                this.props.notify({
+                    status: 'error', 
+                    content: err.response.data.message
+                })
+            }
+        })
+    }
+    deleteItem = (id) => {
+        Axios.delete(`/api/cart/remove/${id}`, {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
+        }).then(({data}) => {
+            console.log(data)
+            this.getCart()
+            this.props.notify({
+                status: 'primary', 
+                content: data.message
+            })
+        }).catch(err => {
+            if(err.response && err.response.data){
+                this.props.notify({
+                    status: 'error', 
+                    content: err.response.data.message
+                })
+            }
+        })
+    }
     render(){
+        let toRender = <Loader />
+        if(!this.state.loading && this.state.cartItems.length === 0){
+            toRender = <div className="EmptyFav">
+                <div className="SavedItem_Empty">
+                    <img className="contain_img" src={emptySVG} alt="empty" />
+                </div>
+                <p className="SavedItem_Empty_Alt" onClick={() => this.props.history.push('/products')}>CONTINUE SHOPPING</p>
+            </div>
+        }else if(!this.state.loading && this.state.cartItems.length >0){
+            toRender = this.state.cartItems.map(cartItem => {
+                return(
+                    <CartItem
+                    key={cartItem._id}
+                    prodImage={cartItem.product.prodImageSrc}
+                    name={cartItem.product.name}
+                    qty={cartItem.quantity}
+                    price={cartItem.product.price}
+                    increaseQuantity={() => this.increaseQuantity(cartItem.product._id)}
+                    decreaseQuantity = {() => this.decreaseQuantity(cartItem.product._id)}
+                    deleteItem = {() => this.deleteItem(cartItem.product._id)}
+                    />
+                )
+            })
+        }
         return(
-            <div>
-                <p>You are in cart component</p>
+            <div className="Cart contain">
+                <p>My Cart</p>
+                <div className="Cart_Listing">
+                    {toRender}
+                </div>
             </div>
         )
     }
 }
 
+const propsMappedToState= state => {
+    return{
+        isLoggedIn: state.users.isLoggedIn,
+        onAuthComp : state.ui.unAuthComponent
+    }
+}
 
-export default Cart
+const actionMappedToProps = dispatch => {
+    return{
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload))
+    }
+}
+export default compose(
+    withRouter,
+    connect(propsMappedToState, actionMappedToProps)
+) (Cart)

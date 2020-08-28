@@ -26,7 +26,7 @@ class Profile extends Component{
         })
     }
     render(){
-        let toDisplayProfile = <div class="Profile_Loader">
+        let toDisplayProfile = <div className="Profile_Loader">
             <Loader />
         </div>
         if(this.state.userDetails){

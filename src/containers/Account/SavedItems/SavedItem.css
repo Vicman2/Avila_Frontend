@@ -7,4 +7,25 @@
 .OneSaved{
     margin: 3px 5px;
 }
+.SavedItem_Empty{
+    width: 250px;
+    height: 300px;
+}
+.SavedItem_Empty_Alt{
+    background: #84BE38;
+    padding: 3px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+
+@media(min-width: 900px){
+    .SavedItem_Empty{
+        width: 300px;
+        height: 400px;
+    }
+}
 

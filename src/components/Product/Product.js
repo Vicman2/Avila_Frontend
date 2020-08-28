@@ -25,7 +25,7 @@ const Product = (props) =>{
                 </div>
             </div>
             <div className="Product_Buy_Btn">
-                <Button name="Buy Now" />
+                <Button clicked={props.addToCart} name="Buy Now" />
             </div>
         </div>
     )

@@ -43,7 +43,6 @@ class ProdPreview extends Component{
         })
     }
     render(){
-        console.log(this.props)
         let display=null
         if(this.state.loading){
             display =  <div className="Product_Loader">

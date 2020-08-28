@@ -7,11 +7,13 @@ import './SavedItem.css'
 import { getInLocalStorage } from '../../../utility'
 import Loader from '../../../components/UI/Loader/Loader'
 import Product from '../../../components/Product/Product'
+import emptySVG from './Assets/emptyFavourite.svg'
+import { withRouter } from 'react-router-dom'
 
 
 class SavedItem extends Component{
     state = {
-        loading: false, 
+        loading: true, 
         favourites: []
     }
     componentDidMount(){
@@ -25,7 +27,7 @@ class SavedItem extends Component{
                 "x-access-token": token
             }
         }).then(res => {
-           this.setState({favourites : res.data.data})
+           this.setState({favourites : res.data.data, loading: false})
         }).catch(err => {
             if(err.response.data){
                 console.log(err.response.data)
@@ -79,7 +81,14 @@ class SavedItem extends Component{
                     </div>
                 )
             })
-        }
+        }else if(!this.state.loading && this.state.favourites.length === 0){
+            toDisplay =<div className="EmptyFav">
+                <div className="SavedItem_Empty">
+                    <img className="contain_img" src={emptySVG} alt="empty" />
+                </div>
+                <p className="SavedItem_Empty_Alt" onClick={() => this.props.history.push('/products')}>CONTINUE SHOPPING</p> 
+            </div>
+        }   
         return(
             <div className="SavedItem">
                {toDisplay}
@@ -101,6 +110,7 @@ const actionMappedToProps = dispatch => {
     }
 }
 export default compose(
+    withRouter,
     connect(stateMappedToProps, actionMappedToProps)
 ) (SavedItem)
 

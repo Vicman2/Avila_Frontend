@@ -1,0 +1,10 @@
+.SavedItem{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+.OneSaved{
+    margin: 3px 5px;
+}
+

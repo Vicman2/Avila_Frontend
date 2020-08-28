@@ -27,6 +27,7 @@ class Account extends Component{
             }
         })
     }
+    
     switchAccountComp =  (comp) => {
         this.setState({activeScreen: comp})
     }

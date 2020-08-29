@@ -1,6 +1,5 @@
 import React from 'react'
 import './HamburgerMenu.css'
-import NavItems from '../Navbar/NavItems/NavItems'
 import { NavLink } from 'react-router-dom'
 import Aux from '../../HOC/Aux/Aux'
 import Backdrop from '../UI/Backdrop/Backdrop'

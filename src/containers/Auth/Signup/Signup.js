@@ -76,7 +76,7 @@ const FORM_INPUTS = {
         label:"Password",
         elemType: "input",
         config: {
-            type: 'text',
+            type: 'password',
             required:"required" 
         },
         value:"",

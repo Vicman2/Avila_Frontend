@@ -2,7 +2,6 @@ import React from 'react'
 import './Navbar.css'
 import logo from './Assets/AVILA-logo.png'
 import NavItems from './NavItems/NavItems'
-import { NavLink } from 'react-router-dom'
 import Harmburger from '../UI/Harmburger/Harmburger'
 
 

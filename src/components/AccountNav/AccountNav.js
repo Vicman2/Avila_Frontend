@@ -6,10 +6,6 @@ import OneNav from './OneNav/OneNav'
 import './AccountNav.css'
 
 const AccountNav = (props) => {
-    const onLogOut = () => {
-        localStorage.removeItem("token");
-        props.logOut()
-    }
     const navs = [
         {title : "My Account",name: "profile", icon: "person-outline"},
         {title : "Saved Item",name: "savedItem", icon: "heart-outline"},
@@ -27,7 +23,7 @@ const AccountNav = (props) => {
                     title={nav.title}
                     icon={nav.icon}
                     switchNav={() => props.switchNav(nav.name)}
-                    activated = {props.activeNav == nav.name}
+                    activated = {props.activeNav === nav.name}
                     />
                 )
             })}

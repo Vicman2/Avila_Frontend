@@ -9,25 +9,34 @@ import { withRouter } from 'react-router-dom'
 import Loader from '../../components/UI/Loader/Loader'
 import emptySVG from './Assets/emptyCart.svg'
 import CartItem from '../../components/CartItem/CartItem'
+import Button from '../../components/UI/Button/Button'
+import Aux from '../../HOC/Aux/Aux'
 
 
 class Cart extends Component{
     state =  {
         loading: true, 
-        cartItems: []
+        cartItems: [],
+        totalPrice: null
     }
     componentDidMount(){
         this.getCart();
     }
     getCart = ()=>{
+        
         Axios.get('/api/cart/get', {
             headers: {
                 "x-access-token": getInLocalStorage("token")
             }
         }).then(({data}) => {
+            let arrayOfPrices = data.data.map(prod => {
+                return prod.quantity * prod.product.price
+            })
+            let arrayPrice = arrayOfPrices.reduce((a, b) => a + b)
             this.setState({
                 loading: false, 
-                cartItems: data.data
+                cartItems: data.data, 
+                totalPrice: arrayPrice
             })
         }).catch(err => {
             this.setState({loading:false})
@@ -79,8 +88,7 @@ class Cart extends Component{
                 "x-access-token": getInLocalStorage("token")
             }
         }).then(({data}) => {
-            console.log(data)
-            this.getCart()
+            this.getCart();
             this.props.notify({
                 status: 'primary', 
                 content: data.message
@@ -119,12 +127,30 @@ class Cart extends Component{
                 )
             })
         }
+        let toDisplay= null ;
+        if(this.state.totalPrice){
+            toDisplay = <Aux>
+                <div className="Cart_Total_Price">
+                    <div className="Cart_Total">
+                        <p className="Total_Title">Total</p>
+                        <p className="Total_Price">#{this.state.totalPrice.toLocaleString()}</p>
+                    </div>
+                </div>
+                <div className="Cart_ChoiceButton">
+                    <div className="CartChoice">
+                        <Button name="PROCEED TO CHECKOUT"  />
+                        <Button name="CANCEL PURCHASE"/>
+                    </div>
+                </div>
+            </Aux>
+        }
         return(
             <div className="Cart contain">
-                <p>My Cart</p>
+                <p className="Cart_Title">My Cart</p>
                 <div className="Cart_Listing">
                     {toRender}
                 </div>
+                {toDisplay}
             </div>
         )
     }

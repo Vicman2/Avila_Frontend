@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter} from 'react-router-dom'
-import {createStore, compose, combineReducers} from 'redux'
+import {createStore, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 
 import productsReducer  from './store/reducers/productReducer'
@@ -18,7 +18,6 @@ const rootReducers = combineReducers({
     users: userReducer, 
     ui:  UIReducer
 })
-const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const store = createStore(
     rootReducers, 
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

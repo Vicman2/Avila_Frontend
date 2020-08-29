@@ -1,0 +1,62 @@
+.Cart_Title{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 54px;
+    color: #003A1A;
+    margin: 0;
+    border-bottom: 0.6px solid #003A1A;
+}
+.Cart_Total_Price, .Cart_ChoiceButton{
+    display: flex;
+    justify-content: center;
+}
+
+.Cart_Total{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.CartChoice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.CartChoice div{
+   margin: 10px 2px;
+}
+.Total_Title{
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    color: #003A1A;
+}
+.Total_Price{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #003A1A;
+}
+
+
+
+@media(min-width: 900px){
+    .Cart_Total_Price, .Cart_ChoiceButton{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .CartChoice{
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .Cart_Total, .CartChoice{
+        justify-content: space-between;
+        width: 50%;
+    }
+}

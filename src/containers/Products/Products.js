@@ -175,7 +175,7 @@ class Products extends Component{
             </div>
         }else{
             display = this.state.products.map(prod => {
-                let addedToFavouite = this.state.userFavourite.find(fav => fav == prod._id)
+                let addedToFavouite = this.state.userFavourite.find(fav => fav === prod._id)
                 return(
                     <Product
                     clicked={()=>this.clickedProduct(prod._id)}
@@ -201,7 +201,7 @@ class Products extends Component{
             }
             arrayPage = arrayPage.map(page => {
                 let classes = ["Product_newPage"];
-                if(page == this.state.activePage){
+                if(page === this.state.activePage){
                     classes.push("Prod_Active_Page");
                 }
                 return(
@@ -214,7 +214,7 @@ class Products extends Component{
                 )
             })
             const prevLink= ["Product_newPage"];
-            if(this.state.activePage && this.state.activePage == 1){
+            if(this.state.activePage && this.state.activePage === 1){
                 prevLink.push("Deactive_Nav");
             }
             const nextLink = ["Product_newPage"];

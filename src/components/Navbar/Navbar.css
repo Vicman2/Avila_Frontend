@@ -5,6 +5,11 @@
     align-items: center;
     padding-top: 10px;
     padding-bottom: 5px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 202;
 }
 .logo_div{
     height: 45px;
@@ -18,7 +23,7 @@
 @media(min-width:900px){
     .Navbar{
         background-color: #FFFFFF;
-        margin: 23px auto;
+        box-shadow:  1.5px 1.5px 4px #ccc;
     }
     .logo_div{
         height: 53px;

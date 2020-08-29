@@ -1,11 +1,16 @@
 .CartItem{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin: 5px 0;
+    box-shadow: 0px 2px 0px #ccc;
+    padding: 10px 0;
 }
 .CartItem_ImgName{
     display: flex;
+    justify-content: flex-start;
+    width: 100%;
     align-items: center;
 }
 
@@ -34,9 +39,31 @@
 }
 
 
+
 .CartItem_Image{
     height: 70px;
     width: 70px;
+}
+.CartItem_Price{
+    display: none;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #003A1A;
+}
+.CartItem_Counter_Delete{
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+.CartItem_Delete>ion-icon{
+    font-size: 16px;
+}
+.CartItem_Price_Mobile{
+    display: block !important;
 }
 
 
@@ -45,6 +72,16 @@
 @media(min-width:900px){
     .CartItem{
         margin: 10px 0;
+        flex-direction: row;
+    }
+    .CartItem_ImgName{
+        width: 30%;
+    }
+    .CartItem_Counter_Delete{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        
     }
     .CartItem_Image{
         height: 200px;
@@ -52,5 +89,27 @@
     }
     .CartItem_name{
         margin-left: 13px;
+    }
+    .CartItem_Price{
+        display: block;
+        text-align: center;
+        width: 70px;
+    }
+
+    .CartItem_Price_Mobile{
+        display: none;
+    }
+    .CartItem_Counter{
+        width: 45px;
+    }
+    .CartItem_Counter p{
+        width: 15px;
+    }
+    .CartItem_Delete{
+        width: 40px;
+        text-align: center;
+    }
+    .CartItem_Delete>ion-icon{
+        font-size: 24px;
     }
 }

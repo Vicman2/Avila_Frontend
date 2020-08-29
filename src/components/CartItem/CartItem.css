@@ -20,7 +20,7 @@
     font-weight: 500;
     font-size: 14px;
     color: #84BE38;
-    margin-left: 5px;
+    margin-left: 10px;
     width: 100px;
 }
 .CartItem_Counter{
@@ -30,6 +30,7 @@
     border: 1px solid #000000;
     padding: 3px 8px;
     height: 15px;
+    margin: 0;
 }
 .CartItem_Counter p>ion-icon{
     color: #000;
@@ -58,12 +59,14 @@
     width: 100%;
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: center;
 }
 .CartItem_Delete>ion-icon{
-    font-size: 16px;
+    font-size: 24px;
 }
 .CartItem_Price_Mobile{
     display: block !important;
+    margin-left: 10px;
 }
 
 

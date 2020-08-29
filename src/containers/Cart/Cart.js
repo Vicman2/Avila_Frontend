@@ -109,7 +109,7 @@ class Cart extends Component{
                 <div className="SavedItem_Empty">
                     <img className="contain_img" src={emptySVG} alt="empty" />
                 </div>
-                <p className="SavedItem_Empty_Alt" onClick={() => this.props.history.push('/products')}>CONTINUE SHOPPING</p>
+                <Button name="CONTINUE SHOPPING"  clicked={() => this.props.history.push('/products')}/>
             </div>
         }else if(!this.state.loading && this.state.cartItems.length >0){
             toRender = this.state.cartItems.map(cartItem => {

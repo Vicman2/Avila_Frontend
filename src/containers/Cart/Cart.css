@@ -42,6 +42,11 @@
     line-height: 20px;
     color: #003A1A;
 }
+.EmptyFav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 

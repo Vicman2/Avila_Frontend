@@ -9,6 +9,7 @@ import Loader from '../../../components/UI/Loader/Loader'
 import Product from '../../../components/Product/Product'
 import emptySVG from './Assets/emptyFavourite.svg'
 import { withRouter } from 'react-router-dom'
+import Button from '../../../components/UI/Button/Button'
 
 
 class SavedItem extends Component{
@@ -86,7 +87,7 @@ class SavedItem extends Component{
                 <div className="SavedItem_Empty">
                     <img className="contain_img" src={emptySVG} alt="empty" />
                 </div>
-                <p className="SavedItem_Empty_Alt" onClick={() => this.props.history.push('/products')}>CONTINUE SHOPPING</p> 
+                <Button name="CONTINUE SHOPPING" clicked={() => this.props.history.push('/products')} />
             </div>
         }   
         return(

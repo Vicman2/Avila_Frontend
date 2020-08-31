@@ -8,6 +8,7 @@ import Axios from '../../axios'
 import Aux from '../../HOC/Aux/Aux'
 import Button from '../../components/UI/Button/Button'
 import RelatedProducts from '../RelatedProducts/RelatedProducts'
+import { getInLocalStorage } from '../../utility'
 
 
 class ProdPreview extends Component{
@@ -42,6 +43,31 @@ class ProdPreview extends Component{
             
         })
     }
+    addToCart = (id) => {
+        if(!this.props.isLoggedIn){
+            this.props.history.push('/account')
+        }else{
+            Axios.post(`/api/cart/add/${id}`, {}, {
+                headers: {
+                    "x-access-token": getInLocalStorage("token")
+                }
+            }).then(res => {
+                this.props.notify({
+                    status: 'success',
+                    content: res.data.message
+                })
+                this.props.history.push('/cart')
+            }).catch(err => {
+                if(err.response.data){
+                    console.log(err.response.data)
+                    this.props.notify({
+                        status: 'error', 
+                        content: err.response.data.message
+                    })
+                }
+            })
+        }
+    }
     render(){
         let display=null
         if(this.state.loading){
@@ -50,7 +76,7 @@ class ProdPreview extends Component{
             </div> 
         }
         if(this.state.product){
-            const {prodImageSrc, name,price, details} = this.state.product
+            const {prodImageSrc, name,price, details, _id} = this.state.product
             display = <Aux>
                 <div className="ProdPreview_Landing">
                     <div className="ProdPreview_Img">
@@ -71,7 +97,7 @@ class ProdPreview extends Component{
                     </div>
                 </div>
                 <div className="ProdPreview_AddToCart">
-                    <Button name="ADD TO CART" />
+                    <Button name="ADD TO CART" clicked ={() =>this.addToCart(_id)} />
                 </div>
                 
                 <p className="ProdPreview_Desc_Title">Description</p>
@@ -86,6 +112,11 @@ class ProdPreview extends Component{
         )
     }
 }
+const stateMappedToProps = state => {
+    return{
+        isLoggedIn : state.users.isLoggedIn
+    }
+}
 
 const actionMappedToProps = dispatch => {
     return{
@@ -93,5 +124,5 @@ const actionMappedToProps = dispatch => {
     }
 }
 export default compose(
-    connect(null, actionMappedToProps)
+    connect(stateMappedToProps, actionMappedToProps)
 ) (ProdPreview)

@@ -30,7 +30,7 @@ class Cart extends Component{
         }).then(({data}) => {
             console.log("fish1",data)
             let arrayOfPrices, arrayPrice
-            if(data.data >0){
+            if(data.data.length >0){
                 arrayOfPrices = data.data.map(prod => {
                     return prod.quantity * prod.product.price
                 })

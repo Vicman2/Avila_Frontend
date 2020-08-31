@@ -4,6 +4,7 @@ import Axios from '../../../axios'
 import { getInLocalStorage } from '../../../utility'
 import Loader from '../../../components/UI/Loader/Loader'
 import Aux from '../../../HOC/Aux/Aux'
+import EditProfile from './EditProfile/EditProfile'
 
 
 
@@ -25,6 +26,15 @@ class Profile extends Component{
             this.setState({userDetails: res.data.data})
         })
     }
+    swithToEdit = () => {
+        this.getProfile()
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                edit: !prevState.edit
+            }
+        })
+    }
     render(){
         let toDisplayProfile = <div className="Profile_Loader">
             <Loader />
@@ -32,7 +42,7 @@ class Profile extends Component{
         if(this.state.userDetails){
             let {name, email, phone, address, sex} = this.state.userDetails
             toDisplayProfile = <Aux>
-                <p className="Account_Edit">Edit</p>
+                <p className="Account_Edit" onClick={this.swithToEdit}>Edit</p>
                 <div className="Profile_KeyValue">
                     <p className="Profile_Key">Name</p>
                     <p className="Profile_Value">{name} </p>
@@ -54,6 +64,12 @@ class Profile extends Component{
                     <p className="Profile_Value">{sex} </p>
                 </div>
             </Aux>
+        }
+        if(this.state.edit){
+            toDisplayProfile = <EditProfile 
+            data={this.state.userDetails}
+            switch={this.swithToEdit}
+            />
         }
         
         return(

@@ -23,16 +23,20 @@ class Cart extends Component{
         this.getCart();
     }
     getCart = ()=>{
-        
         Axios.get('/api/cart/get', {
             headers: {
                 "x-access-token": getInLocalStorage("token")
             }
         }).then(({data}) => {
-            let arrayOfPrices = data.data.map(prod => {
-                return prod.quantity * prod.product.price
-            })
-            let arrayPrice = arrayOfPrices.reduce((a, b) => a + b)
+            console.log("fish1",data)
+            let arrayOfPrices, arrayPrice
+            if(data.data >0){
+                arrayOfPrices = data.data.map(prod => {
+                    return prod.quantity * prod.product.price
+                })
+                arrayPrice = arrayOfPrices.reduce((a, b) => a + b)
+            }
+            console.log("fish2", data)
             this.setState({
                 loading: false, 
                 cartItems: data.data, 
@@ -96,13 +100,14 @@ class Cart extends Component{
         }).catch(err => {
             if(err.response && err.response.data){
                 this.props.notify({
-                    status: 'error', 
+                    status: 'error',
                     content: err.response.data.message
                 })
             }
         })
     }
     render(){
+        console.log(this.state.cartItems)
         let toRender = <Loader />
         if(!this.state.loading && this.state.cartItems.length === 0){
             toRender = <div className="EmptyFav">

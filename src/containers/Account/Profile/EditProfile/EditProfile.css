@@ -1,0 +1,21 @@
+
+
+.Edit_Contain_Div{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.Edit_BtnWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+}
+
+
+@media(min-width:900px){
+    .Edit_BtnWrapper{
+        width: 50%;
+    }
+}

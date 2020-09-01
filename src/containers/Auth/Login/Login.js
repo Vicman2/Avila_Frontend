@@ -95,7 +95,10 @@ class Login extends Component{
             await this.setState({loading: true})
             Axios.post('/api/users/login', data)
             .then(res => {
-                let {token} = res.data.data
+                let {token, cart} = res.data.data
+                console.log(res.data.data)
+                let cartNum  = cart.length>0 ? cart.length: null
+                this.props.updateCart(cartNum)
                 setInLocalStorage("token", token, 3600000);
                 this.setState({formInputs: FORM_INPUTS, loading: false});
                 this.props.notify({
@@ -163,7 +166,8 @@ class Login extends Component{
 const actionMappedToProps = dispatch => {
     return{
         notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
-        login: () => dispatch(userActions.login())
+        login: () => dispatch(userActions.login()),
+        updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
     }
 }
 

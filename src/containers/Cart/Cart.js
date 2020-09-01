@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {flowRight as compose} from 'lodash'
 import Axios from '../../axios'
 import * as uiActions from '../../store/actions/UIActions'
+import * as userActions from '../../store/actions/userActions'
 import './Cart.css'
 import { getInLocalStorage } from '../../utility'
 import { withRouter } from 'react-router-dom'
@@ -28,15 +29,16 @@ class Cart extends Component{
                 "x-access-token": getInLocalStorage("token")
             }
         }).then(({data}) => {
-            console.log("fish1",data)
             let arrayOfPrices, arrayPrice
             if(data.data.length >0){
+                this.props.updateCart(data.data.length)
                 arrayOfPrices = data.data.map(prod => {
                     return prod.quantity * prod.product.price
                 })
                 arrayPrice = arrayOfPrices.reduce((a, b) => a + b)
+            }else{
+                this.props.updateCart(null)
             }
-            console.log("fish2", data)
             this.setState({
                 loading: false, 
                 cartItems: data.data, 
@@ -107,7 +109,6 @@ class Cart extends Component{
         })
     }
     render(){
-        console.log(this.state.cartItems)
         let toRender = <Loader />
         if(!this.state.loading && this.state.cartItems.length === 0){
             toRender = <div className="EmptyFav">
@@ -170,7 +171,8 @@ const propsMappedToState= state => {
 
 const actionMappedToProps = dispatch => {
     return{
-        notify: (payload)=>dispatch(uiActions.promptNotification(payload))
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
+        updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
     }
 }
 export default compose(

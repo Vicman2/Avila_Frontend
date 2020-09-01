@@ -11,21 +11,23 @@ const Product = (props) =>{
         favIcon = <ion-icon name="heart" onClick={props.removeFavourite}></ion-icon>
     }
     return(
-        <div className="Product">
-            <div className="ProdImage_Cont" onClick={props.clicked}>
-                <img className="contain_img" src={props.src}  alt={props.name}/>
-            </div>
-            <div className="ProdContain_Detials">
-                <div className="NamePrice">
-                    <p className="Product_Name" onClick={props.clicked}>{props.name} </p>
-                    <p className="Product_Price">#{props.price.toLocaleString()} </p>
+        <div className="Product_Container">
+            <div className="Product">
+                <div className="ProdImage_Cont" onClick={props.clicked}>
+                    <img className="contain_img" src={props.src}  alt={props.name}/>
                 </div>
-                <div className="Product_Favourite">
-                    {favIcon}
+                <div className="ProdContain_Detials">
+                    <div className="NamePrice">
+                        <p className="Product_Name" onClick={props.clicked}>{props.name} </p>
+                        <p className="Product_Price">#{props.price.toLocaleString()} </p>
+                    </div>
+                    <div className="Product_Favourite">
+                        {favIcon}
+                    </div>
                 </div>
-            </div>
-            <div className="Product_Buy_Btn">
-                <Button clicked={props.addToCart} name="Buy Now" />
+                <div className="Product_Buy_Btn">
+                    <Button clicked={props.addToCart} name="Add to Cart" />
+                </div>
             </div>
         </div>
     )

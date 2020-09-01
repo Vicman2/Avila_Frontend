@@ -2,6 +2,7 @@ import * as actionType from '../actions/userActions'
 
 const initialStore = {
     isLoggedIn: false,
+    cartNo : null
 }
 
 
@@ -18,8 +19,14 @@ const reducer = (state = initialStore, action) => {
                 ...state,  
                 isLoggedIn: false
             }
+        case actionType.UPDATE_NO_OF_CART: 
+            return{
+                ...state, 
+                cartNo: action.num
+            }
+        default: 
+            return state
     }
-    return state;
 }
 
 export default reducer

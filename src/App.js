@@ -14,19 +14,35 @@ import Cart from './containers/Cart/Cart';
 import ProdPreview from './containers/ProdPreview/ProdPreview'
 import { getInLocalStorage } from './utility';
 import * as userActions from './store/actions/userActions'
+import Axios from './axios'
 
 
 
 
 class App extends Component{
   state= {
-    hamburger: false
+    hamburger: false, 
   }
   componentDidMount(){
     let token = getInLocalStorage('token')
     if(token){
       this.props.login()
+      this.getCart()
     }
+  }
+  getCart = () => {
+    let token = getInLocalStorage("token")
+    Axios.get('/api/cart/get', {
+      headers: {
+          "x-access-token": token
+        }
+    }).then(({data}) => {
+        if(data.data.lenght !== 0){
+          this.props.updateCart(data.data.length)
+        }
+    }).catch(err => {
+        console.log(err)
+    })
   }
   clickedHamburger = ()=> {
     this.setState((prevState) => {
@@ -63,6 +79,8 @@ class App extends Component{
 
 const stateMappedToProps = (state) => {
   return{
+    cartNum : state.users.cartNo,
+    isLoggedIn: state.users.isLoggedIn,
     showNotification : state.ui.showNotification,
     notificationData : state.ui.notificationData
   }
@@ -70,7 +88,8 @@ const stateMappedToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: ()=> dispatch(userActions.login())
+    login: ()=> dispatch(userActions.login()),
+    updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
   }
 }
 

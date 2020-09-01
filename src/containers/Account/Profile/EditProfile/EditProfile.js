@@ -4,7 +4,6 @@ import './EditProfile.css'
 import Button from '../../../../components/UI/Button/Button';
 import Axios from '../../../../axios'
 import {flowRight as compose} from 'lodash'
-import { withRouter } from 'react-router-dom';
 import { getInLocalStorage } from '../../../../utility';
 import { connect } from 'react-redux';
 import * as uiActions from '../../../../store/actions/UIActions'
@@ -153,7 +152,6 @@ class EditProfile extends Component{
         }
     }
     render(){
-        console.log(this.state.isFormValid)
         let formElements = [];
         for(let elementName in this.state.formInputs){
             formElements.push({

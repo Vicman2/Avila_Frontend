@@ -10,6 +10,10 @@ const Product = (props) =>{
     if(props.favourites){
         favIcon = <ion-icon name="heart" onClick={props.removeFavourite}></ion-icon>
     }
+    let addButton = <Button clicked={props.addToCart} name="Add to Cart" />
+    if(props.addedToCart){
+        addButton = <Button clicked={props.addToCart} name="Added To Cart" disabled/>
+    }
     return(
         <div className="Product_Container">
             <div className="Product">
@@ -26,7 +30,7 @@ const Product = (props) =>{
                     </div>
                 </div>
                 <div className="Product_Buy_Btn">
-                    <Button clicked={props.addToCart} name="Add to Cart" />
+                    {addButton}
                 </div>
             </div>
         </div>

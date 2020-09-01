@@ -23,3 +23,7 @@
     background: #003A1A;
     transition: background 1.5s;
 }
+.Button button:disabled{
+    cursor: not-allowed;
+    background-color: #92ad70;
+}

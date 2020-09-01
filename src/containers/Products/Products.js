@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {flowRight as compose, isInteger} from 'lodash'
 import {connect} from 'react-redux'
 import * as uiActions from '../../store/actions/UIActions'
+import * as userActions from '../../store/actions/userActions'
 import Axios from '../../axios'
 import axios from 'axios'
 import './Products.css'
@@ -18,13 +19,15 @@ class Products extends Component{
         totalProducts: null, 
         activePage:null, 
         loading: true,
-        userFavourite : []
+        userFavourite : [],
+        cart: []
     }
     componentDidMount(){
         window.scrollTo(0,0)
         this.fetchProducts()
     }
     fetchProducts= ()=>{
+        this.setState({loading: true})
         const productRequest = axios.get(`https://avila-backend.herokuapp.com/api/products/getProducts?pageNo=${this.state.pageNo}&noOfProducts=${this.state.noOfProducts}`)
         const userRequest = axios.get(`https://avila-backend.herokuapp.com/api/users/getUser`, {
             headers: {
@@ -32,11 +35,12 @@ class Products extends Component{
             }
         })
         let fetchArray = [productRequest]
-        if(this.props.isLoggedIn){
+        if(getInLocalStorage("token")){
             fetchArray.push(userRequest)
         }
         axios.all(fetchArray)
         .then(axios.spread((...responses) => {
+            this.setState({loading: false})
             window.scrollTo(0,0)
             const prodResponse = responses[0]
             const userResponse = responses[1]
@@ -45,7 +49,8 @@ class Products extends Component{
                 totalProducts:prodResponse.data.data.totalProducts,
                 activePage:this.state.pageNo,
                 loading:false, 
-                userFavourite: userResponse ?  userResponse.data.data.favourites : []
+                userFavourite: userResponse ?  userResponse.data.data.favourites : [],
+                cart: userResponse ? userResponse.data.data.cart: []
             })
         } ))
         .catch(err => {
@@ -86,7 +91,7 @@ class Products extends Component{
     clickedProduct = (id)=>{
         this.props.history.push(`/products/${id}`)
     }
-    addToFavourties = (id)=>{
+    addToFavourties =(id)=>{
         if(!this.props.isLoggedIn){
             this.props.history.push('/account')
         }else{
@@ -130,7 +135,8 @@ class Products extends Component{
                 status: 'success',
                 content: res.data.message
             })
-        }).catch(err => {
+        })
+        .catch(err => {
             this.setState({loading:false})
             if(err.response.data){
                 console.log(err.response.data)
@@ -154,8 +160,13 @@ class Products extends Component{
                     status: 'success',
                     content: res.data.message
                 })
-                this.props.history.push('/cart')
-            }).catch(err => {
+                this.fetchProducts()
+            }).then(data => {
+                if(this.state.cart.length> 0){
+                    this.props.updateCart(this.state.cart.length)
+                }
+            })
+            .catch(err => {
                 if(err.response.data){
                     console.log(err.response.data)
                     this.props.notify({
@@ -176,6 +187,7 @@ class Products extends Component{
         }else{
             display = this.state.products.map(prod => {
                 let addedToFavouite = this.state.userFavourite.find(fav => fav === prod._id)
+                let addedToCart = this.state.cart.find(cartItem => cartItem.product === prod._id)
                 return(
                     <Product
                     clicked={()=>this.clickedProduct(prod._id)}
@@ -187,6 +199,7 @@ class Products extends Component{
                     removeFavourite = {() => this.removeFromFavourites(prod._id)}
                     favourites={addedToFavouite}
                     addToCart ={() => this.addToCart(prod._id)}
+                    addedToCart = {addedToCart}
                     />
                 )
             })
@@ -253,7 +266,8 @@ const stateMappedToProps = state => {
 
 const actionMappedToProps = dispatch => {
     return{
-        notify: (payload)=>dispatch(uiActions.promptNotification(payload))
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
+        updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
     }
 }
 export default compose(

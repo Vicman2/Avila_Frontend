@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {flowRight as compose} from 'lodash'
+import axios from 'axios'
 import Axios from '../../axios'
 import * as uiActions from '../../store/actions/UIActions'
 import * as userActions from '../../store/actions/userActions'
@@ -12,16 +13,22 @@ import emptySVG from './Assets/emptyCart.svg'
 import CartItem from '../../components/CartItem/CartItem'
 import Button from '../../components/UI/Button/Button'
 import Aux from '../../HOC/Aux/Aux'
+import Rave, {RequeryTransaction} from 'react-flutterwave-rave'
 
 
 class Cart extends Component{
     state =  {
         loading: true, 
         cartItems: [],
-        totalPrice: null
+        totalPrice: null, 
+        userDetails: null, 
+        toCheckout: false, 
+        public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY,
+        secret_key: process.env.REACT_APP_FLUTTERWAVE_SECRET_KEY
     }
     componentDidMount(){
         this.getCart();
+        this.getUser();
     }
     getCart = ()=>{
         Axios.get('/api/cart/get', {
@@ -88,6 +95,23 @@ class Cart extends Component{
             }
         })
     }
+    getUser = () => {
+        let token = getInLocalStorage("token")
+        if(token){
+            Axios.get('/api/users/getUser', {
+                headers: {
+                    "x-access-token": token
+                }
+            }).then(({data}) => {
+                const {email, phone, name} = data.data
+                this.setState({
+                    userDetails: {email, phone, name}
+                })
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
+    }
     deleteItem = (id) => {
         Axios.delete(`/api/cart/remove/${id}`, {
             headers: {
@@ -107,6 +131,60 @@ class Cart extends Component{
                 })
             }
         })
+    }
+
+    checkoutHandler = ()=> {
+        let arrayOfPrices, arrayPrice
+        const cartRequest  = axios.get('https://avila-backend.herokuapp.com/api/cart/get', {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
+        })
+        const userRequest = axios.get(`https://avila-backend.herokuapp.com/api/users/getUser`, {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
+        })
+        axios.all([cartRequest, userRequest])
+        .then(axios.spread((...responses) => {
+            const cartResponse = responses[0]
+            const userResponse = responses[1]
+            arrayOfPrices = cartResponse.data.data.map(prod => {
+                return prod.quantity * prod.product.price
+            })
+            arrayPrice = arrayOfPrices.reduce((a, b) => a + b)
+            const {email, phone, name} = userResponse.data.data
+            this.setState({
+                userDetails: {email, phone, name, amount: arrayPrice}
+            })
+        })).then(() => {
+            this.setState({toCheckout: true})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    paymentCallback = (response) => {
+        return RequeryTransaction({ live: false, txref: response.tx.txRef, SECKEY: this.state.secret_key})
+        .then( (resp)=>{
+            console.log("Vicman")
+        }).catch(function (error) {
+            console.log(error);
+        })
+        // Axios.post('/api/orders/make',{
+        //     headers: {
+        //         "x-access-token": getInLocalStorage("token")
+        //     }
+        // }).then(res => {
+        //     this.props.history.push('/products');
+        //     this.props.notify({
+        //         status: 'error',
+        //         content: "Order created successfully"
+        //     })
+        // })
+    }
+    paymentOnClose = () => {
+        this.props.history.push('/cart');
     }
     render(){
         let toRender = <Loader />
@@ -133,6 +211,22 @@ class Cart extends Component{
                 )
             })
         }
+        let paymentButton = null; 
+        if(this.state.userDetails){
+            paymentButton = <div className="Button">
+                <Rave
+                pay_button_text="Make payments"
+                payment_method="card"
+                customer_email={this.state.userDetails.email}
+                customer_phone={this.state.userDetails.phone}
+                amount={"" + this.state.totalPrice + ""}
+                ravePubKey={this.state.public_key}
+                callback={this.paymentCallback}
+                onclose={this.paymentOnClose}
+                />
+            </div>
+            
+        }
         let toDisplay= null ;
         if(this.state.totalPrice){
             toDisplay = <Aux>
@@ -144,22 +238,26 @@ class Cart extends Component{
                 </div>
                 <div className="Cart_ChoiceButton">
                     <div className="CartChoice">
-                        <Button name="PROCEED TO CHECKOUT"  />
-                        <Button name="CANCEL PURCHASE"/>
+                        <Button name="CANCEL PURCHASE" clicked={() => this.props.history.push('/products')}/>
+                        {paymentButton}
                     </div>
                 </div>
             </Aux>
         }
-        return(
-            <div className="Cart contain">
-                <p className="Cart_Title">My Cart</p>
+        let totalRender = <Aux>
+            <p className="Cart_Title">My Cart</p>
                 <div className="Cart_Listing">
                     {toRender}
                 </div>
                 {toDisplay}
+        </Aux>
+        return(
+            <div className="Cart contain">
+                {totalRender}
             </div>
         )
     }
+
 }
 
 const propsMappedToState= state => {

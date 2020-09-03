@@ -137,8 +137,10 @@ class Cart extends Component{
     }
 
     paymentCallback = async  (response) => {
-        await Axios.post('/api/orders/make',{}, {
-            headers: getInLocalStorage("token")
+        Axios.post('/api/orders/make',{}, {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
         }).then(res => {
             console.log(res)
             this.props.history.push('/products');

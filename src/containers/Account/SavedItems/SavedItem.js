@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {flowRight as compose} from 'lodash'
 import Axios from '../../../axios'
 import * as uiActions from '../../../store/actions/UIActions'
+import * as userActions from '../../../store/actions/userActions'
 import './SavedItem.css'
 import { getInLocalStorage } from '../../../utility'
 import Loader from '../../../components/UI/Loader/Loader'
@@ -62,6 +63,31 @@ class SavedItem extends Component{
             }
         })
     }
+    addToCart = (id) => {
+        if(!this.props.isLoggedIn){
+            this.props.history.push('/account')
+        }else{
+            Axios.post(`/api/cart/add/${id}`, {}, {
+                headers: {
+                    "x-access-token": getInLocalStorage("token")
+                }
+            }).then(res => {
+                this.props.notify({
+                    status: 'success',
+                    content: res.data.message
+                })
+                this.fetchFavourites()
+            }).catch(err => {
+                if(err.response.data){
+                    console.log(err.response.data)
+                    this.props.notify({
+                        status: 'error', 
+                        content: err.response.data.message
+                    })
+                }
+            })
+        }
+    }
     render(){
         let toDisplay = <div className="Loader_Contain">
             <Loader />
@@ -107,7 +133,8 @@ const stateMappedToProps = state => {
 
 const actionMappedToProps = dispatch => {
     return{
-        notify: (payload)=>dispatch(uiActions.promptNotification(payload))
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload)),
+        updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
     }
 }
 export default compose(

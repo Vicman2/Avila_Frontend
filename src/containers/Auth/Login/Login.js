@@ -96,7 +96,6 @@ class Login extends Component{
             Axios.post('/api/users/login', data)
             .then(res => {
                 let {token, cart} = res.data.data
-                console.log(res.data.data)
                 let cartNum  = cart.length>0 ? cart.length: null
                 this.props.updateCart(cartNum)
                 setInLocalStorage("token", token, 3600000);

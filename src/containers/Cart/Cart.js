@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {flowRight as compose} from 'lodash'
-import axios from 'axios'
 import Axios from '../../axios'
 import * as uiActions from '../../store/actions/UIActions'
 import * as userActions from '../../store/actions/userActions'
@@ -27,10 +26,11 @@ class Cart extends Component{
         secret_key: process.env.REACT_APP_FLUTTERWAVE_SECRET_KEY
     }
     componentDidMount(){
+        window.scrollTo(0,0)
         this.getCart();
         this.getUser();
     }
-    getCart = ()=>{
+    getCart = (scrollUp)=>{
         Axios.get('/api/cart/get', {
             headers: {
                 "x-access-token": getInLocalStorage("token")
@@ -51,6 +51,9 @@ class Cart extends Component{
                 cartItems: data.data, 
                 totalPrice: arrayPrice
             })
+            if(scrollUp){
+                window.scrollTo(0,0)
+            }
         }).catch(err => {
             this.setState({loading:false})
             if(err.response && err.response.data){
@@ -133,55 +136,19 @@ class Cart extends Component{
         })
     }
 
-    checkoutHandler = ()=> {
-        let arrayOfPrices, arrayPrice
-        const cartRequest  = axios.get('https://avila-backend.herokuapp.com/api/cart/get', {
-            headers: {
-                "x-access-token": getInLocalStorage("token")
-            }
-        })
-        const userRequest = axios.get(`https://avila-backend.herokuapp.com/api/users/getUser`, {
-            headers: {
-                "x-access-token": getInLocalStorage("token")
-            }
-        })
-        axios.all([cartRequest, userRequest])
-        .then(axios.spread((...responses) => {
-            const cartResponse = responses[0]
-            const userResponse = responses[1]
-            arrayOfPrices = cartResponse.data.data.map(prod => {
-                return prod.quantity * prod.product.price
+    paymentCallback = async  (response) => {
+        await Axios.post('/api/orders/make',{}, {
+            headers: getInLocalStorage("token")
+        }).then(res => {
+            console.log(res)
+            this.props.history.push('/products');
+            this.props.notify({
+                status: 'success',
+                content: "Order created successfully"
             })
-            arrayPrice = arrayOfPrices.reduce((a, b) => a + b)
-            const {email, phone, name} = userResponse.data.data
-            this.setState({
-                userDetails: {email, phone, name, amount: arrayPrice}
-            })
-        })).then(() => {
-            this.setState({toCheckout: true})
-        })
-        .catch(err => {
+        }).catch(err => {
             console.log(err)
         })
-    }
-    paymentCallback = (response) => {
-        return RequeryTransaction({ live: false, txref: response.tx.txRef, SECKEY: this.state.secret_key})
-        .then( (resp)=>{
-            console.log("Vicman")
-        }).catch(function (error) {
-            console.log(error);
-        })
-        // Axios.post('/api/orders/make',{
-        //     headers: {
-        //         "x-access-token": getInLocalStorage("token")
-        //     }
-        // }).then(res => {
-        //     this.props.history.push('/products');
-        //     this.props.notify({
-        //         status: 'error',
-        //         content: "Order created successfully"
-        //     })
-        // })
     }
     paymentOnClose = () => {
         this.props.history.push('/cart');

@@ -23,10 +23,9 @@ class Products extends Component{
         cart: []
     }
     componentDidMount(){
-        window.scrollTo(0,0)
-        this.fetchProducts()
+        this.fetchProducts(true)
     }
-    fetchProducts= ()=>{
+    fetchProducts= (scrollUp)=>{
         this.setState({loading: true})
         const productRequest = axios.get(`https://avila-backend.herokuapp.com/api/products/getProducts?pageNo=${this.state.pageNo}&noOfProducts=${this.state.noOfProducts}`)
         const userRequest = axios.get(`https://avila-backend.herokuapp.com/api/users/getUser`, {
@@ -41,7 +40,6 @@ class Products extends Component{
         axios.all(fetchArray)
         .then(axios.spread((...responses) => {
             this.setState({loading: false})
-            window.scrollTo(0,0)
             const prodResponse = responses[0]
             const userResponse = responses[1]
             this.setState({
@@ -52,6 +50,9 @@ class Products extends Component{
                 userFavourite: userResponse ?  userResponse.data.data.favourites : [],
                 cart: userResponse ? userResponse.data.data.cart: []
             })
+            if(scrollUp){
+                window.scrollTo(0,0)
+            }
         } ))
         .catch(err => {
             console.log(err)
@@ -64,14 +65,14 @@ class Products extends Component{
         })
     }
     nexPage = async ()=>{
-        window.scrollTo(0,0)
         let  numberOfPages = this.state.totalProducts/this.state.noOfProducts
         numberOfPages = isInteger(numberOfPages) ? numberOfPages : parseInt(numberOfPages) + 1
         if(this.state.activePage < numberOfPages){
             await this.setState((state) => {
                 return {pageNo: state.pageNo + 1, activePage: state.activePage + 1}
             })
-            this.fetchProducts()
+            this.fetchProducts(true)
+            window.scrollTo(0,0)
         }  
     }
     prevPage = async()=> {
@@ -81,12 +82,12 @@ class Products extends Component{
             await this.setState((state) => {
                 return {pageNo: state.pageNo - 1, activePage: state.activePage - 1}
             })
-            this.fetchProducts()
+            this.fetchProducts(true)
         }
     }
     numPage = async(pageNo) => {
         await this.setState({pageNo , activePage: pageNo})
-        this.fetchProducts()
+        this.fetchProducts(true)
     }
     clickedProduct = (id)=>{
         this.props.history.push(`/products/${id}`)
@@ -102,7 +103,7 @@ class Products extends Component{
                 }
             })
             .then(res => {
-                this.fetchProducts()
+                this.fetchProducts(false)
                 window.scrollTo(0,0)
                 this.props.notify({
                     status: 'success',
@@ -129,7 +130,7 @@ class Products extends Component{
             }
         })
         .then(res => {
-            this.fetchProducts()
+            this.fetchProducts(false)
             window.scrollTo(0,0)
             this.props.notify({
                 status: 'success',
@@ -160,7 +161,7 @@ class Products extends Component{
                     status: 'success',
                     content: res.data.message
                 })
-                this.fetchProducts()
+                this.fetchProducts(false)
             }).then(data => {
                 if(this.state.cart.length> 0){
                     this.props.updateCart(this.state.cart.length)

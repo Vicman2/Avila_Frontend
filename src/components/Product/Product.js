@@ -15,7 +15,7 @@ const Product = (props) =>{
         addButton = <Button clicked={props.addToCart} name="Added To Cart" disabled/>
     }
     return(
-        <div className="Product_Container">
+        <div className="Product_Container"  data-aos="fade-up" data-aos-duration="3000">
             <div className="Product">
                 <div className="ProdImage_Cont" onClick={props.clicked}>
                     <img className="contain_img" src={props.src}  alt={props.name}/>

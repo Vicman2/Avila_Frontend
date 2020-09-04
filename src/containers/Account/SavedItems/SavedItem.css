@@ -23,6 +23,11 @@
 
 
 @media(min-width: 900px){
+    .SavedItem{
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: scroll;
+    }
     .SavedItem_Empty{
         width: 300px;
         height: 400px;

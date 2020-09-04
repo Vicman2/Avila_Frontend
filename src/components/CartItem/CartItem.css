@@ -4,8 +4,12 @@
     justify-content: space-between;
     align-items: center;
     margin: 5px 0;
-    box-shadow: 0px 2px 0px #ccc;
-    padding: 10px 0;
+    box-shadow: 0px 5px 0px #ccc;
+    transition: 200ms;
+    padding: 10px 5px;
+}
+.CartItem:hover{
+    box-shadow: 7px 7px 7px  10px #ccc;
 }
 .CartItem_ImgName{
     display: flex;

@@ -1,0 +1,49 @@
+.Order{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px 5px;
+    box-shadow: 2px 2px 2px 5px #ccc;
+}
+
+
+.Order_Image_Cont{
+    width: 129px;
+    height: 131px;
+}
+.Order_Price_Reorder{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.Order_ProdName{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #84BE38;
+
+}
+.Order_ProdPrice{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #003A1A;
+}
+.Order:hover{
+    box-shadow: 4px 4px 4px 10px #ccc;
+}
+.Order_Reorder{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #84BE38;
+}

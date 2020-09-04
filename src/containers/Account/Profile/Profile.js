@@ -41,7 +41,7 @@ class Profile extends Component{
         </div>
         if(this.state.userDetails){
             let {name, email, phone, address, sex} = this.state.userDetails
-            toDisplayProfile = <Aux>
+            toDisplayProfile = <div >
                 <p className="Account_Edit" onClick={this.swithToEdit}>Edit</p>
                 <div className="Profile_KeyValue">
                     <p className="Profile_Key">Name</p>
@@ -63,7 +63,7 @@ class Profile extends Component{
                     <p className="Profile_Key">Sex</p>
                     <p className="Profile_Value">{sex} </p>
                 </div>
-            </Aux>
+            </div>
         }
         if(this.state.edit){
             toDisplayProfile = <EditProfile 

@@ -15,6 +15,7 @@ import ProdPreview from './containers/ProdPreview/ProdPreview'
 import { getInLocalStorage } from './utility';
 import * as userActions from './store/actions/userActions'
 import Axios from './axios'
+import AOS from 'aos'
 
 
 
@@ -24,6 +25,7 @@ class App extends Component{
     hamburger: false, 
   }
   componentDidMount(){
+    AOS.init()
     let token = getInLocalStorage('token')
     if(token){
       this.props.login()

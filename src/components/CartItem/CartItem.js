@@ -4,7 +4,7 @@ import './CartItem.css'
 
 const CartItem = (props) => {
     return(
-        <div className="CartItem">
+        <div className="CartItem" data-aos="zoom-in-down">
             <div className="CartItem_ImgName">
                 <div className="CartItem_Image">
                     <img className="contain_img" src={props.prodImage} alt={props.name} />

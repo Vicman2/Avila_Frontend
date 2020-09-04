@@ -143,11 +143,11 @@ class Cart extends Component{
             }
         }).then(res => {
             console.log(res)
-            this.props.history.push('/products');
             this.props.notify({
                 status: 'success',
                 content: "Order created successfully"
             })
+            this.props.history.push('/products');
         }).catch(err => {
             console.log(err)
         })

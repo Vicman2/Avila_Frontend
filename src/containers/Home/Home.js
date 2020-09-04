@@ -33,12 +33,12 @@ class Home extends Component{
         return(
             <div className="Home">
                 <div className="Home_Sec1 contain">
-                    <div className="Home_Landing">
+                    <div className="Home_Landing" data-aos="fade-right">
                         <p className="Home_Avila">Shalom<br /> Avila Natural Distributor</p>
                         <p className="Home_WeProvide">we provide the best natural skincare and Food product</p>
                         <Button name="Explore products" clicked={() => this.props.history.push('/products')}/>
                     </div>
-                    <div className="Home_Landing_Carousel">
+                    <div className="Home_Landing_Carousel" data-aos="fade-left">
                         <Carousel
                         responsive={responsive}
                         infinite={true}
@@ -65,7 +65,7 @@ class Home extends Component{
                         <p className="The_Headers">About Us</p>
                     </div>
                     <div className="Home_About_sec">
-                        <p>Welcome to AVILA NATURALLE, a leading natural
+                        <p data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">Welcome to AVILA NATURALLE, a leading natural
                             skincare and Food company in Nigeria. We hope
                              you find your journey on this site memorable 
                              and rewarding.<br/>
@@ -75,7 +75,7 @@ class Home extends Component{
                              array of Bodycare and Food products.Depending on what
                               your interests are, we have structured this site to 
                               help you have an easy journey through.</p>
-                        <p> Avila Naturalle is a leading manufacturer of 100% NATURAL body
+                        <p data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine"> Avila Naturalle is a leading manufacturer of 100% NATURAL body
                              care and household brands in West Africa. A subsidiary of Top Confectionery 
                             Limited Nigeria, Avila is focussed on encouraging the use of pure and
                             natural body care (skincare, haircare, mouth care, foot care)
@@ -87,12 +87,14 @@ class Home extends Component{
                 </div>
 
                 <div className="Home_Sec3 contain">
-                    <div className="Home_Pop_Header">
-                        <span className="header_span"></span>
-                            <p className="The_Headers">POPULAR AVILA PRODUCTS</p>
-                        <span className="header_span"></span>
+                    <div className="Home_Sec3_Header_Wrapper">
+                        <div className="Home_Pop_Header">
+                            <span className="header_span"></span>
+                                <p className="The_Headers">POPULAR AVILA PRODUCTS</p>
+                            <span className="header_span"></span>
+                        </div>
+                        <p className="Home_Covered">we’ve got you covered</p>
                     </div>
-                    <p className="Home_Covered">we’ve got you covered</p>
 
                     <RelatedProducts />
                 </div>

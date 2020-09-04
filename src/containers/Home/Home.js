@@ -65,7 +65,7 @@ class Home extends Component{
                         <p className="The_Headers">About Us</p>
                     </div>
                     <div className="Home_About_sec">
-                        <p data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">Welcome to AVILA NATURALLE, a leading natural
+                        <p>Welcome to AVILA NATURALLE, a leading natural
                             skincare and Food company in Nigeria. We hope
                              you find your journey on this site memorable 
                              and rewarding.<br/>
@@ -75,7 +75,7 @@ class Home extends Component{
                              array of Bodycare and Food products.Depending on what
                               your interests are, we have structured this site to 
                               help you have an easy journey through.</p>
-                        <p data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine"> Avila Naturalle is a leading manufacturer of 100% NATURAL body
+                        <p> Avila Naturalle is a leading manufacturer of 100% NATURAL body
                              care and household brands in West Africa. A subsidiary of Top Confectionery 
                             Limited Nigeria, Avila is focussed on encouraging the use of pure and
                             natural body care (skincare, haircare, mouth care, foot care)

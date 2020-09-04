@@ -50,6 +50,7 @@ class Products extends Component{
                 userFavourite: userResponse ?  userResponse.data.data.favourites : [],
                 cart: userResponse ? userResponse.data.data.cart: []
             })
+            this.props.updateCart(this.state.cart.length)
             if(scrollUp){
                 window.scrollTo(0,0)
             }
@@ -162,14 +163,9 @@ class Products extends Component{
                     content: res.data.message
                 })
                 this.fetchProducts(false)
-            }).then(data => {
-                if(this.state.cart.length> 0){
-                    this.props.updateCart(this.state.cart.length)
-                }
             })
             .catch(err => {
                 if(err.response.data){
-                    console.log(err.response.data)
                     this.props.notify({
                         status: 'error', 
                         content: err.response.data.message

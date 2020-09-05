@@ -2,12 +2,6 @@
 .react-multiple-carousel__arrow{
     z-index: 201 !important;
 }
-.CarouselImage{
-    width:300px ;
-    height: 270px;
-    display: flex;
-    justify-content: center;
-}
 
 .Home_Landing_Carousel{
     margin-top: 30px;

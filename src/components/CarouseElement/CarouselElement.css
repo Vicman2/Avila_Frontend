@@ -1,0 +1,13 @@
+.CarouselElement{
+    width:300px ;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+}
+
+@media(min-width:800px){
+    .CarouselImage{
+        width: 369px;
+        height: 363px;
+    } 
+}

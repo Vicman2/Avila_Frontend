@@ -1,16 +1,27 @@
 import React, {Component} from 'react'
 import Carousel from "react-multi-carousel";
+import {connect} from 'react-redux'
+import Axios from '../../axios'
 import "react-multi-carousel/lib/styles.css";
 import './Home.css'
 import Button from '../../components/UI/Button/Button'
-import prod1 from './Assets/prod1.png'
-import prod2 from './Assets/prod2.png'
-import prod3 from './Assets/prod3.png'
-import prod4 from './Assets/prod4.png'
 import RelatedProducts from '../RelatedProducts/RelatedProducts';
+import CarouselElement from '../../components/CarouseElement/CarouselElement'
+
 
 
 class Home extends Component{
+    state = {
+        products : []
+    }
+    componentDidMount(){
+        Axios.get(`/api/products/getProducts?pageNo=1&noOfProducts=20`)
+        .then(response => {
+            this.setState({products: response.data.data.requestedProduct})
+        }).catch(err=> {
+            
+        })
+    }
     render(){
         const responsive = {
             desktop: {
@@ -29,6 +40,26 @@ class Home extends Component{
               slidesToSlide: 1 
             }
           }
+
+          let carousel = null 
+          if(this.state.products.length > 0){
+            carousel = 
+                <Carousel
+                responsive={responsive}
+                infinite={true}
+                autoPlay={true}
+                >
+                {this.state.products.map(prod => {
+                    return(
+                        <CarouselElement
+                            key={prod._id}
+                            src ={prod.prodImageSrc}
+                        />
+                    )
+                })}
+                    
+                </Carousel>
+          }
           
         return(
             <div className="Home">
@@ -39,24 +70,7 @@ class Home extends Component{
                         <Button name="Explore products" clicked={() => this.props.history.push('/products')}/>
                     </div>
                     <div className="Home_Landing_Carousel" data-aos="fade-left">
-                        <Carousel
-                        responsive={responsive}
-                        infinite={true}
-                        autoPlay={true}
-                        >
-                            <div className="CarouselImage">
-                                <img className="contain_img" src={prod1} alt="Prod1" />
-                            </div>
-                            <div className="CarouselImage"> 
-                                <img className="contain_img" src={prod2} alt="Prod1" />
-                            </div>
-                            <div className="CarouselImage"> 
-                                <img className="contain_img" src={prod3} alt="Prod1" />
-                            </div>
-                            <div className="CarouselImage"> 
-                                <img className="contain_img" src={prod4} alt="Prod1" />
-                            </div>
-                        </Carousel>
+                       {carousel}
                     </div>
                 </div>
 

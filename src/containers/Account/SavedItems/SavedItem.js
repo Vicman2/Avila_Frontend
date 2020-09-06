@@ -16,13 +16,16 @@ import Button from '../../../components/UI/Button/Button'
 class SavedItem extends Component{
     state = {
         loading: true, 
-        favourites: []
+        favourites: [],
+        cart:[]
     }
     componentDidMount(){
-        this.fetchFavourites()
+        this.fetchFavourites(true)
     }
-    fetchFavourites = ()=>{
-        window.scrollTo(0,0)
+    fetchFavourites = (scrollTop)=>{
+        if(scrollTop)(
+            window.scrollTo(0,0)
+        )
         const token = getInLocalStorage('token');
         Axios.get('/api/users/getFavourites', {
             headers: {
@@ -30,6 +33,7 @@ class SavedItem extends Component{
             }
         }).then(res => {
            this.setState({favourites : res.data.data, loading: false})
+           this.getCart()
         }).catch(err => {
             if(err.response.data){
                 console.log(err.response.data)
@@ -63,6 +67,28 @@ class SavedItem extends Component{
             }
         })
     }
+    
+    getCart = ()=>{
+        Axios.get('/api/cart/get', {
+            headers: {
+                "x-access-token": getInLocalStorage("token")
+            }
+        }).then(({data}) => {
+            console.log(data.data)
+            this.setState({
+                cart: data.data
+            })
+        }).catch(err => {
+            this.setState({loading:false})
+            if(err.response && err.response.data){
+                this.props.notify({
+                    status: 'error', 
+                    content: err.response.data.message
+                })
+            }
+        })
+    }
+
     addToCart = (id) => {
         if(!this.props.isLoggedIn){
             this.props.history.push('/account')
@@ -77,7 +103,12 @@ class SavedItem extends Component{
                     content: res.data.message
                 })
                 this.fetchFavourites()
-            }).catch(err => {
+                this.getCart()
+            
+            }).then(()=> {
+                this.props.updateCart(this.state.cart.length)
+            })
+            .catch(err => {
                 if(err.response.data){
                     console.log(err.response.data)
                     this.props.notify({
@@ -94,15 +125,20 @@ class SavedItem extends Component{
         </div> 
         if(this.state.favourites.length> 0){
             toDisplay = this.state.favourites.map(fav => {
+                let isInCart 
+                if(this.state.cart.length > 0){
+                    isInCart = this.state.cart.find(cartItem => cartItem.product._id === fav._id)
+                }
                 return(
-                    <div className="OneSaved">
+                    <div  key={fav._id} className="OneSaved">
                         <Product
                         clicked={()=>this.clickedProduct(fav._id)}
-                        key={fav._id}
                         src={fav.prodImageSrc}
                         name={fav.name}
                         price={fav.price}
                         removeFavourite = {() => this.removeFromFavourites(fav._id)}
+                        addToCart = {() => this.addToCart(fav._id)}
+                        addedToCart = {isInCart}
                         favourites
                         />
                     </div>

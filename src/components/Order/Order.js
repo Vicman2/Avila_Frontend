@@ -11,7 +11,7 @@ const Order = (props) => {
             <p className="Order_ProdName">{props.name}</p>
             <div className="Order_Price_Reorder">
                 <p className="Order_ProdPrice">#{props.price.toLocaleString()} </p>
-                <p className="Order_Reorder">Reorder</p>
+                <p className="Order_Reorder" onClick={props.reorder}>Reorder</p>
             </div>
         </div>
     )

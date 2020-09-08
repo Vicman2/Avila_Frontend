@@ -111,6 +111,9 @@
     width: 100%;
     justify-content: center;
 }
+.Hide_Footer{
+    display: none !important;
+}
 
 @media(min-width:900px){
     .Footer_green{

@@ -22,7 +22,8 @@ import AOS from 'aos'
 
 class App extends Component{
   state= {
-    hamburger: false, 
+    hamburger: false,
+    showFooter : true
   }
   componentDidMount(){
     AOS.init()
@@ -32,6 +33,7 @@ class App extends Component{
       this.getCart()
     }
   }
+
   getCart = () => {
     let token = getInLocalStorage("token")
     Axios.get('/api/cart/get', {
@@ -46,6 +48,8 @@ class App extends Component{
         console.log(err)
     })
   }
+
+  
   clickedHamburger = ()=> {
     this.setState((prevState) => {
       return{hamburger: !prevState.hamburger }
@@ -72,7 +76,7 @@ class App extends Component{
           <Route path="/cart" component={Cart} />
           <Route path="/" exact component={Home} />
         </Switch>
-        <Footer />
+        <Footer hide={this.props.showFooter} />
       </div>
     )
   }
@@ -84,7 +88,8 @@ const stateMappedToProps = (state) => {
     cartNum : state.users.cartNo,
     isLoggedIn: state.users.isLoggedIn,
     showNotification : state.ui.showNotification,
-    notificationData : state.ui.notificationData
+    notificationData : state.ui.notificationData, 
+    showFooter: state.ui.showFooter
   }
 }
 

@@ -19,7 +19,7 @@ class ProdPreview extends Component{
     componentDidMount(){
         let {id} = this.props.match.params
         this.fetchData(id)
-        
+        this.props.showFooter()
     }
     componentDidUpdate(prevProps){
         if(this.props.match.params.id !== prevProps.match.params.id){
@@ -120,7 +120,8 @@ const stateMappedToProps = state => {
 
 const actionMappedToProps = dispatch => {
     return{
-        notify: (payload)=>dispatch(uiActions.promptNotification(payload))
+        notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
+        showFooter : () => dispatch(uiActions.showFooter())
     }
 }
 export default compose(

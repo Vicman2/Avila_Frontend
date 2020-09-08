@@ -19,6 +19,9 @@ class Account extends Component{
         signedIn: false,
         activeScreen : 'profile' // Initailly set to false to know if the user already have an account
     }
+    componentDidMount(){
+        this.props.hideFooter()
+    }
     swithAuthMethod = () => {
         this.setState((prevState) => {
             return {
@@ -90,7 +93,8 @@ const propsMappedToState= state => {
 const actionMappedToProps = dispatch => {
     return{
         notify: (payload)=>dispatch(uiActions.promptNotification(payload)),
-        logOut : () => dispatch(userActions.logOut())
+        logOut : () => dispatch(userActions.logOut()), 
+        hideFooter: () => dispatch(uiActions.hideFooter())
     }
 }
 export default compose(

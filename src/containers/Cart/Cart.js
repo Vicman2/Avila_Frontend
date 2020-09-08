@@ -29,6 +29,7 @@ class Cart extends Component{
         window.scrollTo(0,0)
         this.getCart();
         this.getUser();
+        this.props.showFooter();
     }
     getCart = (scrollUp)=>{
         Axios.get('/api/cart/get', {
@@ -239,7 +240,8 @@ const propsMappedToState= state => {
 const actionMappedToProps = dispatch => {
     return{
         notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
-        updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
+        updateCart : (num)=> dispatch(userActions.updateNoOfCart(num)), 
+        showFooter : () => dispatch(uiActions.showFooter())
     }
 }
 export default compose(

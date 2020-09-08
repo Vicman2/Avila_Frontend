@@ -6,7 +6,8 @@ const initialStore = {
         status: "", 
         content:""
     }, 
-    unAuthComponent: null
+    unAuthComponent: null, 
+    showFooter: true
 }
 
 
@@ -28,6 +29,16 @@ const reducer = (state = initialStore, action) => {
             return{
                 ...state, 
                 unAuthComponent: action.comp,
+            }
+        case actionType.SHOW_FOOTER:
+            return{
+                ...state, 
+                showFooter: true,
+            }
+        case actionType.HIDE_FOOTER:
+            return{
+                ...state, 
+                showFooter: false,
             }
     }
     return state;

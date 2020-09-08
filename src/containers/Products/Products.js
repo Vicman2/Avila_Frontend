@@ -24,6 +24,7 @@ class Products extends Component{
     }
     componentDidMount(){
         this.fetchProducts(true)
+        this.props.showFooter()
     }
     fetchProducts= (scrollUp)=>{
         this.setState({loading: true})
@@ -264,7 +265,8 @@ const stateMappedToProps = state => {
 const actionMappedToProps = dispatch => {
     return{
         notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
-        updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
+        updateCart : (num)=> dispatch(userActions.updateNoOfCart(num)), 
+        showFooter : () => dispatch(uiActions.showFooter())
     }
 }
 export default compose(

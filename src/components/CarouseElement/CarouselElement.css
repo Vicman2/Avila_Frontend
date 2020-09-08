@@ -1,13 +1,17 @@
 .CarouselElement{
-    width:300px ;
-    height: 270px;
     display: flex;
     justify-content: center;
 }
 
+
+.CarouselElement_Img_contain{
+    width:250px ;
+    height: 270px;
+}
+
 @media(min-width:800px){
-    .CarouselImage{
-        width: 369px;
-        height: 363px;
-    } 
+    .CarouselElement_Img_contain{
+        width: 270px;
+        height: 300px;
+    }
 }

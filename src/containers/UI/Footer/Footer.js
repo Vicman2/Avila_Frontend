@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 import Axios from '../../../axios';
 import Loader from '../../../components/UI/Loader/Loader';
 import * as uiActions from '../../../store/actions/UIActions'
-import {flowRight as compose} from 'lodash'
+import {flowRight as compose} from 'lodash';
 import { connect } from 'react-redux';
 
 
@@ -76,6 +76,10 @@ class Footer extends Component{
 
     }
     render(){
+        const classes = ["Footer"];
+        if(!this.props.hide){
+            classes.push("Hide_Footer");
+        }
        let toShow = <Button name="Subscribe" clicked={(e)=>this.submitEmail(e)} big/>
        if(this.state.loading){
            toShow = <div className="Footer_Loader">
@@ -83,7 +87,7 @@ class Footer extends Component{
             </div>
        }
         return(
-            <div className="Footer">
+            <div className={classes.join(" ")}>
                 <div className="Footer_green contain">
                     <p className="Footer_Sub">SUBSCRIBE To our newsletter</p>
                     <p className="Footer_Focused">Stay updated to get amazing offers and discounts on our products</p>

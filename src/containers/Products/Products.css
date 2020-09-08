@@ -23,7 +23,7 @@
 }
 .Products_List{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 .Product_newPage{
@@ -59,4 +59,10 @@
 }
 .Deactive_Nav:hover{
     cursor: not-allowed;
+}
+
+@media(min-width: 900px){
+    .Products_List{
+        justify-content: space-between;
+    }
 }

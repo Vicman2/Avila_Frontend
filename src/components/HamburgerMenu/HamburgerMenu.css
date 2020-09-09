@@ -3,11 +3,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    right: 20px;
     bottom: 0;
     background: #84BE38;
     z-index: 210;
     text-align: center;
+    padding-top: 20px;
 }
 .RotateBurger{
     margin-right: 0px;
@@ -31,6 +32,7 @@
 .RotateSection{
     display: flex;
     justify-content: flex-end;
+    padding-right: 20px;
 }
 
 .Show_Harmburger{

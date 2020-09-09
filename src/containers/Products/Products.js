@@ -57,7 +57,6 @@ class Products extends Component{
             }
         } ))
         .catch(err => {
-            console.log(err)
             this.setState({loading:false})
             this.props.notify({
                 status: 'error', 
@@ -96,6 +95,10 @@ class Products extends Component{
     }
     addToFavourties =(id)=>{
         if(!this.props.isLoggedIn){
+            this.props.savePayload({
+                action: "addToFavourite", 
+                prodId: id
+            })
             this.props.history.push('/account')
         }else{
             const token = getInLocalStorage("token")
@@ -152,6 +155,10 @@ class Products extends Component{
     }
     addToCart = (id) => {
         if(!this.props.isLoggedIn){
+            this.props.savePayload({
+                action: "addToCart", 
+                prodId: id
+            })
             this.props.history.push('/account')
         }else{
             Axios.post(`/api/cart/add/${id}`, {}, {
@@ -266,7 +273,8 @@ const actionMappedToProps = dispatch => {
     return{
         notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
         updateCart : (num)=> dispatch(userActions.updateNoOfCart(num)), 
-        showFooter : () => dispatch(uiActions.showFooter())
+        showFooter : () => dispatch(uiActions.showFooter()), 
+        savePayload : (payload) => dispatch(userActions.actionBeforeAuth(payload))
     }
 }
 export default compose(

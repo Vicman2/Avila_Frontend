@@ -2,7 +2,8 @@ import * as actionType from '../actions/userActions'
 
 const initialStore = {
     isLoggedIn: false,
-    cartNo : null
+    cartNo : null, 
+    payloadBeforeAuth: null
 }
 
 
@@ -23,6 +24,11 @@ const reducer = (state = initialStore, action) => {
             return{
                 ...state, 
                 cartNo: action.num
+            }
+        case actionType.ACTION_BEFORE_AUTH: 
+            return{
+                ...state, 
+                payloadBeforeAuth: action.payload
             }
         default: 
             return state

@@ -5,10 +5,11 @@ import  * as uiActions from '../../../store/actions/UIActions'
 import  * as userActions from '../../../store/actions/userActions'
 import InputForm from '../../../components/UI/InputTypes/AuthInputs/AuthInputs'
 import Loader from '../../../components/UI/Loader/Loader'
-import {setInLocalStorage} from '../../../utility'
+import {setInLocalStorage, getInLocalStorage} from '../../../utility'
 import Axios from '../../../axios'
 import './Signup.css'
 import Button from '../../../components/UI/Button/Button';
+import { withRouter } from 'react-router-dom'
 
 
 const FORM_INPUTS = {
@@ -201,7 +202,61 @@ class SignUp extends Component{
                     content: res.data.message
                 })
                 this.props.login()
-            }).catch(err=> {
+            }).then(data => {
+                if(this.props.payloadBeforeAuth){
+                    switch (this.props.payloadBeforeAuth.action) {
+                        case "addToCart":
+                            Axios.post(`/api/cart/add/${this.props.payloadBeforeAuth.prodId}`, {}, {
+                                headers: {
+                                    "x-access-token": getInLocalStorage("token")
+                                }
+                            }).then(res => {
+                                this.props.notify({
+                                    status: 'success',
+                                    content: res.data.message
+                                })
+                                this.props.history.push('/products')
+                            }).catch(err => {
+                                console.log(err)
+                                if(err.response.data){
+                                    this.props.history.push('/products')
+                                    this.props.notify({
+                                        status: 'error', 
+                                        content: err.response.data.message
+                                    })
+                                }  
+                            })
+                            break;
+                        case "addToFavourite":
+                            Axios.put(`/api/users/addFavourite/${this.props.payloadBeforeAuth.prodId}`, {},{
+                                headers: {
+                                    "x-access-token": getInLocalStorage("token")
+                                }
+                            })
+                            .then(res => {
+                                this.props.notify({
+                                    status: 'success',
+                                    content: res.data.message
+                                })
+                                this.props.history.push('/products')
+                            }).catch(err => {
+                                if(err.response.data){
+                                    this.props.history.push('/products')
+                                    this.props.notify({
+                                        status: 'error', 
+                                        content: err.response.data.message
+                                    })
+                                }
+                                
+                            })
+                            break;
+                    
+                        default:
+                            this.props.history.push('/products');
+                    }
+                }
+            })
+            .catch(err=> {
                 this.setState({loading: false})
                 if(err.response.data){
                     this.props.notify({
@@ -260,6 +315,12 @@ class SignUp extends Component{
     }
 }
 
+const stateMappedToProps = state  => {
+    return{
+        payloadBeforeAuth : state.users.payloadBeforeAuth
+    }
+}
+
 const actionMappedToProps = dispatch => {
     return{
         notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
@@ -268,5 +329,6 @@ const actionMappedToProps = dispatch => {
 }
 
 export default compose(
-    connect(null, actionMappedToProps)
+    withRouter,
+    connect(stateMappedToProps, actionMappedToProps)
 ) (SignUp)

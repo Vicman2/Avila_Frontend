@@ -5,7 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter} from 'react-router-dom'
-import {createStore, combineReducers} from 'redux'
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
+import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 
 import productsReducer  from './store/reducers/productReducer'
@@ -17,10 +18,14 @@ const rootReducers = combineReducers({
     products: productsReducer, 
     users: userReducer, 
     ui:  UIReducer
-})
+}) 
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     rootReducers, 
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(
+        applyMiddleware(thunk)
+    )
 );
 const app = (
     <Provider store={store}>

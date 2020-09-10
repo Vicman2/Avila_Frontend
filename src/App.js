@@ -12,6 +12,7 @@ import Products from './containers/Products/Products';
 import Account from './containers/Account/Account';
 import Cart from './containers/Cart/Cart';
 import ProdPreview from './containers/ProdPreview/ProdPreview'
+import ErrorBoundary from './containers/ErrorBoundary/ErrorBoundary'
 import { getInLocalStorage } from './utility';
 import * as userActions from './store/actions/userActions'
 import Axios from './axios'
@@ -57,27 +58,29 @@ class App extends Component{
   }
   render(){
     return (
-      <div className="App">
-        <Navbar
-        clickedHamburger={this.clickedHamburger}
-        />
-        <Notification
-          show={this.props.showNotification}
-          data={this.props.notificationData}
-        />
-        <HamburgerMenu 
-          show={this.state.hamburger}
-          clicked={this.clickedHamburger}
-        />
-        <Switch>
-          <Route path="/products/:id" component={ProdPreview} />
-          <Route path="/products" component={Products} />
-          <Route path="/account" component={Account} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/" exact component={Home} />
-        </Switch>
-        <Footer hide={this.props.showFooter} />
-      </div>
+      <ErrorBoundary>
+        <div className="App">
+            <Navbar
+            clickedHamburger={this.clickedHamburger}
+            />
+            <Notification
+              show={this.props.showNotification}
+              data={this.props.notificationData}
+            />
+            <HamburgerMenu 
+              show={this.state.hamburger}
+              clicked={this.clickedHamburger}
+            />
+            <Switch>
+              <Route path="/products/:id" component={ProdPreview} />
+              <Route path="/products" component={Products} />
+              <Route path="/account" component={Account} />
+              <Route path="/cart" component={Cart} />
+              <Route path="/" exact component={Home} />
+            </Switch>
+            <Footer hide={this.props.showFooter} />
+        </div>
+      </ErrorBoundary>
     )
   }
 }

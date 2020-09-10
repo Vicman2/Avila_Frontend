@@ -3,7 +3,8 @@ import * as actionType from '../actions/userActions'
 const initialStore = {
     isLoggedIn: false,
     cartNo : null, 
-    payloadBeforeAuth: null
+    payloadBeforeAuth: null, 
+    isAdmin: false
 }
 
 
@@ -12,7 +13,9 @@ const reducer = (state = initialStore, action) => {
         case actionType.LOGMEIN:
             return{
                 ...state,
-                isLoggedIn : true, 
+                isLoggedIn : true,
+                isAdmin: action.isAdmin
+
             }
         
         case actionType.LOGOUT:

@@ -96,7 +96,8 @@ class Login extends Component{
             await this.setState({loading: true})
             Axios.post('/api/users/login', data)
             .then(res => {
-                let {token, cart} = res.data.data
+                console.log(res.data)
+                let {token, cart, role} = res.data.data
                 let cartNum  = cart.length>0 ? cart.length: null
                 this.props.updateCart(cartNum)
                 setInLocalStorage("token", token, 3600000);
@@ -105,9 +106,11 @@ class Login extends Component{
                     status: 'success', 
                     content: res.data.message
                 })
-                this.props.login()
+                let admin = (role == "admin") ? true : false
+                setInLocalStorage("isAdmin", admin, 3600000)
+                this.props.login(admin)
             }).then(data => {
-                if(this.props.payloadBeforeAuth){
+                if(this.props.payloadBeforeAuth && !getInLocalStorage("isAdmin")){
                     switch (this.props.payloadBeforeAuth.action) {
                         case "addToCart":
                             Axios.post(`/api/cart/add/${this.props.payloadBeforeAuth.prodId}`, {}, {
@@ -226,7 +229,7 @@ const stateMappedToProps = state  => {
 const actionMappedToProps = dispatch => {
     return{
         notify: (payload)=>dispatch(uiActions.promptNotification(payload)), 
-        login: () => dispatch(userActions.login()),
+        login: (isAdmin) => dispatch(userActions.login(isAdmin)),
         updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
     }
 }

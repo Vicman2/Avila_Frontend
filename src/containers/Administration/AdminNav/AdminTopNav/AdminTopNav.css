@@ -1,0 +1,22 @@
+.AdminTopNav{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.AdminTopNav_Right{
+    display: flex;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+    color: #393535;
+}
+.AdminTopNav_Right:hover{
+    cursor: pointer;
+}

@@ -17,6 +17,7 @@ import { getInLocalStorage } from './utility';
 import * as userActions from './store/actions/userActions'
 import Axios from './axios'
 import AOS from 'aos'
+import Administration from './containers/Administration/Administration';
 
 
 
@@ -29,8 +30,9 @@ class App extends Component{
   componentDidMount(){
     AOS.init()
     let token = getInLocalStorage('token')
+    let isAdmin = getInLocalStorage("isAdmin")
     if(token){
-      this.props.login()
+      this.props.login(isAdmin)
       this.getCart()
     }
   }
@@ -56,29 +58,44 @@ class App extends Component{
       return{hamburger: !prevState.hamburger }
     })
   }
+
+
+
+  
   render(){
+    let toDisplay = null
+    if(getInLocalStorage("isAdmin")){
+      toDisplay = <Administration />
+    }else{
+      toDisplay = <div>
+        <Navbar
+        clickedHamburger={this.clickedHamburger}
+        />
+        <Notification
+          show={this.props.showNotification}
+          data={this.props.notificationData}
+        />
+        <HamburgerMenu 
+          show={this.state.hamburger}
+          clicked={this.clickedHamburger}
+        />
+        <Switch>
+          <Route path="/products/:id" component={ProdPreview} />
+          <Route path="/products" component={Products} />
+          <Route path="/account" component={Account} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/" exact component={Home} />
+        </Switch>
+        <Footer hide={this.props.showFooter} />
+      </div>
+    }
+
+
+
     return (
       <ErrorBoundary>
         <div className="App">
-            <Navbar
-            clickedHamburger={this.clickedHamburger}
-            />
-            <Notification
-              show={this.props.showNotification}
-              data={this.props.notificationData}
-            />
-            <HamburgerMenu 
-              show={this.state.hamburger}
-              clicked={this.clickedHamburger}
-            />
-            <Switch>
-              <Route path="/products/:id" component={ProdPreview} />
-              <Route path="/products" component={Products} />
-              <Route path="/account" component={Account} />
-              <Route path="/cart" component={Cart} />
-              <Route path="/" exact component={Home} />
-            </Switch>
-            <Footer hide={this.props.showFooter} />
+            {toDisplay}
         </div>
       </ErrorBoundary>
     )
@@ -92,13 +109,14 @@ const stateMappedToProps = (state) => {
     isLoggedIn: state.users.isLoggedIn,
     showNotification : state.ui.showNotification,
     notificationData : state.ui.notificationData, 
-    showFooter: state.ui.showFooter
+    showFooter: state.ui.showFooter, 
+    isAdmin: state.users.isAdmin
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: ()=> dispatch(userActions.login()),
+    login: (isAdmin)=> dispatch(userActions.login(isAdmin)),
     updateCart : (num)=> dispatch(userActions.updateNoOfCart(num))
   }
 }

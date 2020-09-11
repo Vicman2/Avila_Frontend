@@ -1,7 +1,6 @@
 .App {
   position: relative;
   min-height: 100vh;
-  padding-top: 70px;
 }
 .contain_img{
   width: 100%;
@@ -30,9 +29,6 @@
 
 
 @media(min-width:900px){
-  .App{
-    padding-top: 100px;
-  }
   .contain{
     padding: 1px 118px;
   }

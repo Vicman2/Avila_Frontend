@@ -1,0 +1,34 @@
+.SingleSideNav{
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.SingleSideNav_NavLink{
+    width: 100%;
+}
+.SingleSideNav a{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 36px;
+    color: #F4FFF0;
+    text-decoration: none;
+    display: inline-block;
+    width: 91.5%;
+    padding-left: 20px;
+}
+
+.SingleSideNav ion-icon{
+    color: #F4FFF0;
+    font-size: 20px;
+    margin-bottom: -2px;
+    margin-right: 20px;
+
+}
+
+
+.adminActive{
+    background: #84BE38;
+}

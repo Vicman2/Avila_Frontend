@@ -1,0 +1,13 @@
+.AdminSideNav{
+    left: 0;
+    bottom: 0;
+    background-color: #003A1A;
+    width: 21%;
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    align-items: flex-start;
+    padding-left: 60px;
+}

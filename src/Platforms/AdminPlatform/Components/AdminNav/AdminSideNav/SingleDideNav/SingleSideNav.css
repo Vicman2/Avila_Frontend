@@ -1,11 +1,11 @@
 .SingleSideNav{
-    margin-bottom: 50px;
+    margin-bottom: 35px;
     display: flex;
     align-items: center;
     width: 100%;
 }
 .SingleSideNav_NavLink{
-    width: 100%;
+    width: 90%;
 }
 .SingleSideNav a{
     font-family: 'Poppins';
@@ -18,6 +18,11 @@
     display: inline-block;
     width: 91.5%;
     padding-left: 20px;
+    transition: 1s;
+    border-radius: 3px;
+}
+.SingleSideNav a:hover{
+    background: #84BE38;
 }
 
 .SingleSideNav ion-icon{

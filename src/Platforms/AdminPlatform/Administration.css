@@ -1,4 +1,14 @@
+
 .Administration_Content{
     display: flex;
     justify-content: space-between;
+}
+
+
+.Admin_Detailing{
+    padding-top: 70px;
+    width: 70%;
+    padding-left: 47px;
+    height: 100vh;
+    overflow-y: scroll;
 }

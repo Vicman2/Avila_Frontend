@@ -1,0 +1,40 @@
+.ProgressBar{
+    width: 260px;
+    margin-bottom: 20px;
+}
+
+.ProgressBar_Texts{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ProgressBar_Inner{
+    width: 260px;
+    background: #C4C4C4;
+    border-radius: 20px;
+    height: 5px;
+}
+.ProgressBar_Filler{
+    height: 100%;
+    border-radius: 20px;
+}
+.ProgressBar_Name{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.05em;
+    color: #393535;
+    margin:0;
+
+}
+.ProgressBar_Number{
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.05em;
+    color: #393535;
+    margin: 0;
+}

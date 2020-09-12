@@ -21,7 +21,7 @@ class Administration extends Component{
                <AdminTopNav />
                <div className="Administration_Content">
                     <AdminSideNav />
-                    <div className="contain">
+                    <div className="contain Admin_Detailing">
                         <Switch>
                             <ProtectedRoute path="/products" component={AdminProducts} />
                             <ProtectedRoute path="/Users" component={AdminUsers} />

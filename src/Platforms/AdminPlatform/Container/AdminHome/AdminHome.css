@@ -3,6 +3,11 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.AdminHome_Activities{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
 .AdminHome_Activities_Text{
     font-family: 'Poppins';
@@ -11,6 +16,8 @@
     font-size: 18px;
     line-height: 27px;
     color: #393535;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .AdminHome_Activity1{
@@ -18,4 +25,64 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
     padding: 18px 24px;
+}
+.AdminHome_Activity2_a{
+    margin-top: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    padding: 14px 10px;
+}
+
+.AdminHome_Activity2Rates{
+    display: flex;
+    justify-content: space-between;
+}
+
+.AdminHome_Activity2_b{
+    margin-top: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    padding: 14px 10px;
+}
+.AdminHome_regNumber{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    letter-spacing: 0.05em;
+    color: #393535;
+    margin: 0;
+    margin-top: 20;
+    padding: 0;
+}
+.AdminHome_New_Account{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.05em;
+    color: #84BE38;
+    margin: 0;
+    margin-top: -10px;
+}
+.AdminHome_Activity3{
+    margin-top: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    padding: 14px 10px;
+}
+.AdminHome_Review{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.AdminHome_Review_num{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    color: #BE38A4;
+    margin: 0;
 }

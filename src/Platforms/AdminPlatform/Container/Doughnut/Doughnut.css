@@ -1,0 +1,29 @@
+.Doughnut{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+}
+.Doughnut_Rings{
+    margin-top: -15px;
+    width: 51px;
+    height: 51px;
+}
+.Doughnut_Price{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 181.5%;
+    color: #393535;
+    margin: 0;
+}
+.Doughnut_Month{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: #393535;
+}

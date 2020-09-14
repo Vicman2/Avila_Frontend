@@ -5,6 +5,7 @@ import Chart from 'chart.js'
 import LineGraph from '../LineGraph/LineGraph'
 import ProgressBar from '../../Components/ProgressBar/ProgressBar'
 import Doughnut from '../Doughnut/Doughnut'
+import ProgressVertical from '../../Components/ProgressVertical/ProgressVertical'
 
 class AdminHome extends Component{
     state = {
@@ -52,6 +53,15 @@ class AdminHome extends Component{
         reviewProgress: [
             {num: 6607, total: 10000, fillerColor: "#27854D", name:"Positive"},
             {num: 3807, total: 7000, fillerColor: "#F02929", name:"Negative"}
+        ], 
+        dailySales : [
+            {num: 167, total: 230, name:"M"}, 
+            {num: 57, total: 130, name:"T"}, 
+            {num: 70, total: 110, name:"W"},
+            {num: 167, total: 230, name:"T"}, 
+            {num: 57, total: 130, name:"F"}, 
+            {num: 70, total: 110, name:"S"}, 
+            {num: 167, total: 230, name:"S"}
         ]
     }
     render(){
@@ -71,12 +81,14 @@ class AdminHome extends Component{
         if(this.state.monthlyActivity.length> 0){
             progressActivity = this.state.monthlyActivity.map(activity => {
                 return(
-                    <ProgressBar 
-                    number={activity.num}
-                    total={activity.total}
-                    fillerColor={activity.fillerColor}
-                    name={activity.name}
-                    />
+                    <div className="ProgressSpace">
+                        <ProgressBar 
+                        number={activity.num}
+                        total={activity.total}
+                        fillerColor={activity.fillerColor}
+                        name={activity.name}
+                        />
+                    </div>
                 ) 
             }) 
         }
@@ -102,6 +114,18 @@ class AdminHome extends Component{
                     total={prog.total}
                     fillerColor={prog.fillerColor}
                     name={prog.name}
+                    />
+                )
+            })
+        }
+        let dailySales = null;
+        if(this.state.dailySales.length > 0){
+            dailySales = this.state.dailySales.map(daily => {
+                return(
+                    <ProgressVertical 
+                    number={daily.num}
+                    total={daily.total}
+                    name={daily.name}
                     />
                 )
             })
@@ -138,6 +162,13 @@ class AdminHome extends Component{
                        </div>
                        <div className="AdminHome_Review_Prog">
                             {reviewProgresss}
+                       </div>
+                       <div className="DailySales">
+                           <p className="AdminHome_Activities_Text"> Sales</p>
+                           <p className="AdminHome_Sales_Calc">calculated in 7 days</p>
+                           <div className="DailyScaling">
+                                {dailySales}
+                           </div>
                        </div>
                    </div>
                </div>

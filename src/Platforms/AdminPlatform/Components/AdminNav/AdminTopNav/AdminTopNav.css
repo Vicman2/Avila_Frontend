@@ -18,11 +18,25 @@
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 18px;
     letter-spacing: 0.05em;
     color: #393535;
 }
 .AdminTopNav_Right:hover{
     cursor: pointer;
+}
+
+.AdminTop_UserProfile{
+    margin-right: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.AdminTop_UserProfile img{
+    border-radius: 50%;
+}
+.AdminTopNav_dropIcon{
+    margin-left: 5px;
+    margin-top: 13px;
 }

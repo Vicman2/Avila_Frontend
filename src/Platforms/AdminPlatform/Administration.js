@@ -7,6 +7,8 @@ import AdminProducts from './Container/AdminProducts/AdminProducts'
 import AdminUsers from './Container/AdminUsers/AdminUsers'
 import AdminHome from './Container/AdminHome/AdminHome'
 import AdminSideNav from './Components/AdminNav/AdminSideNav/AdminSideNav'
+import FeedBack from './Container/FeedBack/FeedBack'
+import Sales from './Container/Sales/Sales'
 
 
 
@@ -24,7 +26,9 @@ class Administration extends Component{
                     <div className="contain Admin_Detailing">
                         <Switch>
                             <ProtectedRoute path="/products" component={AdminProducts} />
-                            <ProtectedRoute path="/Users" component={AdminUsers} />
+                            <ProtectedRoute path="/users" component={AdminUsers} />
+                            <ProtectedRoute path="/feedback" component={FeedBack} />
+                            <ProtectedRoute path="/sales" component={Sales} />
                             <ProtectedRoute path="/" component={AdminHome} />
                         </Switch>
                     </div>

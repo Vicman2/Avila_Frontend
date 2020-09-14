@@ -1,3 +1,7 @@
+.AdminHome{
+    padding-bottom: 41px;
+}
+
 .AdminHome_Cards{
     display: flex;
     justify-content: space-between;
@@ -25,12 +29,14 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
     padding: 18px 24px;
+    padding-bottom: 0px;
 }
 .AdminHome_Activity2_a{
     margin-top: 20px;
     background: #FFFFFF;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
     padding: 14px 10px;
+    padding-bottom: 5px;
 }
 
 .AdminHome_Activity2Rates{
@@ -43,6 +49,7 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
     padding: 14px 10px;
+    padding-bottom: 5px;
 }
 .AdminHome_regNumber{
     font-family: 'Poppins';
@@ -85,4 +92,26 @@
     letter-spacing: 0.05em;
     color: #BE38A4;
     margin: 0;
+}
+
+.DailyScaling{
+    display: flex;
+    justify-content: space-between;
+}
+.DailySales{
+    margin-top: -10px;
+}
+.AdminHome_Sales_Calc{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+    color: #5C5E5B;
+    margin-top: -2px;
+}
+
+.ProgressSpace{
+    margin-top: 20px;
 }

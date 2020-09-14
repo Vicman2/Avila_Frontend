@@ -1,0 +1,10 @@
+.AddUser_Inputs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.AddUser_Btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

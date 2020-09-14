@@ -1,0 +1,19 @@
+.EditComp{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.EditComp_Icon{
+    background: rgba(57, 53, 53, 0.7);
+    color: #FFFFFF;
+    padding: 2px 5px;
+}
+
+.EditComp_Text{
+    background: #389EBE;
+    color: #FFFFFF;
+    padding: 2px 5px;
+}
+.EditComp:hover{
+    cursor: pointer;
+}

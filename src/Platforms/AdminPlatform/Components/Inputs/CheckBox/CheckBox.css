@@ -1,0 +1,6 @@
+.CheckBox{
+    max-width: 20px;
+}
+.CheckBox input{
+    border: none !important;
+}

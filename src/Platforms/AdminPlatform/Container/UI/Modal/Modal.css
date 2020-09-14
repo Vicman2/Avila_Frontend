@@ -1,0 +1,41 @@
+.Modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+}
+
+.Modal_Content{
+    width: 40%;
+    background-color: #FFFFFF;
+    height: 70%;
+    padding:  1.69rem 6rem;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+}
+.Modal_title{
+    text-align: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 36px;
+    color: #393535;
+}
+.Modal_Show{
+    display: flex;
+}
+.Modal_Hide{
+    display: none !important;
+}
+.Modal_Btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Modal_ActionButton{
+    margin: 0px 13px;
+}

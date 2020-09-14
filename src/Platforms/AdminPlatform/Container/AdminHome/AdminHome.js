@@ -70,6 +70,7 @@ class AdminHome extends Component{
             counts = this.state.countCards.map(count => {
                 return(
                     <CountCard
+                    key={count.name}
                     name={count.name}
                     number={count.number}
                     />
@@ -83,6 +84,7 @@ class AdminHome extends Component{
                 return(
                     <div className="ProgressSpace">
                         <ProgressBar 
+                        key={activity.name}
                         number={activity.num}
                         total={activity.total}
                         fillerColor={activity.fillerColor}
@@ -97,6 +99,7 @@ class AdminHome extends Component{
             profitRating = this.state.profit.map(profit => {
                 return(
                     <Doughnut
+                    key={profit.month}
                     month={profit.month} 
                     price={profit.price}
                     dataset= {profit.dataSet}
@@ -110,6 +113,7 @@ class AdminHome extends Component{
             reviewProgresss = this.state.reviewProgress.map(prog => {
                 return(
                     <ProgressBar
+                    key={prog.name}
                     number={prog.num}
                     total={prog.total}
                     fillerColor={prog.fillerColor}

@@ -1,0 +1,17 @@
+
+
+
+.AdminUser_ActionButtons_Container{
+    display: flex;
+    justify-content: flex-end;
+}
+.AdminUser_BtnWrapper{
+    display: flex;
+    justify-content: center;
+}
+.AdminUser_ActionButtons{
+    margin-left: 13px;
+}
+.AdminUser_Listing{
+    margin-top: 20px;
+}

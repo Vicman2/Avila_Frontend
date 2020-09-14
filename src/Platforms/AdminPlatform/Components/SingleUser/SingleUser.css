@@ -1,0 +1,48 @@
+.SingleUser{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 27px;
+    color: #393535;
+
+}
+
+.SingleUser_Checkbox{
+    width: 7%;
+}
+.SingleUser_Name_Email{
+    width: 30%;
+}
+.SignleUser_Name{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 30px;
+}
+.SingleUser_Email{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 2px;
+}
+.SingleUser_Gender{
+    width: 10%;
+}
+.SingleUser_Phone{
+    width: 20%;
+}
+.SingleUser_Address{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 25%;
+}   
+.SingleUser_Edit{
+    width: 10%;
+}

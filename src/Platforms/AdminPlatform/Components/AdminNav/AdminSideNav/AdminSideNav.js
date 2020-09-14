@@ -1,6 +1,6 @@
 import React from 'react'
 import './AdminSideNav.css'
-import SingleSideNav from './SingleDideNav/SingleSideNav'
+import SingleSideNav from './SingleSideNav/SingleSideNav'
 
 
 
@@ -17,6 +17,7 @@ const AdminSideNav = (props) => {
             {navItems.map(navItem => {
                 return(
                     <SingleSideNav
+                    key={navItem.name}
                     location={navItem.location}
                     name={navItem.name}
                     exact={navItem.exact}

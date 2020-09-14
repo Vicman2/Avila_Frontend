@@ -61,7 +61,7 @@ const AuthInputs = (props) => {
         value={props.value} />
     }
     return (
-        <div className="Input_Auto">
+        <div className="Input_Auto" style={props.style}>
             {inputElement}
             <label className="AuthInputs__Element_label"> {props.label} </label>
         </div>

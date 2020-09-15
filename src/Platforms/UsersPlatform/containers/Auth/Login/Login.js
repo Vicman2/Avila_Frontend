@@ -10,46 +10,8 @@ import './Login.css'
 import Button from '../../../components/UI/Button/Button';
 import Loader from '../../../components/UI/Loader/Loader'
 import { withRouter } from 'react-router-dom'
+import {Login as FORM_INPUTS}  from '../../../../../utility/FormInput'
 
-
-const FORM_INPUTS = {
-    email: {
-        label:"Email",
-        elemType: "input",
-        config: {
-            type: 'text',
-            required: "required"
-        },
-        value:"",
-        validation: function(){
-            let valid = false;
-            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            if(emailRegex.test(this.value)){
-                valid = true
-            }
-            return valid
-        },
-        isValid: false,
-        errorMessage: "Please input a valid email address",
-        touched: false,
-    },
-    password: {
-        label:"Password",
-        elemType: "input",
-        config: {
-            type: 'password', 
-            required: "required"
-        },
-        value:"",
-        validation: function(){
-            let valid = true;
-            return valid
-        },
-        isValid: false,
-        errorMessage: "Please input a valid email address",
-        touched: false,
-    },
-}
 
 class Login extends Component{
     state = {

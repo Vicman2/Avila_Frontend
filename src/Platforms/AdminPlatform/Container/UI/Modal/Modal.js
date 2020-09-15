@@ -1,4 +1,5 @@
 import React , {Component} from 'react'
+import Aux from '../../../../../HOC/Aux/Aux'
 import Button from '../../../../UsersPlatform/components/UI/Button/Button'
 import LoaderWrapper from '../../../Components/UI/LoaderWrapper/LoaderWrapper'
 import './Modal.css'
@@ -13,7 +14,14 @@ class Modal extends Component{
         }else{
             classes.push("Modal_Hide")
         }
-        let loaderButton = <Button name="Confirm" clicked={this.props.confirm}  style={style.confirm}/>
+        let loaderButton = <Aux>
+            <div className="Modal_ActionButton">
+                <Button name="Cancel" clicked={this.props.cancel}  style={style.cancelBtn}/>
+            </div>
+            <div className="Modal_ActionButton">
+                <Button name="Confirm" clicked={this.props.confirm}  style={style.confirm}/>
+            </div>
+        </Aux>
         if(this.props.loading){
             loaderButton = <LoaderWrapper />
         }
@@ -25,12 +33,7 @@ class Modal extends Component{
                         {this.props.children}
                     </div>
                     <div className="Modal_Btns">
-                        <div className="Modal_ActionButton">
-                            <Button name="Cancel" clicked={this.props.cancel}  style={style.cancelBtn}/>
-                        </div>
-                        <div className="Modal_ActionButton">
-                            {loaderButton}
-                        </div>
+                        {loaderButton}
                     </div>
                 </div>
             </div>

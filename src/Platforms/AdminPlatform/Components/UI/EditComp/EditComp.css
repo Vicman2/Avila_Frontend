@@ -7,12 +7,14 @@
     background: rgba(57, 53, 53, 0.7);
     color: #FFFFFF;
     padding: 2px 5px;
+    margin: 0;
 }
 
 .EditComp_Text{
     background: #389EBE;
     color: #FFFFFF;
     padding: 2px 5px;
+    margin: 0;
 }
 .EditComp:hover{
     cursor: pointer;

@@ -33,7 +33,7 @@
 .ShowErrorMessage{
     color: red;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 10px !important;
     margin-top: 0px;
     margin-bottom: 5px;
 }
@@ -61,7 +61,7 @@
 }
 .Input_Auto input:focus ~ label, 
 .Input_Auto input:valid ~ label{
-    top:-12px;
+    top:0;
     color: #84BE38;
 }
 .AuthInputs__Element:focus, 

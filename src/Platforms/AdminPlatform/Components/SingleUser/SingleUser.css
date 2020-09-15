@@ -6,42 +6,49 @@
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 27px;
     color: #393535;
+    flex-wrap: wrap;
 
 }
 
 .SingleUser_Checkbox{
-    width: 7%;
+    width: 5%;
 }
 .SingleUser_Name_Email{
     width: 30%;
 }
 .SignleUser_Name{
-    margin-top: 0;
+    margin: 0;
     margin-bottom: 0;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 13px;
     line-height: 30px;
+    text-transform: capitalize;
 }
 .SingleUser_Email{
+    margin: 0;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    margin-top: 2px;
+    margin-top: -10px;
 }
 .SingleUser_Gender{
     width: 10%;
+    margin: 0;
+    text-transform: capitalize;
 }
 .SingleUser_Phone{
-    width: 20%;
+    margin: 0;
+    width: 15%;
 }
 .SingleUser_Address{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     width: 25%;
+    margin: 0;
 }   
 .SingleUser_Edit{
     width: 10%;

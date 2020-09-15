@@ -3,109 +3,19 @@ import './AddUser.css'
 import InputForm from '../../../../UsersPlatform/components/UI/InputTypes/AuthInputs/AuthInputs'
 import Modal from '../../UI/Modal/Modal';
 import Axios from '../../../../../axios'
+import * as uiActions from '../../../../../store/actions/UIActions'
+import {flowRight as compose} from 'lodash'
+import { connect } from 'react-redux';
+import {SignUp} from '../../../../../utility/FormInput'
+import { getInLocalStorage } from '../../../../../utility';
 
-
-const FORM_INPUTS = {
-    name: {
-        label:"Name",
-        elemType: "input",
-        config: {
-            type: 'text',
-            required:"required"
-        },
-        value:"",
-        validation: function(){
-            let valid = false;
-            if(this.value.trim() !== '' && this.value.length >=3){
-                valid = true;
-            }
-            return valid
-        },
-        isValid: false,
-        errorMessage: "Please enter your name",
-        touched: false,
-    },
-    phone: {
-        label:"Phone",
-        elemType: "input",
-        config: {
-            type: 'text',
-            required:"required"
-        },
-        value:"",
-        validation: function(){
-            let valid = false;
-            const phoneRegex = /^[0]\d{10}$/
-            if(phoneRegex.test(this.value)){
-                valid = true
-            }
-            return valid
-        },
-        isValid: false,
-        errorMessage: "Please enter a valid nigerian phone number",
-        touched: false,
-    },
-    
-    email: {
-        label:"Email",
-        elemType: "input",
-        config: {
-            type: 'text', 
-            required:"required"
-        },
-        value:"",
-        validation: function(){
-            let valid = false;
-            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            if(emailRegex.test(this.value)){
-                valid = true
-            }
-            return valid
-        },
-        isValid: false,
-        errorMessage: "Please input a valid email address",
-        touched: false,
-    },
-    password: {
-        label:"Password",
-        elemType: "input",
-        config: {
-            type: 'password',
-            required:"required" 
-        },
-        value:"",
-        validation: function(){
-            let valid = true;
-            return valid
-        },
-        isValid: false,
-        errorMessage: "Please input a valid email address",
-        touched: false,
-    },
-    address: {
-        label:"Address",
-        elemType: "input",
-        config: {
-            type: 'text', 
-            required:"required"
-        },
-        value:"",
-        validation: function(){
-            let valid = false;
-            if(this.value.trim() !== '' && this.value.length >=10){
-                valid = true;
-            }
-            return valid
-        },
-        isValid: false,
-        errorMessage: "Enter a default address please",
-        touched: false,
-    },
-    sex: {
+const  FORM_INPUTS = {
+    ...SignUp, 
+    role: {
         elemType: 'select',
-        value: "", 
-        isValid: false,
-        touched: false,
+        value: "user", 
+        isValid: true,
+        touched: true,
         name: 'sex',
         validation: function(){
             let valid = false;
@@ -115,13 +25,10 @@ const FORM_INPUTS = {
             return valid
         },
         options: [
-            {name: 'Select Gender', value: ''},
-            {name: 'Female', value: 'female'},
-            {name: "Male", value: 'male'}, 
-        ], 
-        errorMessage: "Select is a gender please"
+            {name: 'User', value: 'user'},
+            {name: "Admin", value: 'admin'}, 
+        ]
     }
-    
 }
 
 class AddUser extends Component{
@@ -136,7 +43,8 @@ class AddUser extends Component{
             email:{...FORM_INPUTS.email},
             password: {...FORM_INPUTS.password},
             address: {...FORM_INPUTS.address}, 
-            sex: {...FORM_INPUTS.sex}
+            sex: {...FORM_INPUTS.sex},
+            role: {...FORM_INPUTS.role}
         }
     }
 
@@ -181,20 +89,25 @@ class AddUser extends Component{
                 data[deKey]= this.state.formInputs[deKey].value
             }
             await this.setState({loading: true})
-            Axios.post('/api/users/create',data )
+            Axios.post('/api/users/addByAdmin', data, {
+                headers: {
+                    "x-access-token": getInLocalStorage("token")
+                }
+            } )
             .then(res => {
-                this.setState({loading: false})
+                this.setState({loading: false, formInputs: FORM_INPUTS})
                 this.props.notify({
                     status: 'success', 
                     content: res.data.message
                 })
                 this.props.handleModal()
+                this.props.fetchUsers()
             }).catch(err=> {
                 this.setState({loading: false})
                 if(err.response){
                     this.props.notify({
                         status: 'error', 
-                        content: err.response.message
+                        content: err.response.data.message
                     })
                 }
             })
@@ -203,7 +116,7 @@ class AddUser extends Component{
     render(){
         const style={
             inputStyle : {
-                margin: "15px 0",
+                margin: "0",
                 width: "40%"
             }
         }
@@ -254,4 +167,11 @@ class AddUser extends Component{
 }
 
 
-export default AddUser
+const mapDispatchToProps = dispatch => {
+    return {
+      notify: (payload)=> dispatch(uiActions.promptNotification(payload)),
+    }
+}
+export default compose(
+    connect(null, mapDispatchToProps)
+)  (AddUser)

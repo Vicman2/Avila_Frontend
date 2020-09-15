@@ -127,6 +127,7 @@ class AdminHome extends Component{
             dailySales = this.state.dailySales.map(daily => {
                 return(
                     <ProgressVertical 
+                    key={daily.name}
                     number={daily.num}
                     total={daily.total}
                     name={daily.name}

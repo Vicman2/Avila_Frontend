@@ -4,13 +4,13 @@
 }
 
 .DeleteComp_Icon{
-    background: #F02929;
+    background: rgba(57, 53, 53, 0.7);
     color: #FFFFFF;
     padding: 2px 5px;
     margin: 0;
 }
 .DeleteComp_Text{
-    background: #a81c1c;
+    background: #F02929;
     color: #FFFFFF;
     padding: 2px 5px;
     margin: 0;

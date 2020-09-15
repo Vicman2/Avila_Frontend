@@ -1,0 +1,17 @@
+.DeleteComp{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.DeleteComp_Icon{
+    background: #F02929;
+    color: #FFFFFF;
+    padding: 2px 5px;
+    margin: 0;
+}
+.DeleteComp_Text{
+    background: #a81c1c;
+    color: #FFFFFF;
+    padding: 2px 5px;
+    margin: 0;
+}

@@ -1,0 +1,26 @@
+
+.ReadUser{
+    font-size: 14px;
+    width: 100%;
+    min-width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ReadUser_Field{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+}
+.ReadUser_Key{
+    width: 30%;
+}
+.ReadUser_Value{
+    text-transform: capitalize;
+    width: 60%;
+}
+.ReadUser_EmailValue{
+    text-transform: lowercase !important;
+}

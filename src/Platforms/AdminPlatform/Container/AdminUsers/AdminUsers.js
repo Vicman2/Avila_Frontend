@@ -12,10 +12,14 @@ import LoaderWrapper from '../../Components/UI/LoaderWrapper/LoaderWrapper'
 import SingleUser from '../../Components/SingleUser/SingleUser'
 import Aux from '../../../../HOC/Aux/Aux'
 import AddUser from './AddUser/AddUser'
+import EditUser from './EditUser/EditUser'
+import ReadUser from './ReadUser/ReadUser'
+import DeleteUser from './DeleteUser/DeleteUser'
 
 
 class AdminUsers extends Component{
     state = {
+        loading : false,
         activePage: 1,
         pageNo: 1, 
         noOfUsers: 10,
@@ -24,7 +28,8 @@ class AdminUsers extends Component{
         addUser: false, 
         editUser: false, 
         deleteUser: false, 
-        readUser: false
+        readUser: false, 
+        userToPerformAction: null
     }
     clickedAdd = () => {
         this.setState((prevstate) => {
@@ -33,24 +38,30 @@ class AdminUsers extends Component{
             }
         })
     }
-    clickedEdit = () => {
+    clickedEdit = (id) => {
+        const user = this.state.users.find(user => user._id == id)
         this.setState((prevstate) => {
             return{
-                editUser:!prevstate.editUser
+                editUser:!prevstate.editUser,
+                userToPerformAction: user
             }
         })
     }
-    clickedDelete = () => {
+    clickedDelete = (id) => {
+        const user = this.state.users.find(user => user._id == id)
         this.setState((prevstate) => {
             return{
-                deleteUser:!prevstate.deleteUser
+                deleteUser:!prevstate.deleteUser,
+                userToPerformAction: user
             }
         })
     }
-    clickedRead = () => {
+    clickedRead = (id) => {
+        const user = this.state.users.find(user => user._id == id)
         this.setState((prevstate) => {
             return{
-                readUser:!prevstate.readUser
+                readUser:!prevstate.readUser,
+                userToPerformAction: user
             }
         })
     }
@@ -85,17 +96,19 @@ class AdminUsers extends Component{
     }
     getUsers = (scrollUp) => {
         let {pageNo, noOfUsers} = this.state
+        this.setState({loading:true})
         Axios.get(`/api/users/many?pageNo=${pageNo}&noOfUsers=${noOfUsers}`, {
             headers: {
                 "x-access-token": getInLocalStorage("token")
             }
         }).then(({data})=> {
             const {requestedUsers, totalUsers} = data.data
-            this.setState({users: requestedUsers, totalUsers: totalUsers})
+            this.setState({users: requestedUsers, totalUsers: totalUsers, loading: false})
             if(scrollUp){
                 window.scrollTo(0,0)
             }
         }).catch(err => {
+            this.setState({loading:false})
             if(err.response){
                 this.props.notify({
                     status: "error", 
@@ -106,8 +119,7 @@ class AdminUsers extends Component{
     }
    
     render(){
-        console.log(this.state.addUser, "Admin User")
-        const {users} = this.state
+        const {users, loading} = this.state
         const style = {
             greenButton: {
                 backgroundColor: "#38BE6E"
@@ -117,24 +129,27 @@ class AdminUsers extends Component{
             }
         }
         let usersToDisplay = <LoaderWrapper />
-        if(users.length > 0){
+        if(users.length > 0 && !loading){
             usersToDisplay = users.map(user => {
                 return(
                     <SingleUser
                     key={user._id}
                     fieldName="Users"
-                    filedValue="noDelete"
+                    fieldValue="noDelete"
                     name={user.name}
                     email={user.email}
                     phone={user.phone}
                     address={user.address}
                     gender={user.sex}
+                    editUserHandler={() =>this.clickedEdit(user._id)}
+                    readUserHandler= {() => this.clickedRead(user._id)}
+                    deleteUserHandler= {() => this.clickedDelete(user._id)}
                     />
                 )
             })
         }
         let pagination = <div></div>
-        if(this.state.totalUsers){
+        if(this.state.totalUsers && !loading){
             let  numberOfPages = this.state.totalUsers/this.state.noOfUsers
             numberOfPages = isInteger(numberOfPages) ? numberOfPages : parseInt(numberOfPages) + 1
             let arrayPage = []
@@ -169,22 +184,48 @@ class AdminUsers extends Component{
                 <p onClick={this.nexPage} className={nextLink.join(" ")}>Next</p>
             </div>
         }
+        let actionComponent = null
+        if(this.state.userToPerformAction){
+            actionComponent =<Aux>
+                <EditUser
+                fetchUsers={() =>this.getUsers(true)}
+                handleModal={this.clickedEdit}
+                show={this.state.editUser}
+                data={this.state.userToPerformAction}
+               />
+                <ReadUser
+                fetchUsers={() =>this.getUsers(true)}
+                handleModal={this.clickedRead}
+                show={this.state.readUser}
+                data={this.state.userToPerformAction}
+                />
+                <DeleteUser
+                fetchUsers={() =>this.getUsers(true)}
+                handleModal={this.clickedDelete}
+                show={this.state.deleteUser}
+                data={this.state.userToPerformAction}
+                />
+            </Aux>
+            
+        }
         return(
             <Aux>
+                {actionComponent}
                 <AddUser
                 fetchUsers={() =>this.getUsers(true)}
                 handleModal= {this.clickedAdd}
                 show={this.state.addUser}
                 />
+                
                 <div className="AdminUsers">
                     <div className="AdminUser_ActionButtons_Container">
                         <div className="AdminUser_BtnWrapper">
                             <div className="AdminUser_ActionButtons">
                                 <Button name="Create User" clicked={this.clickedAdd}  style={style.greenButton}/>
                             </div>
-                            <div className="AdminUser_ActionButtons">
+                            {/* <div className="AdminUser_ActionButtons">
                                 <Button name="Delete User"  style={style.redButton}/>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="AdminUser_Listing">

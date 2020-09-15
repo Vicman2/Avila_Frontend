@@ -12,12 +12,22 @@
     flex-wrap: wrap;
 
 }
+.SingleUser:hover{
+    box-shadow: 0px 2px 3px 5px #ccc;
+    cursor: pointer;
+}
 
 .SingleUser_Checkbox{
     width: 5%;
 }
 .SingleUser_Name_Email{
     width: 30%;
+}
+.SingleUser_Details{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .SignleUser_Name{
     margin: 0;
@@ -51,5 +61,8 @@
     margin: 0;
 }   
 .SingleUser_Edit{
+    width: 10%;
+}
+.SingleUser_Delete{
     width: 10%;
 }

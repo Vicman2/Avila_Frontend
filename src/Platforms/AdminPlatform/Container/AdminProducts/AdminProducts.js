@@ -11,6 +11,7 @@ import LoaderWrapper from '../../Components/UI/LoaderWrapper/LoaderWrapper'
 import Aux from '../../../../HOC/Aux/Aux'
 import SingleProduct from '../../Components/SingleProduct/SingleProduct'
 import ReadProduct from './ReadProduct/ReadProduct'
+import DeleteProduct from './DeleteProduct/DeleteProduct'
 
 
 class AdminProducts extends Component{
@@ -18,7 +19,7 @@ class AdminProducts extends Component{
         loading : false,
         activePage: 1,
         pageNo: 1, 
-        noOfProducts: 10,
+        noOfProducts: 20,
         products :[], 
         totalProducts: null, 
         addProduct: false, 
@@ -47,7 +48,7 @@ class AdminProducts extends Component{
         const prod = this.state.products.find(prod => prod._id == id)
         this.setState((prevstate) => {
             return{
-                deleteUser:!prevstate.deleteUser,
+                deleteProduct:!prevstate.deleteProduct,
                 prodToPerformAction: prod
             }
         })
@@ -111,6 +112,7 @@ class AdminProducts extends Component{
         })
     }
     render(){
+        console.log(this.state.deleteProduct)
         const {products, loading} = this.state
         const style = {
             greenButton: {
@@ -171,7 +173,7 @@ class AdminProducts extends Component{
                     description={prod.details}
                     // editUserHandler={() =>this.clickedEdit(user._id)}
                     readProductHandler= {() => this.clickedRead(prod._id)}
-                    // deleteUserHandler= {() => this.clickedDelete(user._id)}
+                    deleteProductHandler= {() => this.clickedDelete(prod._id)}
                     />
                 )
             })
@@ -191,12 +193,12 @@ class AdminProducts extends Component{
                 show={this.state.readProduct}
                 data={this.state.prodToPerformAction}
                 />
-                {/* <DeleteUser
-                fetchUsers={() =>this.getUsers(true)}
+                <DeleteProduct
+                fetchProducts={() =>this.getProducts(true)}
                 handleModal={this.clickedDelete}
-                show={this.state.deleteUser}
-                data={this.state.userToPerformAction}
-                /> */}
+                show={this.state.deleteProduct}
+                data={this.state.prodToPerformAction}
+                />
             </Aux>
             
         }

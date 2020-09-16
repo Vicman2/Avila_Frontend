@@ -26,7 +26,7 @@ const SingleProduct = (props) => {
                 <EditComp clicked={props.editUserHandler} />
             </div>
             <div className="SingleProduct_Delete" >
-                <DeleteComp  clicked={props.deleteUserHandler}/>
+                <DeleteComp  clicked={props.deleteProductHandler}/>
             </div>
         </div>
     )

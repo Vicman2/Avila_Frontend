@@ -1,3 +1,4 @@
+const { isInteger, isNaN } = require("lodash");
 
 exports.SignUp = {
     name: {
@@ -155,4 +156,65 @@ exports.Login = {
         errorMessage: "Please input a valid email address",
         touched: false,
     },
+}
+
+
+
+exports.productInput = {
+    name: {
+        label:"Product Name",
+        elemType: "input",
+        config: {
+            type: 'text',
+            required:"required"
+        },
+        value:"",
+        validation: function(){
+            let valid = false;
+            if(this.value.trim() !== '' && this.value.length >=3){
+                valid = true;
+            }
+            return valid
+        },
+        isValid: false,
+        errorMessage: "Please enter a valid product name",
+        touched: false,
+    },
+    price: {
+        label:"Price",
+        elemType: "input",
+        config: {
+            type: 'number',
+            required:"required"
+        },
+        value:"",
+        validation: function(){
+            let valid = false;
+            if(this.value.trim() !== '' && !isNaN(parseFloat(this.value.trim()))){
+                valid = true;
+            }
+            return valid
+        },
+        isValid: false,
+        errorMessage: "Please a valid product price",
+        touched: false,
+    },
+    description: {
+        label:"Description",
+        elemType: "textarea",
+        config: {
+            required:"required"
+        },
+        value:"",
+        validation: function(){
+            let valid = false;
+            if(this.value.trim() !== '' && this.value.length >=20){
+                valid = true;
+            }
+            return valid
+        },
+        isValid: false,
+        errorMessage: "Please a good product description",
+        touched: false,
+    }
 }

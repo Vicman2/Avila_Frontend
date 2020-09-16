@@ -12,6 +12,7 @@ import Aux from '../../../../HOC/Aux/Aux'
 import SingleProduct from '../../Components/SingleProduct/SingleProduct'
 import ReadProduct from './ReadProduct/ReadProduct'
 import DeleteProduct from './DeleteProduct/DeleteProduct'
+import AddProduct from './AddProduct/AddProduct'
 
 
 class AdminProducts extends Component{
@@ -22,7 +23,7 @@ class AdminProducts extends Component{
         noOfProducts: 20,
         products :[], 
         totalProducts: null, 
-        addProduct: false, 
+        addProduct: true, 
         editProduct: false, 
         deleteProduct: false, 
         readProduct: false, 
@@ -112,7 +113,6 @@ class AdminProducts extends Component{
         })
     }
     render(){
-        console.log(this.state.deleteProduct)
         const {products, loading} = this.state
         const style = {
             greenButton: {
@@ -205,6 +205,11 @@ class AdminProducts extends Component{
 
         return(
             <Aux>
+                <AddProduct
+                fetchProducts={() =>this.getProducts(true)}
+                handleModal= {this.clickedAdd}
+                show={this.state.addProduct}
+                />
                 {actionComponent}
                 <div className="AdminProduct_ActionButtons_Container">
                     <div className="AdminProduct_BtnWrapper">

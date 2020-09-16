@@ -9,6 +9,8 @@ import * as uiActions from '../../../../store/actions/UIActions'
 import { connect } from 'react-redux'
 import LoaderWrapper from '../../Components/UI/LoaderWrapper/LoaderWrapper'
 import Aux from '../../../../HOC/Aux/Aux'
+import SingleProduct from '../../Components/SingleProduct/SingleProduct'
+import ReadProduct from './ReadProduct/ReadProduct'
 
 
 class AdminProducts extends Component{
@@ -54,7 +56,7 @@ class AdminProducts extends Component{
         const prod = this.state.products.find(prod => prod._id == id)
         this.setState((prevstate) => {
             return{
-                readUser:!prevstate.readUser,
+                readProduct:!prevstate.readProduct,
                 prodToPerformAction: prod
             }
         })
@@ -109,11 +111,116 @@ class AdminProducts extends Component{
         })
     }
     render(){
-        console.log(this.state.products)
-        return(
-            <div className="AdminProducts">
-                <p>This is the admin products</p>
+        const {products, loading} = this.state
+        const style = {
+            greenButton: {
+                backgroundColor: "#38BE6E"
+            }, 
+            redButton: {
+                backgroundColor: "#F02929"
+            }
+        }
+
+        let pagination = <div></div>
+        if(this.state.totalProducts && !loading){
+            let  numberOfPages = this.state.totalProducts/this.state.noOfProducts
+            numberOfPages = isInteger(numberOfPages) ? numberOfPages : parseInt(numberOfPages) + 1
+            let arrayPage = []
+            for(let i = 1; i<= numberOfPages; i++){
+                arrayPage.push(i)
+            }
+            arrayPage = arrayPage.map(page => {
+                let classes = ["Product_newPage"];
+                if(page === this.state.activePage){
+                    classes.push("Prod_Active_Page");
+                }
+                return(
+                    <div 
+                    key={page}
+                    onClick={() =>this.numPage(page)}
+                    className={classes.join(" ")}>
+                        {page}
+                    </div>
+                )
+            })
+            const prevLink= ["Product_newPage"];
+            if(this.state.activePage && this.state.activePage === 1){
+                prevLink.push("Deactive_Nav");
+            }
+            const nextLink = ["Product_newPage"];
+            if(this.state.activePage && this.state.activePage === numberOfPages){
+                nextLink.push("Deactive_Nav");
+            }
+            pagination =<div className="Pagin_Section">
+                <p onClick={this.prevPage} className={prevLink.join(" ")}>Prev</p>
+                <div className="Page_Numeration">{arrayPage} </div>
+                <p onClick={this.nexPage} className={nextLink.join(" ")}>Next</p>
             </div>
+        }
+        let productsToDisplay = <LoaderWrapper />
+        if(products.length > 0 && !loading){
+            productsToDisplay = products.map(prod => {
+                return(
+                    <SingleProduct
+                    key={prod._id}
+                    fieldName="Product"
+                    fieldValue="noDelete"
+                    name={prod.name}
+                    price={prod.price}
+                    src={prod.prodImageSrc}
+                    description={prod.details}
+                    // editUserHandler={() =>this.clickedEdit(user._id)}
+                    readProductHandler= {() => this.clickedRead(prod._id)}
+                    // deleteUserHandler= {() => this.clickedDelete(user._id)}
+                    />
+                )
+            })
+        }
+        let actionComponent = null
+        if(this.state.prodToPerformAction){
+            actionComponent =<Aux>
+                {/* <EditUser
+                fetchUsers={() =>this.getUsers(true)}
+                handleModal={this.clickedEdit}
+                show={this.state.editUser}
+                data={this.state.userToPerformAction}
+               /> */}
+                <ReadProduct
+                fetchProducts={() =>this.getProducts(true)}
+                handleModal={this.clickedRead}
+                show={this.state.readProduct}
+                data={this.state.prodToPerformAction}
+                />
+                {/* <DeleteUser
+                fetchUsers={() =>this.getUsers(true)}
+                handleModal={this.clickedDelete}
+                show={this.state.deleteUser}
+                data={this.state.userToPerformAction}
+                /> */}
+            </Aux>
+            
+        }
+
+        return(
+            <Aux>
+                {actionComponent}
+                <div className="AdminProduct_ActionButtons_Container">
+                    <div className="AdminProduct_BtnWrapper">
+                        <div className="AdminProduct_ActionButtons">
+                            <Button name="Add Product" clicked={this.clickedAdd}  style={style.greenButton}/>
+                        </div>
+                        {/* <div className="AdminUser_ActionButtons">
+                            <Button name="Delete User"  style={style.redButton}/>
+                        </div> */}
+                    </div>
+                </div>
+                <div className="AdminProducts_Listing">
+                    {productsToDisplay}
+                </div>
+                <div className="Products_Pagination">
+                    {pagination}
+                </div>
+            </Aux>
         )
     }
 }

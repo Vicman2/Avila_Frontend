@@ -1,0 +1,6 @@
+
+.AdminProduct_ActionButtons_Container{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}

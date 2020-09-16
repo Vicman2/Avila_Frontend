@@ -22,7 +22,7 @@ class AdminUsers extends Component{
         loading : false,
         activePage: 1,
         pageNo: 1, 
-        noOfUsers: 10,
+        noOfUsers: 20,
         users :[], 
         totalUsers: null, 
         addUser: false, 

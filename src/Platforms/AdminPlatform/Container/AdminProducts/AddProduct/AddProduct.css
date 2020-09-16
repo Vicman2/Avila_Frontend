@@ -1,0 +1,33 @@
+.AddProducts{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.AddProducts_TextInputs{
+    max-width: 60%;
+    min-width: 400px;
+}
+.AddProducts_ImagePicker{
+    display: flex;
+    justify-content: flex-end;
+    min-width: 200px;
+}
+
+.ImageBox{
+    border: 1px solid rgba(57, 53, 53, 0.7);
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.AddProducts_TextInputs textarea{
+    width: 100%;
+}

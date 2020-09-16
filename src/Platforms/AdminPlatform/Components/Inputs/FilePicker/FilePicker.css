@@ -1,0 +1,29 @@
+
+
+.FilePicker input{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.FilePicker > label {
+    color: #393535;
+    background: #38BE6E;
+    display: inline-block;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 181.5%;
+    padding: 3px 5px;
+}
+.FilePicker>label:hover{
+    cursor: pointer;
+}
+
+.FilePicker>input:focus + label,
+.FilePicker>input + label:hover {
+    background-color: red;
+}

@@ -23,7 +23,7 @@ class AdminProducts extends Component{
         noOfProducts: 20,
         products :[], 
         totalProducts: null, 
-        addProduct: true, 
+        addProduct: false, 
         editProduct: false, 
         deleteProduct: false, 
         readProduct: false, 

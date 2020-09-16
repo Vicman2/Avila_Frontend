@@ -59,7 +59,8 @@
     transition: 0.5s;
     pointer-events: none;
 }
-.Input_Auto input:focus ~ label, 
+.Input_Auto input:focus ~ label,
+.Input_Auto textarea:focus ~ label,
 .Input_Auto input:valid ~ label{
     top:0;
     color: #84BE38;

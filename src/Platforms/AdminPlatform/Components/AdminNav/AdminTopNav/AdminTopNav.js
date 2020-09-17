@@ -16,7 +16,13 @@ const AdminTopNav = (props) => {
                     <img className="contain_img" src={userProfile} alt="ProfilePicture" />
                 </div>
                 <p>Vicman</p>
-                <p className="AdminTopNav_dropIcon"><ion-icon name="chevron-down-outline"></ion-icon></p>
+                <div className="AdminTopNav_userActions">
+                    <p onClick={props.showProfile} className="AdminTioNav_Actions">My Profile</p>
+                    <p onClick={props.logout} className="AdminTioNav_Actions">Logout</p>
+                </div>
+                <div className="AdminTopNav_dropIcon">
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
             </div>
         </div>
     )

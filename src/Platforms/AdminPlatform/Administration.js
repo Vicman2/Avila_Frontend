@@ -13,23 +13,74 @@ import Notification from '../UsersPlatform/containers/UI/Notification/Notificati
 import {flowRight as compose} from 'lodash'
 import { connect } from 'react-redux'
 import * as userActions from '../../store/actions/userActions'
-import Modal from './Container/UI/Modal/Modal'
+import * as uiActions from '../../store/actions/UIActions'
+import AdminProfile from './Components/AdminProfile/AdminProfile'
+import Axios from '../../axios'
+import { getInLocalStorage } from '../../utility'
 
 
 
 
 class Administration extends Component{
     state = {
-
+      showProfile: false,
+      userDetails: null
     }
+    componentDidMount(){
+      this.getProfile()
+    }
+    getProfile = () => {
+      Axios.get('/api/users/getUser', {
+          headers: {
+              "x-access-token": getInLocalStorage("token")
+          }
+      }).then (res => {
+          this.setState({userDetails: res.data.data})
+      }).catch(err => {
+        if(err.response){
+          this.props.notify({
+            status: "error", 
+            content: err.response.data.message
+          })
+        }
+      })
+    }
+    logOutHandler = () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("isAdmin")
+      this.props.logout()
+    }
+    showProfileHandler = () => {
+      this.setState(prevState => {
+        return{
+          ...prevState, 
+          showProfile: !prevState.showProfile
+        }
+      })
+    }
+
     render(){
+      let toShowProfile = null;
+      if(this.state.userDetails){
+        toShowProfile = <AdminProfile
+        handleModal= {this.showProfileHandler}
+        show={this.state.showProfile}
+        data={this.state.userDetails}
+        />
+      }
+
         return(
             <div className="Administration Administration_Contain">
+                {toShowProfile}
                 <Notification
                 show={this.props.showNotification}
                 data={this.props.notificationData}
                 />
-               <AdminTopNav />
+
+               <AdminTopNav
+               showProfile={this.showProfileHandler}
+               logout={this.logOutHandler}
+              />
                <div className="Administration_Content">
                     <AdminSideNav />
                     <div className="contain Admin_Detailing">
@@ -60,6 +111,8 @@ const stateMappedToProps = (state) => {
   const mapDispatchToProps = dispatch => {
     return {
       login: (isAdmin)=> dispatch(userActions.login(isAdmin)),
+      logout: () => dispatch(userActions.logOut()),
+      notify: (payload) => dispatch(uiActions.promptNotification(payload))
     }
   }
   

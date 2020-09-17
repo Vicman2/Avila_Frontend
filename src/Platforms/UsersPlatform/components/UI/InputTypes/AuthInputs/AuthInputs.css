@@ -59,11 +59,17 @@
     transition: 0.5s;
     pointer-events: none;
 }
+
+.Input_Auto textarea ~ label{
+    top:0;
+}
+
 .Input_Auto input:focus ~ label,
 .Input_Auto textarea:focus ~ label,
 .Input_Auto input:valid ~ label{
     top:0;
     color: #84BE38;
+    font-weight: 600;
 }
 .AuthInputs__Element:focus, 
 .AuthInputs__Element:valid{

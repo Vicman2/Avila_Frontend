@@ -13,6 +13,7 @@ import SingleProduct from '../../Components/SingleProduct/SingleProduct'
 import ReadProduct from './ReadProduct/ReadProduct'
 import DeleteProduct from './DeleteProduct/DeleteProduct'
 import AddProduct from './AddProduct/AddProduct'
+import EditProduct from './EditProduct/EditProduct'
 
 
 class AdminProducts extends Component{
@@ -171,7 +172,7 @@ class AdminProducts extends Component{
                     price={prod.price}
                     src={prod.prodImageSrc}
                     description={prod.details}
-                    // editUserHandler={() =>this.clickedEdit(user._id)}
+                    editUserHandler={() =>this.clickedEdit(prod._id)}
                     readProductHandler= {() => this.clickedRead(prod._id)}
                     deleteProductHandler= {() => this.clickedDelete(prod._id)}
                     />
@@ -181,12 +182,12 @@ class AdminProducts extends Component{
         let actionComponent = null
         if(this.state.prodToPerformAction){
             actionComponent =<Aux>
-                {/* <EditUser
-                fetchUsers={() =>this.getUsers(true)}
+                <EditProduct
+                fetchProducts={() =>this.getProducts(true)}
                 handleModal={this.clickedEdit}
-                show={this.state.editUser}
-                data={this.state.userToPerformAction}
-               /> */}
+                show={this.state.editProduct}
+                data={this.state.prodToPerformAction}
+               />
                 <ReadProduct
                 fetchProducts={() =>this.getProducts(true)}
                 handleModal={this.clickedRead}

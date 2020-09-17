@@ -4,8 +4,8 @@ import './FilePicker.css'
 const FilePicker = (props) => {
     return(
         <div className="FilePicker">
-            <label htmlFor="file">{props.name} </label>
-            <input onChange={props.changed} type="file" name="file" id="file" />
+            <label htmlFor={props.id}>{props.name} </label>
+            <input onChange={props.changed} type="file" name="file" id={props.id} />
         </div>
     )
 }

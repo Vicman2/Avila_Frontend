@@ -159,7 +159,8 @@ class AddProduct extends Component{
                     </div>
                     <div className="AddProducts_ImagePicker">
                         <div className="ImageBox" style={style.pickerSection}>
-                            <FilePicker 
+                            <FilePicker
+                            id="AddFile"
                             name="Add image"
                             changed={(e) => this.fileChanger(e)}
                              />

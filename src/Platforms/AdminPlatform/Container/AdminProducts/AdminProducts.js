@@ -201,7 +201,6 @@ class AdminProducts extends Component{
                 data={this.state.prodToPerformAction}
                 />
             </Aux>
-            
         }
 
         return(

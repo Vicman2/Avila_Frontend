@@ -38,10 +38,13 @@
     margin-bottom: 5px;
 }
 .INPUT_SELECT{
+    display: block;
     border: none;
     border-bottom: 0.5px solid #393535;
     background-color: inherit;
-    margin-bottom: 0 !important;
+    margin-top: 0px;
+    width: 100%;
+    height: 42px;
 }
 .INPUT_SELECT:hover{
     cursor: pointer;

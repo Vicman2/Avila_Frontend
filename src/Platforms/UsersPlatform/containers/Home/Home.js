@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import Carousel from "react-multi-carousel";
-import {connect} from 'react-redux'
 import Axios from '../../../../axios'
 import "react-multi-carousel/lib/styles.css";
 import './Home.css'
 import Button from '../../components/UI/Button/Button'
 import RelatedProducts from '../RelatedProducts/RelatedProducts';
 import CarouselElement from '../../components/CarouseElement/CarouselElement'
+import * as uiActions from '../../../../store/actions/UIActions'
+import { flowRight } from 'lodash';
+import { connect } from 'react-redux';
 
 
 
@@ -19,9 +21,17 @@ class Home extends Component{
         .then(response => {
             this.setState({products: response.data.data.requestedProduct})
         }).catch(err=> {
-            
+            if(err.response){
+                this.props.notify({
+                    status: "error", 
+                    message: err.response.data.message
+                })
+            }
         })
     }
+    goToProduct = () => {
+        this.props.history.push('/products')
+      }
     render(){
         const responsive = {
             desktop: {
@@ -67,7 +77,7 @@ class Home extends Component{
                     <div className="Home_Landing" data-aos="fade-right">
                         <p className="Home_Avila">Shalom<br /> Avila Natural Distributor</p>
                         <p className="Home_WeProvide">we provide the best natural skincare and Food product</p>
-                        <Button name="Explore products" clicked={() => this.props.history.push('/products')}/>
+                        <Button name="Explore products" clicked={this.goToProduct }/>
                     </div>
                     <div className="Home_Landing_Carousel" data-aos="fade-left">
                        {carousel}
@@ -117,5 +127,13 @@ class Home extends Component{
     }
 }
 
+const dispatchMappedToProps = dispatch => {
+    return{
+        notify: (payload) => dispatch(uiActions.promptNotification(payload))
+    }
+}
 
-export default Home
+
+export default flowRight(
+    connect(null, dispatchMappedToProps)
+)  (Home)

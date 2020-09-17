@@ -7,7 +7,7 @@ const Button = (props) => {
     if(props.big) classes.push("btn_big")
     return(
         <div className={classes.join(" ")}>
-            <button onClick={props.clicked} disabled={props.disabled} {...props} > {props.name}</button>
+            <button onClick={props.clicked} disabled={props.disabled} style={props.style} > {props.name}</button>
         </div>
     )
 }

@@ -29,13 +29,13 @@ class Products extends Component{
     fetchProducts= (scrollUp)=>{
         this.setState({loading: true})
         const productRequest = axios.get(`https://avila-backend.herokuapp.com/api/products/getProducts?pageNo=${this.state.pageNo}&noOfProducts=${this.state.noOfProducts}`)
-        const userRequest = axios.get(`https://avila-backend.herokuapp.com/api/users/getUser`, {
-            headers: {
-                "x-access-token": getInLocalStorage("token")
-            }
-        })
         let fetchArray = [productRequest]
         if(getInLocalStorage("token")){
+            const userRequest = axios.get(`https://avila-backend.herokuapp.com/api/users/getUser`, {
+                headers: {
+                    "x-access-token": getInLocalStorage("token")
+                }
+            })
             fetchArray.push(userRequest)
         }
         axios.all(fetchArray)

@@ -37,3 +37,11 @@
 .adminActive{
     background: #84BE38;
 }
+
+
+@media(max-width: 900px){
+    .SingleSideNav a{
+        font-size: 12px;
+        padding-left: 5px;
+    }
+}

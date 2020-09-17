@@ -1,5 +1,5 @@
 .Product_Container{
-    width: 250px;
+    width: 220px;
     margin: 0px 10px;
     display: flex;
     justify-content: center;
@@ -8,12 +8,13 @@
     width: 210px;
     padding: 7px;
     border: 0.5px solid #84BE38;
+    border-radius: 7px;
     margin-top: 30px;
     height: 309px;
     transition:  150ms;
 }
 .Product:hover{
-    box-shadow: 10px 10px 10px 5px #ccc;
+    box-shadow: 1px 10px 10px 5px #ccc;
     width: 220px !important;
 }
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import {flowRight as compose} from 'lodash'
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
 import ErrorBoundary from './Platforms/UsersPlatform/containers/ErrorBoundary/ErrorBoundary'
 import { getInLocalStorage } from './utility';
 import * as userActions from './store/actions/userActions'

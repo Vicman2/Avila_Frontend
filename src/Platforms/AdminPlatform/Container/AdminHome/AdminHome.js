@@ -82,9 +82,8 @@ class AdminHome extends Component{
         if(this.state.monthlyActivity.length> 0){
             progressActivity = this.state.monthlyActivity.map(activity => {
                 return(
-                    <div className="ProgressSpace">
+                    <div key={activity.name} className="ProgressSpace">
                         <ProgressBar 
-                        key={activity.name}
                         number={activity.num}
                         total={activity.total}
                         fillerColor={activity.fillerColor}
@@ -127,7 +126,7 @@ class AdminHome extends Component{
             dailySales = this.state.dailySales.map(daily => {
                 return(
                     <ProgressVertical 
-                    key={daily.name}
+                    key={daily.num + Math.random()}
                     number={daily.num}
                     total={daily.total}
                     name={daily.name}

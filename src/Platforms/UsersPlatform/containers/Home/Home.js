@@ -80,7 +80,7 @@ class Home extends Component{
                         <Button name="Explore products" clicked={this.goToProduct }/>
                     </div>
                     <div className="Home_Landing_Carousel" data-aos="fade-left">
-                       {carousel}
+                        {carousel}
                     </div>
                 </div>
 

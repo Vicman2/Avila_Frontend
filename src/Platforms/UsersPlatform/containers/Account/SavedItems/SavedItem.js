@@ -109,7 +109,7 @@ class SavedItem extends Component{
                 this.props.updateCart(this.state.cart.length)
             })
             .catch(err => {
-                if(err.response.data){
+                if(err.response){
                     console.log(err.response.data)
                     this.props.notify({
                         status: 'error', 
@@ -151,7 +151,7 @@ class SavedItem extends Component{
                 </div>
                 <Button name="CONTINUE SHOPPING" clicked={() => this.props.history.push('/products')} />
             </div>
-        }   
+        } 
         return(
             <div className="SavedItem">
                {toDisplay}

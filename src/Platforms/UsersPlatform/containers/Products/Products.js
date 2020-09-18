@@ -9,6 +9,7 @@ import './Products.css'
 import Loader from '../../components/UI/Loader/Loader'
 import Product from '../../components/Product/Product'
 import { getInLocalStorage } from '../../../../utility'
+import LoaderWrapper from '../../../AdminPlatform/Components/UI/LoaderWrapper/LoaderWrapper'
 
 
 class Products extends Component{
@@ -186,9 +187,7 @@ class Products extends Component{
     render(){
         let display = null
         if(this.state.loading && this.state.products.length === 0){
-            display =<div className="Product_Loader">
-                <Loader />
-            </div>
+            display =<LoaderWrapper />
         }else{
             display = this.state.products.map(prod => {
                 let addedToFavouite = this.state.userFavourite.find(fav => fav === prod._id)

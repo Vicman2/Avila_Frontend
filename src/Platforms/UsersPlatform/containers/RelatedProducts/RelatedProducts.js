@@ -6,6 +6,7 @@ import './RelatedProducts.css'
 import Axios from '../../../../axios'
 import { withRouter } from 'react-router-dom'
 import Aux from '../../../../HOC/Aux/Aux'
+import LoaderWrapper from '../../../AdminPlatform/Components/UI/LoaderWrapper/LoaderWrapper'
 
 
 
@@ -45,12 +46,18 @@ class RelatedProducts extends Component{
                 )
             })
         }
-        return(
-            <Aux>
+        let totalDisplay = <LoaderWrapper />
+        if(this.state.products){
+                totalDisplay = <Aux>
                 {title}
                 <div className="RelatedProducts">
                     {toDisplay}
                 </div>
+            </Aux>
+        }
+        return(
+            <Aux>
+                {totalDisplay}
             </Aux>
         )
     }

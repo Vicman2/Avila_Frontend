@@ -31,7 +31,10 @@ class Home extends Component{
     }
     goToProduct = () => {
         this.props.history.push('/products')
-      }
+    }
+    goToProductReview = (id)=>{
+        this.props.history.push(`/products/${id}`)
+    }
     render(){
         const responsive = {
             desktop: {
@@ -62,6 +65,7 @@ class Home extends Component{
                 {this.state.products.map(prod => {
                     return(
                         <CarouselElement
+                            clicked={() => this.goToProductReview(prod._id)}
                             key={prod._id}
                             src ={prod.prodImageSrc}
                         />

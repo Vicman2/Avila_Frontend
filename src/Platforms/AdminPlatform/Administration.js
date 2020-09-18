@@ -45,11 +45,6 @@ class Administration extends Component{
         }
       })
     }
-    logOutHandler = () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("isAdmin")
-      this.props.logout()
-    }
     showProfileHandler = () => {
       this.setState(prevState => {
         return{
@@ -79,7 +74,6 @@ class Administration extends Component{
 
                <AdminTopNav
                showProfile={this.showProfileHandler}
-               logout={this.logOutHandler}
               />
                <div className="Administration_Content">
                     <AdminSideNav />

@@ -21,7 +21,8 @@ const reducer = (state = initialStore, action) => {
         case actionType.LOGOUT:
             return{
                 ...state,  
-                isLoggedIn: false
+                isLoggedIn: false, 
+                cartNo: null,
             }
         case actionType.UPDATE_NO_OF_CART: 
             return{

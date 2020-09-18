@@ -13,6 +13,7 @@ import CartItem from '../../../../Platforms/UsersPlatform/components/CartItem/Ca
 import Button from '../../../../Platforms/UsersPlatform/components/UI/Button/Button'
 import Aux from '../../../../HOC/Aux/Aux'
 import Rave, {RequeryTransaction} from 'react-flutterwave-rave'
+import LoaderWrapper from '../../../AdminPlatform/Components/UI/LoaderWrapper/LoaderWrapper'
 
 
 class Cart extends Component{
@@ -157,7 +158,7 @@ class Cart extends Component{
         this.props.history.push('/cart');
     }
     render(){
-        let toRender = <Loader />
+        let toRender =<LoaderWrapper />
         if(!this.state.loading && this.state.cartItems.length === 0){
             toRender = <div className="EmptyFav">
                 <div className="SavedItem_Empty">

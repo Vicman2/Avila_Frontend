@@ -3,9 +3,13 @@
     justify-content: center;
     align-items: center;
 }
+.CarouselElement:hover{
+    cursor: pointer;
+}
 
 
 .CarouselElement_Img_contain{
+    border-radius: 5px;
     width:250px ;
     height: 270px;
 }

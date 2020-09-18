@@ -120,6 +120,7 @@ class EditProfile extends Component{
         await this.setState({isFormValid: theFormIsValid})
     }
     editProfileHandler = async (event) => {
+        console.log("Clicked")
         let data  = {}
         event.preventDefault();
         await this.setState({isSubmitted: true});
@@ -142,7 +143,7 @@ class EditProfile extends Component{
                 this.props.switch()
             }).catch(err=> {
                 this.setState({loading: false})
-                if(err.resp){
+                if(err.response){
                     this.props.notify({
                         status: 'error', 
                         content: err.response.data.message

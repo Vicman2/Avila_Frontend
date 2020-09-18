@@ -9,6 +9,8 @@ import { getInLocalStorage } from '../../../../../utility'
 import Loader from '../../../../../Platforms/UsersPlatform/components/UI/Loader/Loader'
 import Order from '../../../components/Order/Order'
 import { withRouter } from 'react-router-dom'
+import noOrder from './Assets/noOrder.svg'
+import Button from '../../../components/UI/Button/Button'
 
 
 class Orders extends Component{
@@ -80,6 +82,13 @@ class Orders extends Component{
                     />
                 )
             })
+        }else if(!this.state.loading && this.state.orderedProduct.length === 0){
+            toDisplay = toDisplay =<div className="EmptyFav">
+            <div className="SavedItem_Empty">
+                <img className="contain_img" src={noOrder} alt="empty" />
+            </div>
+            <Button name="CONTINUE SHOPPING" clicked={() => this.props.history.push('/products')} />
+        </div>
         }
         return(
             <div className="Orders ">

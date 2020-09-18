@@ -8,8 +8,8 @@
     margin: 3px 5px;
 }
 .SavedItem_Empty{
-    width: 250px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
 }
 .SavedItem_Empty_Alt{
     background: #84BE38;
@@ -20,6 +20,11 @@
     color: #FFFFFF;
     text-align: center;
 }
+.EmptyFav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 @media(min-width: 900px){
@@ -29,8 +34,8 @@
         overflow-y: scroll;
     }
     .SavedItem_Empty{
-        width: 300px;
-        height: 400px;
+        width: 150px;
+        height: 150px;
     }
 }
 

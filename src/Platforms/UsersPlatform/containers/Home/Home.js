@@ -17,6 +17,7 @@ class Home extends Component{
         products : []
     }
     componentDidMount(){
+        this.props.showFooter();
         Axios.get(`/api/products/getProducts?pageNo=1&noOfProducts=20`)
         .then(response => {
             this.setState({products: response.data.data.requestedProduct})
@@ -133,7 +134,8 @@ class Home extends Component{
 
 const dispatchMappedToProps = dispatch => {
     return{
-        notify: (payload) => dispatch(uiActions.promptNotification(payload))
+        notify: (payload) => dispatch(uiActions.promptNotification(payload)),
+        showFooter : () => dispatch(uiActions.showFooter()), 
     }
 }
 

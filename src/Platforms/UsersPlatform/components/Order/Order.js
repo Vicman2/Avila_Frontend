@@ -4,7 +4,7 @@ import './Order.css'
 
 const Order = (props) => {
     return(
-        <div className="Order">
+        <div className="Order" onClick={props.clicked}>
             <div className="Order_Image_Cont">
                 <img className="contain_img" src={props.src} alt={props.name} />
             </div>

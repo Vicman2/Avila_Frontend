@@ -55,8 +55,8 @@ class Profile extends Component{
                     <p className="Profile_Value">{phone}</p>
                 </div>
                 <div className="Profile_KeyValue">
-                    <p className="Profile_Key">Address</p>
-                    <p className="Profile_Value">{address} </p>
+                    <p className="Profile_Key ">Address</p>
+                    <p className="Profile_Value Profile_Address">{address} </p>
                 </div>
                 <div className="Profile_KeyValue">
                     <p className="Profile_Key">Sex</p>

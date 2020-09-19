@@ -8,8 +8,8 @@
     margin: 3px 5px;
 }
 .SavedItem_Empty{
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
 }
 .SavedItem_Empty_Alt{
     background: #84BE38;
@@ -34,8 +34,8 @@
         overflow-y: scroll;
     }
     .SavedItem_Empty{
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
     }
 }
 

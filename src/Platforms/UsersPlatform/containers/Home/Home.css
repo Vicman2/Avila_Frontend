@@ -2,6 +2,12 @@
 .react-multiple-carousel__arrow{
     z-index: 201 !important;
 }
+.Home_Landing{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
 .Home_Landing_Carousel{
     margin-top: 70px;
@@ -19,7 +25,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center ;
 }
 .Home_Avila{
     font-family: 'Poppins';
@@ -128,6 +134,8 @@
     }
     .Home_Landing{
         max-width: 400px;
+        text-align: left;
+        align-items: flex-start;
     }
     .Home_Sec1{
         display: flex;

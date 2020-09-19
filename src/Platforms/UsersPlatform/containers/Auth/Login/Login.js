@@ -58,7 +58,6 @@ class Login extends Component{
             await this.setState({loading: true})
             Axios.post('/api/users/login', data)
             .then(res => {
-                console.log(res.data)
                 let {token, cart, role} = res.data.data
                 let cartNum  = cart.length>0 ? cart.length: null
                 this.props.updateCart(cartNum)

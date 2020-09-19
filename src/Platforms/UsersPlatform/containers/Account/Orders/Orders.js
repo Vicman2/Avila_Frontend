@@ -79,6 +79,7 @@ class Orders extends Component{
                     name={orderItem.name}
                     price={orderItem.price}
                     reorder = {() => this.addToCart(orderItem._id)}
+                    clicked={() => this.props.history.push(`/products/${orderItem._id}`)}
                     />
                 )
             })

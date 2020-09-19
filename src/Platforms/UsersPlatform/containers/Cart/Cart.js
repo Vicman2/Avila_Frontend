@@ -7,12 +7,11 @@ import * as userActions from '../../../../store/actions/userActions'
 import './Cart.css'
 import { getInLocalStorage } from '../../../../utility'
 import { withRouter } from 'react-router-dom'
-import Loader from '../../../../Platforms/UsersPlatform/components/UI/Loader/Loader'
 import emptySVG from './Assets/emptyCart.svg'
 import CartItem from '../../../../Platforms/UsersPlatform/components/CartItem/CartItem'
 import Button from '../../../../Platforms/UsersPlatform/components/UI/Button/Button'
 import Aux from '../../../../HOC/Aux/Aux'
-import Rave, {RequeryTransaction} from 'react-flutterwave-rave'
+import Rave from 'react-flutterwave-rave'
 import LoaderWrapper from '../../../AdminPlatform/Components/UI/LoaderWrapper/LoaderWrapper'
 
 
@@ -24,7 +23,8 @@ class Cart extends Component{
         userDetails: null, 
         toCheckout: false, 
         public_key: process.env.REACT_APP_FLUTTERWAVE_PUBLIC_KEY,
-        secret_key: process.env.REACT_APP_FLUTTERWAVE_SECRET_KEY
+        secret_key: process.env.REACT_APP_FLUTTERWAVE_SECRET_KEY, 
+        successfulPayment: false
     }
     componentDidMount(){
         window.scrollTo(0,0)
@@ -138,24 +138,31 @@ class Cart extends Component{
         })
     }
 
-    paymentCallback = async  (response) => {
+    paymentCallback = (response) => {
         Axios.post('/api/orders/make',{}, {
             headers: {
                 "x-access-token": getInLocalStorage("token")
             }
         }).then(res => {
-            console.log(res)
             this.props.notify({
                 status: 'success',
                 content: "Order created successfully"
             })
+            this.setState({successfulPayment: true})
             this.props.history.push('/products');
         }).catch(err => {
-            console.log(err)
+            this.props.notify({
+                status: 'error',
+                content: "An error occured while trying to make payment"
+            })
         })
     }
     paymentOnClose = () => {
-        this.props.history.push('/cart');
+        if(this.state.successfulPayment){
+            this.props.history.push('/products');
+        }else{
+            this.props.history.push('/cart');
+        }
     }
     render(){
         let toRender =<LoaderWrapper />
